@@ -1,0 +1,64 @@
+# macOS metadata
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Editor and local-tool state
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.scratch/
+
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+
+# Python caches, environments, and builds
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+.venv/
+venv/
+env/
+build/
+dist/
+*.egg-info/
+
+# Node and frontend tooling
+node_modules/
+.npm/
+.yarn/cache/
+.pnpm-store/
+.parcel-cache/
+.next/
+.nuxt/
+coverage/
+
+# Local execution output
+*.tmp
+*.log
+*.pid
+tmp/
+
+# TeX and LaTeX build artifacts
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.out
+*.synctex.gz
+*.toc
+
+# Generated evaluation results; retain directory markers and templates.
+evals/*/results/*
+!evals/*/results/.gitkeep
+!evals/*/results/*.template.*
