@@ -134,6 +134,44 @@ Maintain distinctions that affect interpretation, including measured versus calc
 
 Consult [references/comment-examples.md](references/comment-examples.md) when concrete wording examples would help. Do not load it when the repository's own conventions already settle the choice.
 
+### Require evidence before assigning scientific meaning
+
+Do not infer units, physical roles, sentinel meanings, or conversion
+semantics from arithmetic patterns, input position, or domain familiarity
+alone.
+
+Treat an interpretation as established only when it is supported by one
+or more of the following:
+
+- explicit variable or field names;
+- data schemas;
+- tests;
+- repository documentation;
+- user instructions;
+- authoritative nearby comments;
+- output labels that unambiguously define the quantity.
+
+In particular:
+
+- Do not describe multiplication by `1e-n` as a unit conversion unless
+  both the source and target units are established.
+- Do not assign sample/reference, measured/calculated,
+  reactant/product, or similar physical roles to generic input series
+  without supporting evidence.
+- Do not assign a physical meaning to a sentinel, correction, offset, or
+  threshold beyond its observable effect in the implementation.
+- Do not turn a plausible domain interpretation into a documented fact.
+
+When scientific semantics remain uncertain:
+
+1. preserve the calculation;
+2. use neutral terminology;
+3. document only the observable computational operation;
+4. report the ambiguity in the completion summary.
+
+Prefer “Scale the input values by the configured factor” over “Convert
+nanoseconds to seconds” when the units are not documented.
+
 ## Respect refactoring boundaries
 
 - Do not silently fix scientific assumptions or numerical constants.
