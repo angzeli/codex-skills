@@ -1,0 +1,124 @@
+schema_version: 1
+skill: scientific-code-documenter
+
+positive_implicit:
+  - id: positive-python-docstrings
+    language: python
+    mode: document-existing
+    prompt: "Add concise docstrings to the non-trivial functions and document the units and NumPy array shapes without changing calculations."
+  - id: positive-python-cramped
+    language: python
+    mode: readability-refactor
+    prompt: "Make this dense spectroscopy routine easier to scan, preserving evaluation order and numerical results."
+  - id: positive-typescript-jsdoc
+    language: typescript
+    mode: document-existing
+    prompt: "Improve the documentation of this data transformation and clarify the runtime assumptions without duplicating its TypeScript types."
+  - id: positive-javascript-comments
+    language: javascript
+    mode: comment-cleanup
+    prompt: "Replace the repetitive AI-like comments with concise explanations of the non-obvious browser and data-ordering constraints."
+  - id: positive-html-structure
+    language: html-css
+    mode: readability-refactor
+    prompt: "Clarify this scientific report page's semantic structure and accessibility while avoiding comments on every element."
+  - id: positive-css-layout
+    language: css
+    mode: document-existing
+    prompt: "Document only the unusual print-layout constraints and rename opaque new classes where that is safe."
+  - id: positive-shell-workflow
+    language: shell
+    mode: readability-refactor
+    prompt: "Make this computational workflow readable and document its required executables, paths, environment variables, and stages."
+  - id: positive-latex-macros
+    language: latex
+    mode: document-existing
+    prompt: "Organize these macros and explain the non-obvious journal-template workaround without rewriting ordinary LaTeX commands."
+  - id: positive-config-conventions
+    language: yaml
+    mode: documentation-review
+    prompt: "Review whether this pipeline configuration adequately explains units, axis order, and normalization conventions; do not change its schema."
+  - id: positive-mixed-repository
+    language: mixed
+    mode: limited-edit
+    prompt: "Apply focused documentation and readability improvements across the Python analysis and shell entry point, preserving APIs, files, and numerical outputs."
+
+negative:
+  - id: negative-debug
+    language: python
+    prompt: "Find and fix the off-by-one error in this loop."
+  - id: negative-dependency
+    language: mixed
+    prompt: "Upgrade the project to the latest supported dependency versions."
+  - id: negative-tests
+    language: python
+    prompt: "Run the existing unit tests and report the failures."
+  - id: negative-feature
+    language: typescript
+    prompt: "Add OAuth login to this web application."
+  - id: negative-ci
+    language: yaml
+    prompt: "Repair the failing GitHub Actions workflow."
+  - id: negative-performance
+    language: python
+    prompt: "Profile this matrix multiplication and make it faster."
+  - id: negative-security
+    language: javascript
+    prompt: "Audit this endpoint for injection vulnerabilities."
+  - id: negative-data-analysis
+    language: python
+    prompt: "Fit a nonlinear model to these measurements and report confidence intervals."
+  - id: negative-tex-compile
+    language: latex
+    prompt: "Compile this manuscript and fix the missing package error."
+  - id: negative-deploy
+    language: shell
+    prompt: "Deploy the application to the staging cluster."
+
+boundary:
+  - id: boundary-buggy-comment
+    language: python
+    expected: trigger-review-only
+    prompt: "A comment disagrees with the equation below it. Determine which is stale, but do not change the calculation."
+  - id: boundary-types-only
+    language: typescript
+    expected: do-not-trigger
+    prompt: "Add missing TypeScript types to the public API."
+  - id: boundary-generated-docs
+    language: mixed
+    expected: trigger-and-skip-generated
+    prompt: "Improve comments in the source modules; the generated API client must remain untouched."
+  - id: boundary-readme-only
+    language: markdown
+    expected: do-not-trigger
+    prompt: "Rewrite the user-facing installation README for clarity."
+  - id: boundary-public-rename
+    language: python
+    expected: trigger-and-report-risk
+    prompt: "Review the scientific names and comments, but preserve all public symbols even if a better name exists."
+  - id: boundary-json-comments
+    language: json
+    expected: trigger-and-use-nearby-doc
+    prompt: "Explain the units in this JSON configuration without making the JSON invalid."
+
+explicit_invocation:
+  - id: explicit-review-only
+    language: mixed
+    mode: review-only
+    prompt: "$scientific-code-documenter\nReview this file for readability and documentation quality. Do not modify it. Identify the five highest-value improvements."
+  - id: explicit-limited-edit
+    language: mixed
+    mode: limited-edit
+    prompt: "$scientific-code-documenter\nApply only high-confidence documentation and readability improvements to this file. Preserve calculations, public interfaces, file formats, and numerical behaviour."
+  - id: explicit-new-function
+    language: python
+    mode: write-new-code
+    prompt: "$scientific-code-documenter\nImplement the requested function using this repository's conventions. Document its units, array shapes, assumptions, failure modes, and return values without over-commenting it."
+  - id: explicit-shell-review
+    language: shell
+    mode: review-only
+    prompt: "$scientific-code-documenter\nReview this workflow for comment quality and unstated path assumptions. Do not edit or run it."
+  - id: explicit-html-limited
+    language: html-css
+    mode: limited-edit
+    prompt: "$scientific-code-documenter\nImprove only semantic structure, accessibility documentation, and opaque names in this report component; leave generated CSS untouched."

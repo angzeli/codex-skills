@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Synthetic calibration report</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div class="box1">
+      <div class="box2">
+        <div class="box3">
+          <div class="top">
+            <h1>Calibration campaign</h1>
+            <div class="actions">
+              <button class="icon-button"><span aria-hidden="true">↻</span></button>
+            </div>
+          </div>
+          <div class="content">
+            <div class="left">
+              <div class="card">
+                <div class="card-title">Reference spectrum</div>
+                <div class="card-body">
+                  <img src="synthetic-spectrum.svg" alt="Synthetic absorbance spectrum with a broad maximum near 520 nanometres">
+                  <div style="font-size: 0.85rem; color: #445; margin-top: 8px;">
+                    Values are generated examples, not experimental measurements.
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="right">
+              <div class="card">
+                <div class="card-title">Processing summary</div>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="key">Input domain</div>
+                    <div class="value">400–700 nm</div>
+                  </div>
+                  <div class="row">
+                    <div class="key">Baseline</div>
+                    <div class="value">First three samples</div>
+                  </div>
+                  <div class="row">
+                    <div class="key">Output</div>
+                    <div class="value">Corrected absorbance</div>
+                  </div>
+                </div>
+              </div>
+              <div class="card notes">
+                <div class="card-title">Notes</div>
+                <div class="card-body">
+                  <p>The layout intentionally contains opaque names, excessive wrappers, and an unlabeled refresh control.</p>
+                  <p>Evaluation edits should preserve the text and spectrum description.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="bottom">Synthetic fixture · No private data</div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

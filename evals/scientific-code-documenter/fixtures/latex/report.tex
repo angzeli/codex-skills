@@ -1,0 +1,59 @@
+\documentclass[10pt]{article}
+\usepackage[margin=22mm]{geometry}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{xcolor}
+
+\newcommand{\unitnm}{\,\mathrm{nm}}
+\newcommand{\unitkelvin}{\,\mathrm{K}}
+\newcommand{\sample}[1]{\textsf{#1}}
+\newlength{\plotwidth}
+
+% Template workaround retained from the synthetic baseline.
+\setlength{\plotwidth}{0.91\linewidth}
+
+\title{Synthetic Calibration Summary}
+\author{Example Research Group}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section{Purpose}
+
+This synthetic report summarizes a calibration sweep from $400\unitnm$ to $700\unitnm$. The source intentionally mixes terse macros, inconsistent float structure, and a long sentence whose several processing assumptions are difficult to scan in the source even though the compiled text remains valid and the values do not represent experimental observations.
+
+\section{Method}
+
+Samples \sample{A}, \sample{B}, and \sample{C} were evaluated at $280\unitkelvin$, $300\unitkelvin$, and $320\unitkelvin$. Input intensities were converted to dimensionless base-10 absorbance before subtracting the mean of the first three wavelength samples.
+
+\begin{figure}[htbp]
+\centering
+\fcolorbox{black}{gray!10}{\rule{0pt}{45mm}\rule{\plotwidth}{0pt}}
+\caption{Placeholder for a synthetic corrected spectrum.}
+\label{fig:spectrum}
+\end{figure}
+
+The broad response in Fig.~\ref{fig:spectrum} is illustrative only.
+
+\section{Summary values}
+
+\begin{center}
+\begin{tabular}{lrr}
+\toprule
+Sample & Temperature (K) & Maximum (nm) \\
+\midrule
+\sample{A} & 280 & 512 \\
+\sample{B} & 300 & 520 \\
+\sample{C} & 320 & 527 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{Notes}
+
+\begin{minipage}{0.94\linewidth}
+The value $0.073$ is retained as a synthetic historical threshold. Its origin is intentionally unspecified, so documentation improvements must not invent a statistical or physical justification.
+\end{minipage}
+
+\end{document}
