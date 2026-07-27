@@ -12,3 +12,5 @@ Evaluation material remains separate so runtime installations contain only the i
 - result-recording templates for diffs, validation logs, scores, trigger outcomes, strengths, and regressions.
 
 Generated evaluation runs belong under `evals/<name>/results/` and are ignored by default except for committed directory markers and templates.
+
+Each suite may provide `evals/<name>/checks.sh`. Run one suite with `./scripts/run_fixture_checks.sh <name>` or all available suites with `./scripts/run_fixture_checks.sh`. A missing optional tool should produce a clear skip; a detected regression must produce a non-zero exit.

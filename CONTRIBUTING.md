@@ -12,12 +12,12 @@ Keep every contribution focused on one independently installable skill or one co
 6. Add synthetic, behavior-preserving fixtures when the skill edits code or artifacts.
 7. Run `./scripts/check_skill.sh <name>`.
 8. Run `./scripts/run_fixture_checks.sh <name>` when fixtures provide executable checks.
-9. Install locally with `./scripts/install_skill.sh <name>`.
+9. Dry-run with `./scripts/install_skill.sh --dry-run <name>`, then install with `./scripts/install_skill.sh <name>`.
 10. Update the catalogue in `README.md` and the unreleased section in `CHANGELOG.md`.
 11. Create coherent local commits with path-specific staging and reviewed staged diffs.
 12. Review all tracked content for secrets, personal paths, private research, and publication rights before pushing or publishing.
 
-Run `./scripts/check_all_skills.sh` before sharing a collection-level change. If the shared scripts have not yet been added, validate frontmatter, directory naming, links, and fixtures manually and state exactly what was checked.
+Run `./scripts/check_all_skills.sh` and `./scripts/run_fixture_checks.sh` before sharing a collection-level change. State exactly which optional checks were unavailable.
 
 ## Change discipline
 
