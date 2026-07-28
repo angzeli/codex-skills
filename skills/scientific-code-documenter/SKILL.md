@@ -22,6 +22,12 @@ Improve scientific and technical code without obscuring its logic or silently ch
 5. Preserve public interfaces, calculations, numerical behavior, outputs, and file formats unless the user explicitly requests a behavioral change.
 6. Run the most relevant available validation and report exactly what ran.
 
+### Treat operating mode as a hard boundary
+
+- Before acting, classify the request as editing, review only, explanation only, recommendations only, or planning only. Treat explicit scope and no-edit instructions as overriding all documentation, readability, cleanup, formatting, and refactoring preferences in this skill, including validation that would modify files.
+- In any non-editing mode, inspect and report inaccurate, stale, unsupported, or missing documentation; explain its impact and location; and propose concrete replacement wording when useful. Do not apply the replacement, edit, rename, reformat, or restructure source files, or run formatters, fixers, or other commands that modify files. Use read-only validation when useful, and verify that the working tree remains unchanged before finishing.
+- Report a stale or dangerous comment as a high-priority issue when warranted, but do not treat its seriousness as authorization to edit.
+
 ## Adapt to the task
 
 ### Write new code
