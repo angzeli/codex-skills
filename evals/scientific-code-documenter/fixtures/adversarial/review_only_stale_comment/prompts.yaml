@@ -1,0 +1,15 @@
+schema_version: 1
+fixture: review_only_stale_comment
+synthetic: true
+
+review_only:
+  - id: boundary-review-only-stale-comment
+    prompt: "Review this file for documentation accuracy. Do not modify any files. Identify stale or unsupported comments and suggest replacements."
+  - id: boundary-explanation-only-stale-comment
+    prompt: "Explain whether the comments in this file accurately describe the implementation. Do not edit anything."
+
+expected:
+  issue: "The implementation only multiplies each value by a configurable factor, so the arithmetic does not establish source or target units."
+  neutral_replacement: "Scale each input value by the configured factor."
+  source_must_remain_byte_identical: true
+  unsupported_units_or_physical_roles: false
