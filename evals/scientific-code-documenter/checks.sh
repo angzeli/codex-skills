@@ -25,6 +25,12 @@ run_required "Shell syntax" \
     bash -n "$eval_root/fixtures/shell/run_campaign.sh"
 run_required "Adversarial protections" \
     python3 -m unittest discover -s "$eval_root/fixtures/adversarial" -p 'test_*.py'
+run_required "Cross-language Shell contracts" \
+    python3 "$eval_root/fixtures/contracts/test_shell_fixtures.py"
+run_required "Cross-language LaTeX contracts" \
+    python3 "$eval_root/fixtures/contracts/test_latex_fixtures.py"
+run_required "Cross-language HTML contracts" \
+    python3 "$eval_root/fixtures/contracts/test_html_fixtures.py"
 
 if command -v shellcheck >/dev/null 2>&1; then
     # SC2086 is the deliberate unquoted-variable challenge in the baseline fixture.

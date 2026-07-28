@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Synthetic XPS Results Dashboard</title>
+<style>
+:root{font-family:Arial,sans-serif;color:#1f2933;background:#f4f6f8}*{box-sizing:border-box}body{margin:0}.wrap{max-width:1120px;margin:0 auto;padding:18px}.top{display:flex;justify-content:space-between;gap:12px;align-items:center;background:white;border:1px solid #d8dee4;padding:14px}.controls{display:flex;gap:8px;align-items:end;flex-wrap:wrap}.controls>div{display:flex;flex-direction:column;gap:3px}label{font-size:12px;font-weight:700}select,button{font:inherit;padding:7px 9px;border:1px solid #aeb7c2;background:white}button{cursor:pointer}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:12px}.card{background:white;border:1px solid #d8dee4;padding:12px}.metric{font-size:25px;font-weight:700;margin-top:4px}.small{font-size:12px;color:#52606d}.main{display:grid;grid-template-columns:1.35fr .65fr;gap:12px;margin-top:12px}.plot,.tablebox{background:white;border:1px solid #d8dee4;padding:12px}svg{width:100%;height:auto;border:1px solid #e4e7eb;background:#fff}table{width:100%;border-collapse:collapse;font-size:12px}th,td{text-align:left;padding:6px;border-bottom:1px solid #e4e7eb}th{position:sticky;top:0;background:#f8fafc}.scroll{max-height:320px;overflow:auto}.badge{display:inline-block;padding:2px 6px;border:1px solid #9fb3c8;border-radius:10px;font-size:11px}.footer{margin-top:12px;font-size:12px;color:#52606d}.hidden{display:none}@media(max-width:760px){.main,.grid{grid-template-columns:1fr}.top{align-items:flex-start;flex-direction:column}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="top">
+<div>
+<h1 style="margin:0;font-size:22px">XPS fitting dashboard</h1>
+<div class="small">Synthetic fixture · schema version 3</div>
+</div>
+<div class="controls">
+<div><label for="sample-filter">Sample</label><select id="sample-filter"><option value="all">All</option><option value="PDI-Me-COOH">PDI-Me-COOH</option><option value="PDI-H-COOH">PDI-H-COOH</option><option value="PDI-OMe-COOH">PDI-OMe-COOH</option></select></div>
+<div><label for="region-filter">Region</label><select id="region-filter"><option value="all">All</option><option value="C1s">C1s</option><option value="N1s">N1s</option><option value="O1s">O1s</option></select></div>
+<div><label><input id="show-components" type="checkbox" checked> Show labels</label></div>
+<button id="reset-button" type="button">Reset</button>
+<button id="export-button" type="button">Export CSV</button>
+</div>
+</div>
+
+<div class="grid">
+<div class="card"><div class="small">Visible rows</div><div id="row-count" class="metric">0</div></div>
+<div class="card"><div class="small">Mean scaled intensity</div><div id="mean-intensity" class="metric">0.000</div></div>
+<div class="card"><div class="small">Maximum binding energy</div><div id="max-energy" class="metric">0.00</div></div>
+</div>
+
+<div class="main">
+<div class="plot">
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><strong>Scaled intensity profile</strong><span id="plot-status" class="badge" aria-live="polite">No rows</span></div>
+<svg id="profile-plot" viewBox="0 0 640 220" role="img" aria-label="Scaled XPS intensity profile"></svg>
+</div>
+<div class="tablebox">
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><strong>Rows</strong><span class="small">Original order preserved</span></div>
+<div class="scroll">
+<table id="results-table">
+<thead><tr><th>Sample</th><th>Region</th><th>BE / eV</th><th>Scaled intensity</th><th class="component-column">Component</th></tr></thead>
+<tbody id="results-body"></tbody>
+</table>
+</div>
+</div>
+</div>
+
+<div class="footer">Export contract: <code>sample,region,binding_energy_ev,intensity_cps,component</code>. Filtering changes visibility but does not reorder the underlying dataset.</div>
+</div>
+
+<script>
+(function(){
+var SCALE=1e-3;
+var raw=[
+{sample:"PDI-Me-COOH",region:"C1s",binding_energy_ev:284.80,intensity_cps:12640,component:"aromatic_C",order:0},
+{sample:"PDI-Me-COOH",region:"C1s",binding_energy_ev:286.35,intensity_cps:5240,component:"imide_C",order:1},
+{sample:"PDI-Me-COOH",region:"N1s",binding_energy_ev:399.72,intensity_cps:7340,component:"imide_N",order:2},
+{sample:"PDI-H-COOH",region:"C1s",binding_energy_ev:284.76,intensity_cps:11880,component:"aromatic_C",order:3},
+{sample:"PDI-H-COOH",region:"O1s",binding_energy_ev:531.82,intensity_cps:4160,component:"carbonyl_O",order:4},
+{sample:"PDI-OMe-COOH",region:"C1s",binding_energy_ev:286.68,intensity_cps:6040,component:"methoxy_C",order:5},
+{sample:"PDI-OMe-COOH",region:"O1s",binding_energy_ev:533.16,intensity_cps:4720,component:"methoxy_O",order:6}
+];
+var sf=document.getElementById("sample-filter"),rf=document.getElementById("region-filter"),sc=document.getElementById("show-components"),tbody=document.getElementById("results-body"),count=document.getElementById("row-count"),mean=document.getElementById("mean-intensity"),maxe=document.getElementById("max-energy"),svg=document.getElementById("profile-plot"),status=document.getElementById("plot-status"),reset=document.getElementById("reset-button"),exp=document.getElementById("export-button");
+
+function current(){
+return raw.filter(function(r){return(sf.value==="all"||r.sample===sf.value)&&(rf.value==="all"||r.region===rf.value)}).sort(function(a,b){return a.order-b.order});
+}
+
+function toCsv(rows){
+var out=["sample,region,binding_energy_ev,intensity_cps,component"];
+rows.forEach(function(r){out.push([r.sample,r.region,r.binding_energy_ev.toFixed(2),String(r.intensity_cps),r.component].join(","))});
+return out.join("\n")+"\n";
+}
+
+function download(text){
+var blob=new Blob([text],{type:"text/csv;charset=utf-8"});
+var url=URL.createObjectURL(blob);
+var a=document.createElement("a");
+a.href=url;
+a.download="xps_visible_rows.csv";
+document.body.appendChild(a);
+a.click();
+a.remove();
+URL.revokeObjectURL(url);
+}
+
+function render(){
+var rows=current(),values=rows.map(function(r){return r.intensity_cps*SCALE}),largest=Math.max.apply(null,values.concat([1])),maximumEnergy=rows.length?Math.max.apply(null,rows.map(function(r){return r.binding_energy_ev})):0;
+count.textContent=String(rows.length);
+mean.textContent=rows.length?(values.reduce(function(a,b){return a+b},0)/rows.length).toFixed(3):"0.000";
+maxe.textContent=maximumEnergy.toFixed(2);
+tbody.innerHTML="";
+rows.forEach(function(r){
+var tr=document.createElement("tr");
+var cells=[r.sample,r.region,r.binding_energy_ev.toFixed(2),(r.intensity_cps*SCALE).toFixed(3),r.component];
+cells.forEach(function(value,index){var td=document.createElement("td");td.textContent=value;if(index===4)td.className="component-column";tr.appendChild(td)});
+tbody.appendChild(tr);
+});
+document.querySelectorAll(".component-column").forEach(function(el){el.classList.toggle("hidden",!sc.checked)});
+while(svg.firstChild)svg.removeChild(svg.firstChild);
+var ns="http://www.w3.org/2000/svg";
+var axis=document.createElementNS(ns,"line");axis.setAttribute("x1","20");axis.setAttribute("x2","620");axis.setAttribute("y1","190");axis.setAttribute("y2","190");axis.setAttribute("stroke","#52606d");svg.appendChild(axis);
+if(rows.length){
+var points=rows.map(function(r,i){var x=20+(rows.length===1?300:i/(rows.length-1)*600),y=190-(r.intensity_cps*SCALE/largest)*160;return x+","+y}).join(" ");
+var poly=document.createElementNS(ns,"polyline");poly.setAttribute("points",points);poly.setAttribute("fill","none");poly.setAttribute("stroke","#334e68");poly.setAttribute("stroke-width","2");svg.appendChild(poly);
+rows.forEach(function(r,i){var x=20+(rows.length===1?300:i/(rows.length-1)*600),y=190-(r.intensity_cps*SCALE/largest)*160,c=document.createElementNS(ns,"circle");c.setAttribute("cx",x);c.setAttribute("cy",y);c.setAttribute("r","4");c.setAttribute("fill","#486581");c.setAttribute("data-order",String(r.order));svg.appendChild(c)});
+}
+status.textContent=rows.length?rows.length+" row"+(rows.length===1?"":"s"):"No rows";
+}
+
+sf.addEventListener("change",render);
+rf.addEventListener("change",render);
+sc.addEventListener("change",render);
+reset.addEventListener("click",function(){sf.value="all";rf.value="all";sc.checked=true;render()});
+exp.addEventListener("click",function(){download(toCsv(current()))});
+window.__XPS_EXPORT__={toCsv:toCsv,rows:raw.slice(),schemaVersion:3};
+render();
+})();
+</script>
+</body>
+</html>

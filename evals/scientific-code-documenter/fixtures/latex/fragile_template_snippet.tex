@@ -1,0 +1,58 @@
+\documentclass[10pt]{article}
+
+\usepackage[a4paper,margin=20mm]{geometry}
+\usepackage{array,booktabs}
+\usepackage{xcolor}
+
+% TEMPLATE CONTRACT:
+% The publisher's conversion service expects these macros in this order.
+% Reordering them does not change TeX output locally but breaks its source parser.
+\newcommand{\ManuscriptType}{Research Article}
+\newcommand{\JournalSection}{Photochemistry}
+\newcommand{\SchemaVersion}{3}
+
+\newcommand{\ConfiguredFactor}{10^{-9}}
+\newcommand{\UnknownCorrection}{0.037}
+
+\title{Fragile Template Fixture}
+\author{Synthetic Author}
+\date{}
+
+\begin{document}
+\maketitle
+
+\noindent
+\textbf{Manuscript type:} \ManuscriptType\\
+\textbf{Journal section:} \JournalSection\\
+\textbf{Schema version:} \SchemaVersion
+
+\vspace{0.8em}
+
+The downstream implementation multiplies one imported quantity by
+$\ConfiguredFactor$. The source and target units are not established by
+this document, so the factor must not be described as a particular unit
+conversion.
+
+The workflow also applies the configured value
+$\UnknownCorrection$. Its physical interpretation is deliberately
+unspecified.
+
+\begin{table}[ht]
+\centering
+\caption{Stable schema order used by the publisher parser.}
+\begin{tabular}{lll}
+\toprule
+Field & Type & Required \\
+\midrule
+sample & string & yes \\
+region & string & yes \\
+value & number & yes \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% Keep this local spacing adjustment. The publisher parser inserts its own
+% block after the table and otherwise produces a duplicated vertical gap.
+\vspace{-0.4em}
+
+\end{document}

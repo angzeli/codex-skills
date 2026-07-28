@@ -1,0 +1,135 @@
+\documentclass[10pt]{article}
+
+\usepackage[a4paper,margin=18mm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{array,booktabs}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{hyperref}
+
+\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue}
+
+\newcommand{\SampleMe}{\textsc{PDI-Me-COOH}}
+\newcommand{\SampleH}{\textsc{PDI-H-COOH}}
+\newcommand{\SampleOMe}{\textsc{PDI-OMe-COOH}}
+\newcommand{\configuredshift}{0.037}
+\newcommand{\orbitaliso}{0.030}
+\newcommand{\densityiso}{0.002}
+\newcommand{\energyunit}{\ensuremath{\mathrm{E_h}}}
+\newcommand{\dipoleunit}{D}
+
+\newlength{\panelwidth}
+\setlength{\panelwidth}{0.295\linewidth}
+
+\newenvironment{compacttable}
+  {\begingroup\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.05}}
+  {\endgroup}
+
+\title{Synthetic Electronic-Structure and Spectroscopic Analysis Report}
+\author{Evaluation Fixture}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Three carboxylated perylene-diimide derivatives were compared using a deliberately compact analysis workflow. This document is a synthetic fixture: all values are illustrative, but the labels, ordering, cross-references, formatting choices, and output contracts are treated as stable during evaluation.
+\end{abstract}
+
+\section{Workflow}
+\label{sec:workflow}
+
+The structures were processed in the fixed order \SampleMe, \SampleH, and \SampleOMe. The electronic-structure workflow produced optimized coordinates, orbital surfaces, electrostatic-potential surfaces, dipole moments, and summary tables. The configured orbital and density surface values were \orbitaliso{} and \densityiso{}, respectively; the implementation does not assign a broader physical interpretation to these display settings.
+
+\begin{figure}[ht]
+\centering
+\fbox{\parbox[c][34mm][c]{\panelwidth}{\centering Geometry\\optimization}}
+\hfill
+\fbox{\parbox[c][34mm][c]{\panelwidth}{\centering Electronic\\analysis}}
+\hfill
+\fbox{\parbox[c][34mm][c]{\panelwidth}{\centering Plot and\\export}}
+\vspace{-0.6em}
+\caption{Fixed workflow order used by the synthetic evaluation. The negative spacing is retained because the target journal conversion step otherwise inserts an excessive gap below boxed placeholder panels.}
+\label{fig:workflow}
+\end{figure}
+
+The response quantity was evaluated as
+\begin{equation}
+R_i=-\log_{10}\left(\frac{I_i}{I_{i,\mathrm{ref}}}\right)-\frac{1}{N_{\mathrm{base}}}\sum_{j=1}^{N_{\mathrm{base}}}R_j,
+\label{eq:response}
+\end{equation}
+where the implementation-defined ordering of sample and reference intensities is preserved. Equation~\ref{eq:response} describes the operation performed by the fixture and does not independently establish an experimental assignment.
+
+\section{Electronic descriptors}
+\label{sec:descriptors}
+
+\begin{compacttable}
+\begin{table}[ht]
+\centering
+\caption{Illustrative electronic descriptors. Energies are reported in \energyunit{} and dipole moments in \dipoleunit{}.}
+\label{tab:descriptors}
+\begin{tabular}{lrrrr}
+\toprule
+Sample & Energy & Dipole & Orbital surface & Density surface \\
+\midrule
+\SampleMe   & -4089.158196 & 9.274 & \orbitaliso & \densityiso \\
+\SampleH    & -4010.441141 & 7.861 & \orbitaliso & \densityiso \\
+\SampleOMe  & -4239.641138 & 3.778 & \orbitaliso & \densityiso \\
+\bottomrule
+\end{tabular}
+\end{table}
+\end{compacttable}
+
+The configured shift used by one downstream operation is \configuredshift{}. Its provenance is intentionally unspecified in this fixture; therefore, it should be described only as a configured shift rather than as a calibration, solvation, zero-point, or instrumental correction.
+
+\section{Electrochemical and fitting summary}
+\label{sec:electrochem}
+
+\begin{compacttable}
+\begin{table}[ht]
+\centering
+\caption{Illustrative electrochemical and impedance parameters. Row ordering is part of the exported table contract.}
+\label{tab:electrochem}
+\begin{tabular}{lrrrrr}
+\toprule
+Sample & $E_{\mathrm{pa}}$ & $E_{\mathrm{pc}}$ & $R_{\mathrm{s}}$ & $R_{\mathrm{ct}}$ & $n$ \\
+\midrule
+\SampleMe  & 0.510 & -0.383 & 18.6 & 179.4 & 0.669 \\
+\SampleH   & 0.398 & -0.220 & 18.3 & 225.1 & 0.781 \\
+\SampleOMe & 0.414 & -0.185 & 13.2 & 243.4 & 0.768 \\
+\bottomrule
+\end{tabular}
+\end{table}
+\end{compacttable}
+
+The ordering in Table~\ref{tab:electrochem} is intentionally different from sorting by $R_{\mathrm{ct}}$. Reordering rows for visual neatness would change the externally consumed report contract.
+
+\begin{figure}[ht]
+\centering
+\fbox{\parbox[c][42mm][c]{0.44\linewidth}{\centering Placeholder for\\orbital comparison}}
+\hfill
+\fbox{\parbox[c][42mm][c]{0.44\linewidth}{\centering Placeholder for\\fitting comparison}}
+\caption{Synthetic comparison panels. Panel order and labels are stable because downstream text refers to the left panel before the right panel.}
+\label{fig:comparison}
+\end{figure}
+
+\section{Reproducibility notes}
+\label{sec:reproducibility}
+
+The report depends on the labels in Figures~\ref{fig:workflow} and~\ref{fig:comparison}, the column order in Tables~\ref{tab:descriptors} and~\ref{tab:electrochem}, and the equation identifier in Equation~\ref{eq:response}. Source cleanup may improve line breaking, comments, macro grouping, and structural clarity, but it must not rename these labels or alter the visible scientific values.
+
+\ifdefined\SHOWAPPENDIX
+\appendix
+\section{Conditional appendix}
+\label{sec:appendix}
+This section appears only when the build defines \texttt{\string\SHOWAPPENDIX}. The conditional is used by the evaluation harness and should not be replaced by a permanently visible appendix.
+\fi
+
+\begin{thebibliography}{2}
+\bibitem{orca}
+Synthetic reference describing an electronic-structure workflow.
+\bibitem{multiwfn}
+Synthetic reference describing post-processing and real-space analysis.
+\end{thebibliography}
+
+\end{document}
