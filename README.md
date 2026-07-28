@@ -34,7 +34,7 @@ codex_skills/
 
 | Skill | Purpose | Status |
 | --- | --- | --- |
-| `scientific-code-documenter` | Improve scientific and technical code documentation and readability while preserving behavior | Experimental; structurally and synthetically checked, not yet A/B or real-repository validated |
+| `scientific-code-documenter` | Improve scientific and technical code documentation and readability while preserving behavior | Experimental v0.1.0; validated with controlled synthetic, trigger, boundary, and scientific Python acceptance tests |
 
 ## Validate and install
 
@@ -64,7 +64,7 @@ Installers derive the repository root from their own location and create individ
 
 ## Invoke a skill
 
-Invoke the current skill explicitly:
+Use `scientific-code-documenter` for review-only documentation assessments, focused docstring and comment work, or behavior-preserving readability improvements. Invoke it explicitly for a review-only request:
 
 ```text
 $scientific-code-documenter
@@ -76,7 +76,16 @@ Codex may also select it implicitly for requests such as:
 - “Add concise docstrings and document the units and NumPy array shapes without changing calculations.”
 - “Replace these repetitive AI-like comments with explanations of the non-obvious data-ordering constraints.”
 
-Ordinary debugging, dependency upgrades, test execution, and unrelated feature work should not trigger it merely because code is present.
+For an editing-mode request:
+
+```text
+$scientific-code-documenter
+Apply only high-confidence documentation and readability improvements to this file. Preserve calculations, public interfaces, file formats, and numerical behaviour.
+```
+
+Units, shapes, conventions, physical roles, and numerical context should be documented only when supported by code, tests, configuration, repository documentation, or user-provided evidence. Uncertainty should be stated rather than converted into scientific fact. A review-only or “do not edit” instruction takes precedence over opportunities to fix stale comments or improve code.
+
+Ordinary debugging, dependency upgrades, test execution, and unrelated feature work should not trigger the skill merely because code is present.
 
 ## Add another skill
 
@@ -92,72 +101,9 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for the complete workflow.
 
 ## Evaluation and status
 
-Structural validation proves that a skill can be discovered and parsed; it does not prove usefulness. Evaluate skills through controlled A/B runs from identical commits, using the same model and prompt in fresh sessions, then save diffs and validation logs and score both outputs manually. Include behavior-preservation, adversarial, false-trigger, and real-repository checks.
+Structural validation proves that a skill can be discovered and parsed; it does not prove usefulness. Evaluation therefore combines controlled A/B runs, trigger and scope-boundary measurements, independent behavior checks, adversarial fixtures, and authorized real-repository acceptance.
 
-The current fixture suite checks Python numerical outputs and file formatting, HTML/CSS integrity, shell syntax, adversarial constants and ordering, and LaTeX compilation when available. It does not automate subjective rubric scoring or measure implicit-trigger accuracy.
-
-### Controlled A/B procedure
-
-The initial evaluation base is commit `16552f9c065b6d02bbd2c40b1e7018ff7cc6e20e` on `main`. Create sibling worktrees outside the main checkout:
-
-```sh
-REPO_ROOT=$(git rev-parse --show-toplevel)
-REPO_PARENT=$(dirname "$REPO_ROOT")
-EVAL_BASE=16552f9c065b6d02bbd2c40b1e7018ff7cc6e20e
-BASELINE_WT="$REPO_PARENT/codex-skills-ab-baseline"
-SKILL_WT="$REPO_PARENT/codex-skills-ab-skill"
-
-git worktree add --detach "$BASELINE_WT" "$EVAL_BASE"
-git worktree add --detach "$SKILL_WT" "$EVAL_BASE"
-```
-
-Independent Codex sessions are not launched by repository tooling. Open two fresh tasks manually, select the same model, and use one worktree per task. Give the baseline task this prompt:
-
-```text
-Apply only high-confidence documentation and readability improvements to evals/scientific-code-documenter/fixtures/python/spectrum_pipeline.py. Preserve calculations, public interfaces, file formats, and numerical behaviour.
-```
-
-Give the skill task the same request, preceded only by the explicit invocation:
-
-```text
-$scientific-code-documenter
-Apply only high-confidence documentation and readability improvements to evals/scientific-code-documenter/fixtures/python/spectrum_pipeline.py. Preserve calculations, public interfaces, file formats, and numerical behaviour.
-```
-
-Save diffs and validation logs back to the ignored results directory:
-
-```sh
-git -C "$BASELINE_WT" diff -- evals/scientific-code-documenter/fixtures/python/spectrum_pipeline.py > "$REPO_ROOT/evals/scientific-code-documenter/results/baseline.diff"
-git -C "$SKILL_WT" diff -- evals/scientific-code-documenter/fixtures/python/spectrum_pipeline.py > "$REPO_ROOT/evals/scientific-code-documenter/results/skill.diff"
-
-"$BASELINE_WT/scripts/run_fixture_checks.sh" scientific-code-documenter > "$REPO_ROOT/evals/scientific-code-documenter/results/baseline-validation.log" 2>&1
-"$SKILL_WT/scripts/run_fixture_checks.sh" scientific-code-documenter > "$REPO_ROOT/evals/scientific-code-documenter/results/skill-validation.log" 2>&1
-
-cp "$REPO_ROOT/evals/scientific-code-documenter/results/result.template.md" "$REPO_ROOT/evals/scientific-code-documenter/results/initial-python-ab.md"
-```
-
-Fill in the copied result record and score both diffs with `evals/scientific-code-documenter/rubric.md`. Do not reuse a session, change models, or carry context from one run to the other. After saving all results, clean worktrees only with ordinary `git worktree remove <path>` commands; never use destructive resets.
-
-### Real-repository acceptance prompts
-
-Run these later on one authorized medium-complexity file from a scientific Python repository, a computational workflow repository, and an HTML/reporting/scientific-document repository:
-
-```text
-$scientific-code-documenter
-Review this file for readability and documentation quality. Do not modify it. Identify the five highest-value improvements.
-```
-
-```text
-$scientific-code-documenter
-Apply only high-confidence documentation and readability improvements to this file. Preserve calculations, public interfaces, file formats, and numerical behaviour.
-```
-
-```text
-$scientific-code-documenter
-Implement the requested function using this repository's conventions. Document its units, array shapes, assumptions, failure modes, and return values without over-commenting it.
-```
-
-Unless a catalogue entry says otherwise, every skill is experimental. `scientific-code-documenter` is ready for experimental local use, but controlled A/B comparison, trigger-rate measurement, and real-repository acceptance remain outstanding.
+`scientific-code-documenter` v0.1.0 passed its five-fixture controlled A/B suite (112/120 versus 94/120), tested explicit and implicit trigger gates, corrected review-only boundary regressions, and passed acceptance on a scientific Python repository without changing reviewed files or tested behavior. The strongest real-repository evidence is currently Python; other supported languages remain fixture-validated. See the [sanitized v0.1.0 evaluation summary](docs/evaluations/scientific-code-documenter-v0.1.0.md) for methods, exact results, and limitations. The skill remains experimental and scientific edits still require human review.
 
 ## Privacy and publication
 

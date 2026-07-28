@@ -1,17 +1,36 @@
 # Changelog
 
-All notable changes to this collection are documented here. The project has not made a public release.
+All notable changes to this collection are documented here. No remote release has been published.
 
 ## Unreleased
 
+No changes yet.
+
+## [0.1.0] - 2026-07-28
+
 ### Added
 
-- Multi-skill repository foundation and contribution conventions.
-- Experimental `scientific-code-documenter` runtime skill and synthetic comment examples.
-- Evaluation prompt matrix, behavior-preserving fixtures, adversarial cases, and manual scoring rubric.
-- Reusable skill discovery, validation, fixture-checking, and symlink installation tools.
-- Installation, controlled A/B evaluation, and real-repository acceptance guidance.
+- Experimental `scientific-code-documenter` skill.
+- Scientific documentation hierarchy and language-specific readability rules.
+- Evidence-grounded guidance for units, shapes, conventions, and numerical context.
+- Reusable validation, fixture-checking, discovery, and installation tooling.
+- Controlled evaluation fixtures, prompt matrix, adversarial cases, and scoring rubric.
 
-## Status
+### Fixed
 
-All skills remain experimental until controlled evaluation and real-repository acceptance testing demonstrate otherwise.
+- Prevented unsupported inference of units, physical roles, correction meanings, and conversion semantics.
+- Enforced review-only mode when a stale comment is identified instead of applying an unrequested edit.
+
+### Validated
+
+- Full five-fixture controlled A/B suite.
+- Explicit and positive implicit trigger behavior.
+- Negative false-trigger behavior.
+- Review-only and explanation-only boundary scope adherence.
+- Real-repository acceptance on a scientific Python XPS fitting workbench.
+
+### Known limitations
+
+- This first release remains experimental.
+- The strongest real-repository evidence currently comes from Python; other supported languages have fixture-level coverage.
+- Human scientific review remains required before merging generated documentation changes.

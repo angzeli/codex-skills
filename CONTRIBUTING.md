@@ -25,3 +25,10 @@ Run `./scripts/check_all_skills.sh` and `./scripts/run_fixture_checks.sh` before
 - Keep runtime content out of `evals/` and collection infrastructure out of `skills/<name>/`.
 - Do not commit generated evaluation runs.
 - Do not claim trigger accuracy, behavior preservation, or effectiveness without recording the relevant evaluation.
+
+## Evaluation gates for skill changes
+
+- Add a focused synthetic regression whenever an observed failure leads to a runtime change.
+- Rerun the directly affected fixture, trigger, or boundary gates after every runtime modification.
+- Before a release, rerun collection validation, the skill's full fixture suite, and any real-repository gate whose accepted runtime snapshot changed.
+- Record portable summaries of release evidence, but keep raw sessions, temporary repositories, and generated logs in ignored result directories.
