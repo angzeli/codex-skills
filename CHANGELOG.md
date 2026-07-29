@@ -6,6 +6,26 @@ All notable changes to this collection are documented here. No remote release ha
 
 No changes yet.
 
+## [0.3.0] - 2026-07-29
+
+### Added
+
+- Real-repository ORCA Shell acceptance evidence.
+- Multi-script Shell inventory and contract validation.
+- Mock and dry-run preservation checks.
+- Command, restart, failure, cleanup, and generated-input comparisons.
+
+### Validated
+
+- Production-style ORCA Shell scripts and review-only repository inspection.
+- CLI, environment, exit-code, trap, cleanup, ordering, input-generation, and output-contract preservation.
+
+### Known limitations
+
+- No expensive production calculation was launched.
+- Cluster-specific behavior remains outside the current acceptance scope.
+- Human scientific review remains required.
+
 ## [0.2.0] - 2026-07-28
 
 ### Added

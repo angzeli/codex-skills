@@ -34,7 +34,7 @@ codex_skills/
 
 | Skill | Purpose | Status |
 | --- | --- | --- |
-| `scientific-code-documenter` | Improve scientific and technical code documentation and readability while preserving behavior | Experimental v0.2.0; validated with controlled Python, Shell, LaTeX, HTML/CSS/JavaScript, trigger, boundary, and scientific Python acceptance tests |
+| `scientific-code-documenter` | Improve scientific and technical code documentation and readability while preserving behavior | Experimental v0.3.0; validated with scientific Python and ORCA Shell real-repository acceptance plus controlled Python, Shell, LaTeX, HTML/CSS/JavaScript, trigger, and boundary tests |
 
 ## Validate and install
 
@@ -106,9 +106,9 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for the complete workflow.
 
 Structural validation proves that a skill can be discovered and parsed; it does not prove usefulness. Evaluation therefore combines controlled A/B runs, trigger and scope-boundary measurements, independent behavior checks, adversarial fixtures, and authorized real-repository acceptance.
 
-`scientific-code-documenter` v0.2.0 retains the accepted v0.1.0 runtime unchanged. Its new six-fixture controlled suite scored 159/162 with the skill versus 145/162 baseline: four wins, two ties, and no losses. Contract checks covered Shell aggregate failure, exit codes, manifests, ORCA inputs, and review-only restraint; LaTeX compilation, labels, macros, conditional content, rendered text, and fragile templates; and HTML DOM, accessibility, CSV bytes, ordering, scaling, and generated snapshots. Cross-language trigger checks passed explicit invocation, implicit discovery, negative, and zero-edit boundary gates.
+`scientific-code-documenter` v0.3.0 retains the accepted v0.2.0 runtime unchanged. Its real-repository ORCA Shell acceptance reviewed nine production-style scripts (4,319 lines), made zero review-only edits, and tested three controlled A/B pairs. The skill scored 89/90 versus 80/90 baseline, won all three scripts, and preserved generated ORCA inputs, command order, CLI and environment contracts, failures, restarts, cleanup, logs, outputs, and exit codes under independent mocks and dry runs. No expensive scientific calculation was launched.
 
-Scientific Python remains the only completed real-repository acceptance. Shell, LaTeX, and HTML/CSS/JavaScript evidence is synthetic and contract-based, including generated- and fragile-file restraint; it must not be described as real-repository validation. See the [sanitized v0.2.0 evaluation summary](docs/evaluations/scientific-code-documenter-v0.2.0.md) for exact results and limitations. The skill remains experimental and scientific edits still require human review.
+The prior scientific Python real-repository acceptance and controlled Shell, LaTeX, HTML, CSS, and JavaScript evidence remain applicable because the runtime hash did not change. Mock and dry-run equivalence cannot prove every scheduler, cluster, MPI, or operating-system interaction. See the [sanitized v0.3.0 evaluation summary](docs/evaluations/scientific-code-documenter-v0.3.0.md) for exact results and limitations. The skill remains experimental and scientific edits still require human review.
 
 ## Privacy and publication
 
