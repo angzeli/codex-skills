@@ -6,6 +6,30 @@ All notable changes to this collection are documented here. No remote release ha
 
 No changes yet.
 
+## [0.2.0] - 2026-07-28
+
+### Added
+
+- Adversarial synthetic Shell, LaTeX, and HTML evaluation fixtures.
+- Deterministic contracts for exit codes, manifests, rendering, labels, DOM behavior, CSV bytes, ordering, scaling, accessibility, and byte-fragile generated outputs.
+- Language-specific explicit, implicit, negative, review-only, and generated-file trigger coverage.
+
+### Changed
+
+- Expanded tested language coverage and release evidence without changing the accepted v0.1.0 runtime instructions.
+
+### Validated
+
+- Shell aggregate-failure behavior, ORCA input preservation, manifest contracts, strict-mode restraint, and review-only behavior.
+- LaTeX labels, macros, scientific values, conditional compilation, normalized rendered content, and fragile-template preservation.
+- HTML DOM and accessibility contracts, CSV export, data ordering, display scaling, formatting, and generated-snapshot preservation.
+- Cross-language trigger discovery, false-trigger, review-only, and generated-file boundaries.
+
+### Known limitations
+
+- Non-Python real-repository validation remains outstanding.
+- Human review remains required before scientific documentation changes are merged.
+
 ## [0.1.0] - 2026-07-28
 
 ### Added

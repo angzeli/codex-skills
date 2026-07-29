@@ -34,7 +34,7 @@ codex_skills/
 
 | Skill | Purpose | Status |
 | --- | --- | --- |
-| `scientific-code-documenter` | Improve scientific and technical code documentation and readability while preserving behavior | Experimental v0.1.0; validated with controlled synthetic, trigger, boundary, and scientific Python acceptance tests |
+| `scientific-code-documenter` | Improve scientific and technical code documentation and readability while preserving behavior | Experimental v0.2.0; validated with controlled Python, Shell, LaTeX, HTML/CSS/JavaScript, trigger, boundary, and scientific Python acceptance tests |
 
 ## Validate and install
 
@@ -75,6 +75,9 @@ Codex may also select it implicitly for requests such as:
 
 - “Add concise docstrings and document the units and NumPy array shapes without changing calculations.”
 - “Replace these repetitive AI-like comments with explanations of the non-obvious data-ordering constraints.”
+- “Clarify this Shell workflow's aggregate-error behavior without changing its exit codes.”
+- “Organize these LaTeX macros while preserving labels, rendered content, and the template workaround.”
+- “Make this scientific dashboard easier to maintain without changing its DOM or CSV contracts.”
 
 For an editing-mode request:
 
@@ -103,7 +106,9 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for the complete workflow.
 
 Structural validation proves that a skill can be discovered and parsed; it does not prove usefulness. Evaluation therefore combines controlled A/B runs, trigger and scope-boundary measurements, independent behavior checks, adversarial fixtures, and authorized real-repository acceptance.
 
-`scientific-code-documenter` v0.1.0 passed its five-fixture controlled A/B suite (112/120 versus 94/120), tested explicit and implicit trigger gates, corrected review-only boundary regressions, and passed acceptance on a scientific Python repository without changing reviewed files or tested behavior. The strongest real-repository evidence is currently Python; other supported languages remain fixture-validated. See the [sanitized v0.1.0 evaluation summary](docs/evaluations/scientific-code-documenter-v0.1.0.md) for methods, exact results, and limitations. The skill remains experimental and scientific edits still require human review.
+`scientific-code-documenter` v0.2.0 retains the accepted v0.1.0 runtime unchanged. Its new six-fixture controlled suite scored 159/162 with the skill versus 145/162 baseline: four wins, two ties, and no losses. Contract checks covered Shell aggregate failure, exit codes, manifests, ORCA inputs, and review-only restraint; LaTeX compilation, labels, macros, conditional content, rendered text, and fragile templates; and HTML DOM, accessibility, CSV bytes, ordering, scaling, and generated snapshots. Cross-language trigger checks passed explicit invocation, implicit discovery, negative, and zero-edit boundary gates.
+
+Scientific Python remains the only completed real-repository acceptance. Shell, LaTeX, and HTML/CSS/JavaScript evidence is synthetic and contract-based, including generated- and fragile-file restraint; it must not be described as real-repository validation. See the [sanitized v0.2.0 evaluation summary](docs/evaluations/scientific-code-documenter-v0.2.0.md) for exact results and limitations. The skill remains experimental and scientific edits still require human review.
 
 ## Privacy and publication
 
