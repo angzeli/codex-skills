@@ -1,6 +1,6 @@
 # Scientific Code Documenter evaluation
 
-This suite tests whether the skill improves documentation and readability without changing behavior or expanding scope. All examples are synthetic and contain no unpublished research or third-party project code.
+This suite tests whether the skill improves documentation and readability without changing behavior or expanding scope. Tracked fixtures are synthetic and contain no unpublished research or third-party project code. Authorized real-repository runs retain raw source, diffs, and logs only in ignored local result directories; tracked summaries are sanitized.
 
 ## Evaluation layers
 
@@ -36,4 +36,6 @@ Exact repository-specific commands are maintained in the root `README.md` after 
 
 ## Real-repository acceptance
 
-Later acceptance should cover a medium-complexity file in each of a scientific Python repository, a computational workflow repository, and an HTML/reporting/scientific-document repository. Use the reusable prompts in `prompts.yaml`; do not use private code without authorization.
+Completed acceptance now covers an authorized scientific Python repository and a production-style ORCA Shell workflow repository. The ORCA run reviewed nine scripts, exercised three controlled edit pairs with isolated mocks and dry runs, and preserved generated calculation inputs and workflow contracts without launching an expensive calculation. See the [v0.3.0 sanitized summary](../../docs/evaluations/scientific-code-documenter-v0.3.0.md).
+
+Future acceptance should add an authorized HTML/reporting or scientific-document repository and broader scheduler or cluster environments. Use the reusable prompts in `prompts.yaml`; do not use private code without authorization.
