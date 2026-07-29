@@ -22,6 +22,14 @@ positive_implicit:
     language: html-css
     mode: readability-refactor
     prompt: "Clarify this scientific report page's semantic structure and accessibility while avoiding comments on every element."
+  - id: positive-html-dashboard-contracts
+    language: html
+    mode: document-existing
+    prompt: "Make dashboard.html easier to maintain and document the non-obvious DOM, ordering, scaling, and CSV contracts without changing browser behaviour."
+  - id: positive-html-script-readability
+    language: html
+    mode: readability-refactor
+    prompt: "Untangle the inline JavaScript in dashboard.html and add only useful comments, preserving IDs, visible values, and exported data bytes."
   - id: positive-css-layout
     language: css
     mode: document-existing
@@ -30,10 +38,26 @@ positive_implicit:
     language: shell
     mode: readability-refactor
     prompt: "Make this computational workflow readable and document its required executables, paths, environment variables, and stages."
+  - id: positive-shell-aggregate-errors
+    language: shell
+    mode: document-existing
+    prompt: "Clarify workflow.sh so maintainers understand its aggregate-error handling, cleanup trap, and manifest contract without changing exit behaviour."
+  - id: positive-shell-scientific-parameters
+    language: shell
+    mode: readability-refactor
+    prompt: "Reorganize the dense Bash stages in workflow.sh and explain the configured computational parameters without assigning unsupported scientific meaning."
   - id: positive-latex-macros
     language: latex
     mode: document-existing
     prompt: "Organize these macros and explain the non-obvious journal-template workaround without rewriting ordinary LaTeX commands."
+  - id: positive-latex-report-structure
+    language: latex
+    mode: readability-refactor
+    prompt: "Improve the source readability of report.tex while preserving its labels, references, scientific values, float order, and rendered content."
+  - id: positive-latex-conditional
+    language: latex
+    mode: document-existing
+    prompt: "Document the conditional appendix and table-order contracts in report.tex, keeping the template class, macro values, and spacing workaround intact."
   - id: positive-config-conventions
     language: yaml
     mode: documentation-review
@@ -71,11 +95,47 @@ negative:
   - id: negative-tex-compile
     language: latex
     prompt: "Compile this manuscript and fix the missing package error."
+  - id: negative-latex-reference
+    language: latex
+    prompt: "Add a bibliography entry to report.tex and cite it in the discussion."
   - id: negative-deploy
     language: shell
     prompt: "Deploy the application to the staging cluster."
+  - id: negative-shell-execute
+    language: shell
+    prompt: "Run workflow.sh with the sample input and report its exit code and generated files."
+  - id: negative-html-feature
+    language: html
+    prompt: "Add a dark-mode toggle to dashboard.html and persist the selection in local storage."
+  - id: negative-html-debug
+    language: html
+    prompt: "Fix the dashboard filter so selecting a sample updates the visible row count."
 
 boundary:
+  - id: boundary-shell-review-only
+    language: shell
+    expected: trigger-review-only
+    prompt: "Review workflow.sh for misleading parameter and error-handling comments. Do not modify or execute it; report only evidence-supported findings."
+  - id: boundary-shell-generated
+    language: shell
+    expected: trigger-and-skip-generated
+    prompt: "Assess the comments in generated_workflow.sh, but do not edit the generated file; identify the upstream change that would be needed."
+  - id: boundary-latex-review-only
+    language: latex
+    expected: trigger-review-only
+    prompt: "Review report.tex for unsupported descriptions of configured values. Do not edit the source or redesign the template."
+  - id: boundary-latex-generated
+    language: latex
+    expected: trigger-and-skip-generated
+    prompt: "Review generated_supplement.tex for documentation clarity without modifying it; direct any suggested wording to its generator."
+  - id: boundary-html-review-only
+    language: html
+    expected: trigger-review-only
+    prompt: "Review dashboard.html for stale accessibility and export-contract comments. Do not change any files."
+  - id: boundary-html-generated
+    language: html
+    expected: trigger-and-skip-generated
+    prompt: "Inspect generated_dashboard.html for misleading documentation, but leave it byte-identical and recommend changes only at the generator."
   - id: boundary-buggy-comment
     language: python
     expected: trigger-review-only
@@ -122,3 +182,7 @@ explicit_invocation:
     language: html-css
     mode: limited-edit
     prompt: "$scientific-code-documenter\nImprove only semantic structure, accessibility documentation, and opaque names in this report component; leave generated CSS untouched."
+  - id: explicit-latex-review
+    language: latex
+    mode: review-only
+    prompt: "$scientific-code-documenter\nReview report.tex for source readability, label and macro contracts, and unsupported scientific interpretation. Do not modify it."
