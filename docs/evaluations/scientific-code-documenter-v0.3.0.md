@@ -22,6 +22,8 @@ A fresh skill-enabled review inspected all nine scripts and produced twelve prio
 
 No real ORCA, `orca_plot`, Multiwfn, scheduler, or expensive scientific calculation was launched. Validation used syntax checks, missing-executable preflight probes, source-only helper probes, and isolated deterministic mocks.
 
+A pre-existing calculation continued advancing ignored checkpoints in the live repository while evidence was captured. The activity began before the evaluation and was recorded separately: branch, HEAD, remotes, tracked, staged, unstaged, and untracked source state remained unchanged, as did the immutable evaluated inputs. Because candidate sessions used frozen snapshots and never wrote to the live source tree, the external activity did not affect acceptance validity.
+
 ## A/B results
 
 Each pair started from the same detached neutral commit. Baseline sessions exposed zero user skills; skill sessions exposed exactly the immutable `scientific-code-documenter` snapshot and recorded its `SKILL.md` read. Prompt bodies, model, reasoning effort, CLI, sandbox, repository context, and independent validation were otherwise identical. A zero-skill blind judge scored anonymous candidates from complete scripts, diffs, context, and contract outputs.
