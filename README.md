@@ -2,6 +2,8 @@
 
 This repository is the editable source of truth for a growing collection of custom Codex skills. Each direct child of `skills/` is an independent runtime package; collection documentation, evaluation suites, and shared tooling stay outside those packages.
 
+New to Codex skills? Follow [Getting started](GETTING_STARTED.md) to install and use `scientific-code-documenter`.
+
 ## Source and runtime installations
 
 Edit skills in this repository. Runtime discovery uses one symbolic link per skill under `$HOME/.agents/skills/<name>`, pointing to `skills/<name>/`. Do not link or copy the repository root into the runtime skills directory.
@@ -26,6 +28,7 @@ codex_skills/
 ├── AGENTS.md
 ├── CHANGELOG.md
 ├── CONTRIBUTING.md
+├── GETTING_STARTED.md
 ├── LICENSE
 └── README.md
 ```
