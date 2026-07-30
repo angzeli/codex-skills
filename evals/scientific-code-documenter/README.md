@@ -38,4 +38,6 @@ Exact repository-specific commands are maintained in the root `README.md` after 
 
 Completed acceptance now covers an authorized scientific Python repository and a production-style ORCA Shell workflow repository. The ORCA run reviewed nine scripts, exercised three controlled edit pairs with isolated mocks and dry runs, and preserved generated calculation inputs and workflow contracts without launching an expensive calculation. See the [v0.3.0 sanitized summary](../../docs/evaluations/scientific-code-documenter-v0.3.0.md).
 
+Run real-repository candidates only from immutable snapshots, never from the live source tree. Protect and restore tracked source state, and determine validity from the frozen runtime, source inputs, prompts, harnesses, and captured outputs. Ignored calculation outputs and filesystem metadata remain outside that boundary unless explicitly frozen; record concurrent external activity separately without treating live-source quiescence as an evaluation gate.
+
 Future acceptance should add an authorized HTML/reporting or scientific-document repository and broader scheduler or cluster environments. Use the reusable prompts in `prompts.yaml`; do not use private code without authorization.
