@@ -1,0 +1,4 @@
+interface:
+  display_name: "Angze Plot Style"
+  short_description: "Apply Angze's evidence-backed plot style"
+  default_prompt: "Use $angze-plot-style to create or restyle this Matplotlib scientific figure in Angze's established style."
