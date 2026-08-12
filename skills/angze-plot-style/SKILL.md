@@ -16,8 +16,9 @@ Matplotlib house style.
    - `diagnostic`: compact typography for working figures.
 2. Read [references/style-profile.md](references/style-profile.md) for exact
    values and a minimal example.
-3. Use [assets/angze_plot_style.py](assets/angze_plot_style.py) rather than
-   retyping rcParams when writing Matplotlib code.
+3. Use the `create_figure()` context manager in
+   [assets/angze_plot_style.py](assets/angze_plot_style.py) rather than retyping
+   rcParams when writing standalone Matplotlib figures.
 4. Apply layout and scientific formatting deliberately. Prefer a standalone
    `(8, 6)` figure; use panels only when the task requires a combined figure.
 5. For final output, save PNG and PDF from one stem at 600 dpi with tight bounds

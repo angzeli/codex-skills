@@ -8,7 +8,7 @@ heavy typography and boxed axes; it is not normalized toward journal defaults.
 | Role | Canonical setting |
 |---|---|
 | Font | Arial-first sans serif, then Helvetica, Liberation Sans, DejaVu Sans |
-| Math text | STIX Sans, regular math default |
+| Math text | STIX Sans; retain Matplotlib's conventional math styling |
 | Global font size | unset; use role-specific sizes |
 | Axis labels | 22 pt, bold, black |
 | Tick labels | 14 pt, bold, black |
@@ -89,15 +89,14 @@ import matplotlib.pyplot as plt
 
 from angze_plot_style import (
     PDI_COLOURS,
-    angze_plot_context,
+    create_figure,
     data_line_kwargs,
     save_figure_bundle,
     style_axes,
     style_legend,
 )
 
-with angze_plot_context("manuscript"):
-    fig, ax = plt.subplots(figsize=(8, 6))
+with create_figure(profile="manuscript") as (fig, ax):
     ax.plot(
         x,
         y,
@@ -114,5 +113,7 @@ with angze_plot_context("manuscript"):
     plt.close(fig)
 ```
 
-Add the skill's `assets/` directory to `sys.path`, or copy/import the module in
-the consuming project according to that project's packaging convention.
+`create_figure()` keeps the selected profile active for every artist created in
+its `with` block, then restores global rcParams. Add the skill's `assets/`
+directory to `sys.path`, or copy/import the module in the consuming project
+according to that project's packaging convention.

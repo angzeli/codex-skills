@@ -17,7 +17,7 @@ Labels:
 
 | Rule | Basis | Evidence or decision |
 |---|---|---|
-| Arial-first sans serif | `FORENSIC + USER_DECISION` | Explicit in 15 files across PDI calculation, PDI data, and XPS; the user fixed the fallback policy. |
+| Arial-first sans serif | `FORENSIC` | Explicit in 15 files across PDI calculation, PDI data, and XPS; the fallback stack preserves this preference when Arial is unavailable. |
 | STIX Sans math | `FORENSIC + USER_DECISION` | Present in current PDI helpers; Phase 1 found competing math fontsets, and the user selected STIX Sans. |
 | No global `font.size` | `FORENSIC + USER_DECISION` | Most repositories style roles directly; only XPS supplied a global 14. The user rejected a canonical global size. |
 | Labels 22 bold | `FORENSIC + USER_DECISION` | 124 size uses across 30 files and 8 repositories; bold across 34 files and 9 repositories. |

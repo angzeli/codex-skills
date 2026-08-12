@@ -56,7 +56,6 @@ BASE_RCPARAMS: dict[str, object] = {
     "font.family": "sans-serif",
     "font.sans-serif": ["Arial", "Helvetica", "Liberation Sans", "DejaVu Sans"],
     "mathtext.fontset": "stixsans",
-    "mathtext.default": "regular",
     "pdf.fonttype": 42,
     "ps.fonttype": 42,
     "text.color": "black",
@@ -201,7 +200,7 @@ def style_axes(
 
     ax.figure.patch.set_facecolor("white")
     ax.set_facecolor("white")
-    ax.grid(grid)
+    ax.grid(grid, which="both")
     for spine in ax.spines.values():
         spine.set_visible(True)
         spine.set_color("black")
@@ -253,10 +252,16 @@ def style_axes(
         offset_text.set_color("black")
         offset_text.set_fontsize(sizes["tick_label"])
         offset_text.set_fontweight("bold")
-    if ax.get_title():
-        ax.title.set_color("black")
-        ax.title.set_fontsize(sizes["title"])
-        ax.title.set_fontweight("bold")
+    title_artists = (
+        ax.title,
+        getattr(ax, "_left_title", None),
+        getattr(ax, "_right_title", None),
+    )
+    for title in title_artists:
+        if title is not None and title.get_text():
+            title.set_color("black")
+            title.set_fontsize(sizes["title"])
+            title.set_fontweight("bold")
     return ax
 
 
@@ -266,6 +271,7 @@ def style_legend(legend: Legend | None, *, profile: str = "base") -> Legend | No
     if legend is None:
         return None
     sizes = _profile_typography(profile)
+    legend.set_frame_on(True)
     frame = legend.get_frame()
     frame.set_facecolor("white")
     frame.set_edgecolor("black")
@@ -348,24 +354,26 @@ def open_marker_kwargs(color: str, **overrides: object) -> dict[str, object]:
     return values
 
 
+@contextmanager
 def create_figure(
     *,
     profile: str = "base",
     figsize: tuple[float, float] | None = None,
     constrained_layout: bool = False,
     **subplot_kwargs: object,
-) -> tuple[Figure, Axes]:
-    """Create and style one standalone axes without changing global rcParams."""
+) -> Iterator[tuple[Figure, Axes]]:
+    """Create one styled axes while isolating the profile's global rcParams."""
 
     _validate_profile(profile)
     default_size = DIAGNOSTIC_FIGSIZE if profile == "diagnostic" else DEFAULT_FIGSIZE
-    fig, ax = plt.subplots(
-        figsize=figsize or default_size,
-        constrained_layout=constrained_layout,
-        **subplot_kwargs,
-    )
-    style_axes(ax, profile=profile)
-    return fig, ax
+    with angze_plot_context(profile):
+        fig, ax = plt.subplots(
+            figsize=figsize or default_size,
+            constrained_layout=constrained_layout,
+            **subplot_kwargs,
+        )
+        style_axes(ax, profile=profile)
+        yield fig, ax
 
 
 def save_figure_bundle(
@@ -401,8 +409,7 @@ def save_figure_bundle(
     for file_format in normalized:
         output = stem.with_suffix(f".{file_format}")
         kwargs = dict(common)
-        if file_format == "png":
-            kwargs["dpi"] = dpi
+        kwargs["dpi"] = dpi
         figure.savefig(output, format=file_format, **kwargs)
         outputs.append(output)
     return tuple(outputs)
