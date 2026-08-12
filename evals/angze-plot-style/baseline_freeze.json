@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "condition": "A_baseline_no_plotting_skill",
+  "freeze_order": "Condition A renderer and outputs were completed before the treatment file was opened during this evaluation run.",
+  "isolation_warning": "The surrounding conversation had already exposed the treatment skill in earlier tasks, so the experiment is not strictly blinded.",
+  "shared_semantics_sha256": {
+    "common.py": "6596cf468b12de61ca6f350fb3f3b8cb93455515f54386d1e67ded7078f858c3"
+  },
+  "renderer_sha256": {
+    "renderers/baseline/render.py": "c9ff2fe9fec9d8ea676bfe8d18761fd462bf52568f66844a2d554421a3b053d9"
+  },
+  "input_sha256": {
+    "data/ir.csv": "67ae869ef84249562b3a0df8bc652493e7eec90bc608147404569f016e3f2bfb",
+    "data/uv_vis.csv": "b08a8f1f1fe1fb1a376d289c2e2dbbad3026af4dcee50dccc527b8391fee152f",
+    "data/xrd.csv": "d09f70b91ebf8f389fd2cae94062f0489e5a3665eef4677d777f3b397cb8549b"
+  },
+  "output_sha256": {
+    "outputs/A_baseline/ir_A.png": "c658826b5bd0acfb285eeb7401d2fccd3a48ad21fa2b47df87394ffa990f8009",
+    "outputs/A_baseline/uv_vis_A.png": "c4e3fa452c2954bfdd4f9e19fd150bae00822eed80e47ad9b6f2b10b341d731d",
+    "outputs/A_baseline/xrd_A.png": "a9a1d20566920bc88b6e4fb3084368efd5e9676b86c09440f3d1f497e15a8d68"
+  }
+}
