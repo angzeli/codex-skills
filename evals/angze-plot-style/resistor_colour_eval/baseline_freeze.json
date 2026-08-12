@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "condition": "A_baseline_no_plotting_skill",
+  "freeze_order": "All three Condition A renderers and PNGs were completed before SKILL.md was reopened during this evaluation run.",
+  "isolation_warning": "The surrounding conversation had already exposed and maintained the treatment skill in earlier tasks, so the experiment is not strictly blinded.",
+  "shared_semantics_sha256": {
+    "common.py": "560dab87a15353ce0107f361eb0b89231f8c02b8a5308857d5f1499d42ef30ad"
+  },
+  "renderer_sha256": {
+    "renderers/baseline/categorical6.py": "104680ea69940302f2fc8d1ee28d9856f62161b555b82bb9095240dbd326eb91",
+    "renderers/baseline/subset4.py": "a34d711141ff0dadff588fcb791fc73b74395c99b512ce820658a5090f40aa6f",
+    "renderers/baseline/ordered6.py": "524eda4e02f24e40f4eb9a648146312b0db10f7878649dea5bf5b7bff8950e30"
+  },
+  "output_sha256": {
+    "outputs/A_baseline/categorical6_A.png": "de2ce66f92b48d4d6eb3a605598b316b6f07bc2415e1884ae1c59fdf618d1cd6",
+    "outputs/A_baseline/subset4_A.png": "ee07e40be11ca3971bbba3524c9acc5a1395c9bf0b75a2581fc60a03367df757",
+    "outputs/A_baseline/ordered6_A.png": "8c136cae370964b205f58adb2eb1f8b1830369d1dfaca8bb842ff06f5ae55b2d"
+  },
+  "source_csv_sha256": {
+    "../data/resistor_repeats5_20260122_201801.csv": "ea8f3f52bb7b4113738b34a80c096642ef7baae8baf9156775ea8f10af58b80a"
+  }
+}
