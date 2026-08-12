@@ -1,7 +1,9 @@
 # Canonical style profile
 
-This is the Phase-2 operational specification. It preserves Angze's observed
-heavy typography and boxed axes; it is not normalized toward journal defaults.
+This expands the complete operational contract already present in `SKILL.md`.
+It preserves Angze's observed heavy typography and boxed axes; it is not
+normalized toward journal defaults. Normal use does not require this reference
+or any external style module.
 
 ## Base profile
 
@@ -85,35 +87,108 @@ Do not impose universal significant figures.
 ```python
 from pathlib import Path
 
+import matplotlib as mpl
 import matplotlib.pyplot as plt
 
-from angze_plot_style import (
-    PDI_COLOURS,
-    create_figure,
-    data_line_kwargs,
-    save_figure_bundle,
-    style_axes,
-    style_legend,
-)
+ANGZE_RC = {
+    "figure.facecolor": "white",
+    "axes.facecolor": "white",
+    "savefig.facecolor": "white",
+    "legend.facecolor": "white",
+    "legend.edgecolor": "black",
+    "font.family": "sans-serif",
+    "font.sans-serif": ["Arial", "Helvetica", "Liberation Sans", "DejaVu Sans"],
+    "mathtext.fontset": "stixsans",
+    "text.color": "black",
+    "axes.edgecolor": "black",
+    "axes.labelcolor": "black",
+    "axes.grid": False,
+    "axes.linewidth": 1.8,
+    "axes.spines.left": True,
+    "axes.spines.right": True,
+    "axes.spines.bottom": True,
+    "axes.spines.top": True,
+    "xtick.color": "black",
+    "ytick.color": "black",
+    "xtick.direction": "in",
+    "ytick.direction": "in",
+    "xtick.major.width": 1.8,
+    "ytick.major.width": 1.8,
+    "xtick.major.size": 4,
+    "ytick.major.size": 4,
+    "xtick.top": False,
+    "ytick.right": False,
+    "xtick.minor.visible": False,
+    "ytick.minor.visible": False,
+}
 
-with create_figure(profile="manuscript") as (fig, ax):
+x = [0, 1, 2, 3]
+y = [0.2, 0.8, 1.1, 1.5]
+series_colour = "tab:blue"  # Choose from the science; there is no universal palette.
+
+with mpl.rc_context(rc=ANGZE_RC):
+    fig, ax = plt.subplots(figsize=(8, 6))
     ax.plot(
         x,
         y,
-        label="PDI-H-COOH",
-        **data_line_kwargs(PDI_COLOURS["PDI-H-COOH"]),
+        color=series_colour,
+        linewidth=2.0,
+        marker="o",
+        markersize=5.5,
+        markerfacecolor=series_colour,
+        markeredgecolor="black",
+        markeredgewidth=0.8,
+        label="Measured response",
     )
-    ax.set_xlabel("Time (min)")
-    ax.set_ylabel(r"Concentration ($\mathrm{mmol\,L^{-1}}$)")
-    # ax.set_title("Time-dependent response")
-    style_axes(ax, profile="manuscript")
-    style_legend(ax.legend(loc="upper right"), profile="manuscript")
+    ax.set_xlabel("Time (min)", fontsize=22, fontweight="bold")
+    ax.set_ylabel(r"Response (a.u.)", fontsize=22, fontweight="bold")
+    # ax.set_title("Time-dependent response", fontsize=18, fontweight="bold")
+
+    ax.set_facecolor("white")
+    ax.grid(False, which="both")
+    ax.minorticks_off()
+    for spine in ax.spines.values():
+        spine.set_visible(True)
+        spine.set_color("black")
+        spine.set_linewidth(1.8)
+    ax.tick_params(
+        axis="both",
+        which="major",
+        direction="in",
+        width=1.8,
+        length=4,
+        colors="black",
+        labelsize=14,
+        bottom=True,
+        left=True,
+        top=False,
+        right=False,
+    )
+    for label in (*ax.get_xticklabels(), *ax.get_yticklabels()):
+        label.set_fontweight("bold")
+
+    legend = ax.legend(loc="upper right", fontsize=10, frameon=True)
+    legend.get_frame().set_facecolor("white")
+    legend.get_frame().set_edgecolor("black")
+    legend.get_frame().set_alpha(1.0)
+    for label in legend.get_texts():
+        label.set_fontweight("bold")
+
     fig.tight_layout()
-    save_figure_bundle(fig, Path("time_dependent_response"))
+    stem = Path("time_dependent_response")
+    save_options = {
+        "bbox_inches": "tight",
+        "facecolor": "white",
+        "edgecolor": "white",
+        "transparent": False,
+    }
+    fig.savefig(stem.with_suffix(".png"), dpi=600, **save_options)
+    fig.savefig(stem.with_suffix(".pdf"), **save_options)
     plt.close(fig)
 ```
 
-`create_figure()` keeps the selected profile active for every artist created in
-its `with` block, then restores global rcParams. Add the skill's `assets/`
-directory to `sys.path`, or copy/import the module in the consuming project
-according to that project's packaging convention.
+The example is deliberately self-contained. For several figures in one script,
+factor the repeated axes and legend statements into a small local helper. The
+bundled `assets/angze_plot_style.py` remains an optional executable reference
+for skill maintenance or deliberate repository-local adoption; it is not a
+runtime dependency of generated plotting code.

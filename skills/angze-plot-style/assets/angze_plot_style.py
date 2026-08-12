@@ -1,4 +1,9 @@
-"""Small Matplotlib helpers for Angze's evidence-backed plotting style."""
+"""Optional executable reference for Angze's evidence-backed plotting style.
+
+The skill generates self-contained Matplotlib code for normal use. This module
+is a reference implementation and validation fixture, not a required runtime
+dependency for consuming repositories.
+"""
 
 from __future__ import annotations
 

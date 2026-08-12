@@ -26,10 +26,13 @@ following contexts require it.
 
 ## Marks and colour
 
-- Use `data_line_kwargs()` for the general filled circular PDI-derived marker.
-- Use `experimental_errorbar_kwargs()` for PDI-like time-course means with
-  uncertainty, `dense_marker_kwargs()` for dense traces, and
-  `open_marker_kwargs()` for an explicitly open/control role.
+- Use the general 5.5 pt filled circle with a black 0.8 pt edge unless the mark
+  carries a more specific scientific role.
+- For PDI-like time-course means with uncertainty, the established role is a
+  6.5 pt filled circle with a white 0.7 pt edge, 4 pt caps, and 1.4 pt error
+  lines. Dense electrochemical traces use 4.5 pt circles with white 0.45 pt
+  edges. Explicit open/control series use 7 pt white-centred circles with a
+  series-coloured 1.8 pt edge.
 - Choose stars, triangles, squares, diamonds, or other shapes only when they
   encode a scientific distinction. Do not use them as decorative variation.
 - Keep scatter size, scatter alpha, and highlight geometry local to the figure.

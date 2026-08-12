@@ -46,6 +46,7 @@ Labels:
 | PNG and PDF only, paired by default | `FORENSIC + USER_DECISION` | Paired output was established in PDI/XPS, while other formats and single-format diagnostics existed. The user excluded other formats by default. |
 | 600 dpi, tight, opaque white | `FORENSIC + USER_DECISION` | Tight bounds and white opaque raster were strong; 300 versus 600 and vector transparency conflicted. The user selected 600 and opaque white for both outputs. |
 | Base + manuscript policy + diagnostic override | `FORENSIC + USER_DECISION` | Base/publication and compact diagnostic families were supported; the user separated stable DNA from final-output policy and declined a broad presentation profile. |
+| Specification-first dependency contract | `USER_DECISION` | `SKILL.md` is sufficient for normal self-contained Matplotlib generation. The Python asset is an optional reference implementation and validation fixture, not a cross-repository runtime dependency. |
 
 ## Targeted PDI marker audit
 
