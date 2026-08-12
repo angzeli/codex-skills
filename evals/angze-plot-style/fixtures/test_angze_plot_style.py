@@ -178,6 +178,137 @@ class AngzePlotStyleRegressionTests(unittest.TestCase):
                     self.assertTrue(output.is_file())
                     self.assertGreater(output.stat().st_size, 0)
 
+    def test_canonical_colour_constants_and_pdi_anchors(self) -> None:
+        self.assertEqual(
+            style.DEFAULT_COLOUR_CYCLE,
+            [
+                "#0072B2",
+                "#D55E00",
+                "#7A5195",
+                "#009E73",
+                "#C23B70",
+                "#7A8F00",
+            ],
+        )
+        self.assertEqual(style.NEUTRAL_COLOUR, "#4D4D4D")
+        self.assertEqual(
+            style.PDI_COLOURS,
+            {
+                "PDI-Me-COOH": "#D55E00",
+                "PDI-H-COOH": "#0072B2",
+                "PDI-OMe-COOH": "#7A5195",
+            },
+        )
+        for identity, base_colour in style.PDI_COLOURS.items():
+            with self.subTest(identity=identity):
+                self.assertEqual(
+                    style.SAMPLE_RATE_COLOUR_MAPS[identity][100.0],
+                    base_colour,
+                )
+
+    def test_first_n_categorical_assignments(self) -> None:
+        four = style.assign_categorical_colours(["A", "B", "C", "D"])
+        six = style.assign_categorical_colours(["A", "B", "C", "D", "E", "F"])
+
+        self.assertEqual(
+            four,
+            dict(zip(["A", "B", "C", "D"], style.DEFAULT_COLOUR_CYCLE[:4])),
+        )
+        self.assertEqual(
+            six,
+            dict(zip(["A", "B", "C", "D", "E", "F"], style.DEFAULT_COLOUR_CYCLE)),
+        )
+
+    def test_established_subset_keeps_identity_mapping(self) -> None:
+        established = dict(
+            zip(["A", "B", "C", "D", "E", "F"], style.DEFAULT_COLOUR_CYCLE)
+        )
+
+        subset = style.assign_categorical_colours(
+            ["A", "C", "E", "F"],
+            established_colours=established,
+        )
+
+        self.assertEqual(
+            subset,
+            {
+                "A": "#0072B2",
+                "C": "#7A5195",
+                "E": "#C23B70",
+                "F": "#7A8F00",
+            },
+        )
+
+    def test_neutral_control_does_not_consume_cycle_colour(self) -> None:
+        assigned = style.assign_categorical_colours(
+            ["Sample A", "Sample B", "Control"],
+            neutral_identities=["Control"],
+        )
+
+        self.assertEqual(
+            assigned,
+            {
+                "Sample A": "#0072B2",
+                "Sample B": "#D55E00",
+                "Control": "#4D4D4D",
+            },
+        )
+
+    def test_pdi_colours_follow_identity_not_input_order(self) -> None:
+        identities = ["PDI-OMe-COOH", "PDI-H-COOH", "PDI-Me-COOH"]
+
+        assigned = style.assign_categorical_colours(identities)
+
+        self.assertEqual(
+            assigned,
+            {
+                "PDI-OMe-COOH": "#7A5195",
+                "PDI-H-COOH": "#0072B2",
+                "PDI-Me-COOH": "#D55E00",
+            },
+        )
+
+    def test_explicit_user_colours_have_highest_priority(self) -> None:
+        assigned = style.assign_categorical_colours(
+            ["A", "PDI-H-COOH", "B", "C"],
+            user_colours={"A": "#123456", "PDI-H-COOH": "green"},
+            project_colours={"A": "#ABCDEF", "PDI-H-COOH": "purple"},
+        )
+
+        self.assertEqual(assigned["A"], "#123456")
+        self.assertEqual(assigned["PDI-H-COOH"], "green")
+        self.assertEqual(assigned["B"], "#0072B2")
+        self.assertEqual(assigned["C"], "#D55E00")
+
+    def test_more_than_six_new_categories_requires_explicit_design(self) -> None:
+        with self.assertRaisesRegex(ValueError, "More than six unmapped"):
+            style.assign_categorical_colours(list("ABCDEFG"))
+
+    def test_generic_colour_family_changes_rgb_not_alpha(self) -> None:
+        family = style.generate_colour_family("#0072B2")
+
+        self.assertEqual(
+            family,
+            [
+                "#BFDCEC",
+                "#8CC0DC",
+                "#59A3CD",
+                "#2E8BC0",
+                "#0072B2",
+                "#005685",
+            ],
+        )
+        self.assertTrue(all(len(colour) == 7 for colour in family))
+        brightness = [sum(to_rgba(colour)[:3]) for colour in family]
+        self.assertTrue(all(left > right for left, right in zip(brightness, brightness[1:])))
+
+    def test_non_six_level_family_can_preserve_a_natural_anchor(self) -> None:
+        family = style.generate_colour_family("#009E73", levels=4, anchor_index=2)
+
+        self.assertEqual(family[2], "#009E73")
+        brightness = [sum(to_rgba(colour)[:3]) for colour in family]
+        self.assertTrue(all(left > right for left, right in zip(brightness, brightness[1:])))
+
 
 if __name__ == "__main__":
     unittest.main()

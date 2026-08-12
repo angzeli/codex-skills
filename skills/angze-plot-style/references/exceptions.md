@@ -36,8 +36,13 @@ following contexts require it.
 - Choose stars, triangles, squares, diamonds, or other shapes only when they
   encode a scientific distinction. Do not use them as decorative variation.
 - Keep scatter size, scatter alpha, and highlight geometry local to the figure.
-- Use `PDI_COLOURS` only for exact `PDI-Me-COOH`, `PDI-H-COOH`, and
-  `PDI-OMe-COOH` identities. Do not treat the registry as a universal palette.
+- Follow the priority and persistence rules in `SKILL.md`; an explicit user
+  colour always wins. Use `PDI_COLOURS` only for exact `PDI-Me-COOH`,
+  `PDI-H-COOH`, and `PDI-OMe-COOH` identities. Do not treat the registry as a
+  positional palette.
+- Use same-hue light-to-dark families for ordered values of one identity. Do
+  not spend the categorical cycle on scan rate, temperature, time, loading,
+  concentration, potential, or another ordered scalar.
 - Reference lines are neutral and dashed when scientifically appropriate, but
   their width depends on emphasis.
 

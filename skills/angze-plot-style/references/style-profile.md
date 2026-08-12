@@ -33,6 +33,12 @@ or any external style module.
 For a legend, try `upper right`, then `upper center`, then `best` if the data
 collide. Keep it inside the axes and omit it when labels are unnecessary.
 
+For colour, preserve explicit user and existing project mappings first. New
+unrelated identities use the ordered blue/orange/purple/teal/berry/olive cycle;
+controls may use neutral `#4D4D4D`, and ordered values of one identity use a
+same-hue family. See [colour-profile.md](colour-profile.md) for the complete
+priority hierarchy, frozen PDI families, and deterministic mixing policy.
+
 ## Manuscript/final policy
 
 The manuscript profile uses the base visual DNA, but adds output and composition
@@ -124,7 +130,7 @@ ANGZE_RC = {
 
 x = [0, 1, 2, 3]
 y = [0.2, 0.8, 1.1, 1.5]
-series_colour = "tab:blue"  # Choose from the science; there is no universal palette.
+series_colour = "#0072B2"  # First colour for a new unrelated identity.
 
 with mpl.rc_context(rc=ANGZE_RC):
     fig, ax = plt.subplots(figsize=(8, 6))

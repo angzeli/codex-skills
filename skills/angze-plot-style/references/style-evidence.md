@@ -42,6 +42,15 @@ Labels:
 | Framed, opaque white legend | `FORENSIC + USER_DECISION` | Framed bold legends and white/black styling recur broadly; the user fixed opacity and the inside-axes placement order. |
 | No legend when unnecessary | `USER_DECISION` | Scientific-content policy, not a scalar mining result. |
 | PDI semantic colours | `FORENSIC + USER_DECISION` | The exact triad recurred in 7 files across the independent calculation and data repositories; the user restricted it to exact PDI identities. |
+| PDI sample-rate shade families | `FORENSIC + USER_DECISION` | The existing exact rate shades and identity-colour anchors were mined from PDI work; the user froze those families for their semantic PDI contexts. |
+| Six-colour categorical cycle and exact order | `USER_DECISION` | The user selected blue `#0072B2`, orange `#D55E00`, purple `#7A5195`, teal `#009E73`, berry `#C23B70`, and olive `#7A8F00`, in that order. This is not a forensic inference. |
+| Neutral `#4D4D4D` | `USER_DECISION` | The user selected this exact control/reference neutral and excluded it from the categorical cycle. |
+| Explicit user colour overrides every skill rule | `USER_DECISION` | Exact user colours, mappings, palettes, and orders must be preserved, including when they conflict with built-in semantic mappings. |
+| Stable identity mapping across related figures | `USER_DECISION` | Project/task mappings and newly established workflow mappings persist across subsets; colour follows identity rather than local plot order. |
+| First-N assignment for new categories | `USER_DECISION` | Previously unseen unrelated identities receive the ordered cycle from its first available colour; do not optimize or reorder subsets per figure. |
+| No automatic expansion beyond six categories | `USER_DECISION` | More than six unrelated unmapped identities trigger scientific restructuring or an explicit colour decision, not imported, invented, recycled, or rainbow hues. |
+| Generate generic ordered families on demand | `USER_DECISION` | Ordered values of one identity use actual same-hue colour values: 75%, 55%, 35%, and 18% toward white, exact base, then 25% toward black for six levels. Other counts interpolate monotonically. |
+| Do not auto-promote generated families | `USER_DECISION` | A dynamically generated non-PDI family remains task-local unless a later explicit decision freezes it; no generic 36-shade table is canonical. |
 | Quantity plus units in parentheses | `FORENSIC + USER_DECISION` | Repeated scientific labels use parenthetical units, math super/subscripts, and direct degree/angstrom symbols; no universal precision rule. |
 | PNG and PDF only, paired by default | `FORENSIC + USER_DECISION` | Paired output was established in PDI/XPS, while other formats and single-format diagnostics existed. The user excluded other formats by default. |
 | 600 dpi, tight, opaque white | `FORENSIC + USER_DECISION` | Tight bounds and white opaque raster were strong; 300 versus 600 and vector transparency conflicted. The user selected 600 and opaque white for both outputs. |

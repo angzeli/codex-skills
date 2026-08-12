@@ -14,6 +14,7 @@ from typing import Iterator, Mapping, Sequence
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 from matplotlib.axes import Axes
+from matplotlib.colors import to_hex, to_rgb
 from matplotlib.figure import Figure
 from matplotlib.legend import Legend
 
@@ -45,10 +46,47 @@ DEFAULT_MARKER_EDGE_WIDTH = 0.8
 ERRORBAR_CAPSIZE = 4.0
 ERRORBAR_LINE_WIDTH = 1.4
 
+DEFAULT_COLOUR_CYCLE = [
+    "#0072B2",
+    "#D55E00",
+    "#7A5195",
+    "#009E73",
+    "#C23B70",
+    "#7A8F00",
+]
+NEUTRAL_COLOUR = "#4D4D4D"
+
 PDI_COLOURS = {
     "PDI-Me-COOH": "#D55E00",
     "PDI-H-COOH": "#0072B2",
     "PDI-OMe-COOH": "#7A5195",
+}
+
+SAMPLE_RATE_COLOUR_MAPS = {
+    "PDI-Me-COOH": {
+        20.0: "#F6D2BD",
+        40.0: "#EEAE86",
+        60.0: "#E78A55",
+        80.0: "#DF6A2B",
+        100.0: "#D55E00",
+        120.0: "#9B4100",
+    },
+    "PDI-H-COOH": {
+        20.0: "#C5E1F0",
+        40.0: "#93C8E1",
+        60.0: "#5CAED2",
+        80.0: "#2F94C3",
+        100.0: "#0072B2",
+        120.0: "#005681",
+    },
+    "PDI-OMe-COOH": {
+        20.0: "#D8C9E2",
+        40.0: "#BFA6CE",
+        60.0: "#A881BC",
+        80.0: "#8D63A7",
+        100.0: "#7A5195",
+        120.0: "#58346F",
+    },
 }
 
 BASE_RCPARAMS: dict[str, object] = {
@@ -76,6 +114,7 @@ BASE_RCPARAMS: dict[str, object] = {
     "axes.spines.right": True,
     "axes.spines.bottom": True,
     "axes.spines.top": True,
+    "axes.prop_cycle": mpl.cycler(color=DEFAULT_COLOUR_CYCLE),
     "xtick.color": "black",
     "ytick.color": "black",
     "xtick.labelsize": TICK_LABEL_SIZE,
@@ -113,6 +152,130 @@ DIAGNOSTIC_RCPARAM_OVERRIDES: dict[str, object] = {
 }
 
 SUPPORTED_PROFILES = ("base", "manuscript", "diagnostic")
+
+
+def assign_categorical_colours(
+    identities: Sequence[str],
+    *,
+    user_colours: Mapping[str, object] | None = None,
+    project_colours: Mapping[str, object] | None = None,
+    established_colours: Mapping[str, object] | None = None,
+    neutral_identities: Sequence[str] = (),
+) -> dict[str, object]:
+    """Assign stable colours while preserving the documented priority order.
+
+    Explicit user assignments outrank project mappings, the PDI registry, and
+    established workflow mappings. Neutral identities do not consume a
+    categorical slot. More than six unresolved identities requires an explicit
+    design decision rather than automatic palette expansion or recycling.
+    """
+
+    user = user_colours or {}
+    project = project_colours or {}
+    established = established_colours or {}
+    neutral = set(neutral_identities)
+    ordered_identities = tuple(dict.fromkeys(identities))
+    assigned: dict[str, object] = {}
+    unresolved: list[str] = []
+
+    for identity in ordered_identities:
+        if identity in user:
+            assigned[identity] = user[identity]
+        elif identity in project:
+            assigned[identity] = project[identity]
+        elif identity in PDI_COLOURS:
+            assigned[identity] = PDI_COLOURS[identity]
+        elif identity in established:
+            assigned[identity] = established[identity]
+        elif identity in neutral:
+            assigned[identity] = NEUTRAL_COLOUR
+        else:
+            unresolved.append(identity)
+
+    used_cycle_colours: set[str] = set()
+    for colour in assigned.values():
+        try:
+            used_cycle_colours.add(to_hex(colour, keep_alpha=False).upper())
+        except (TypeError, ValueError):
+            continue
+    available = [
+        colour for colour in DEFAULT_COLOUR_CYCLE if colour not in used_cycle_colours
+    ]
+    if len(unresolved) > len(available):
+        raise ValueError(
+            "More than six unmapped categorical identities require an explicit "
+            "mapping, grouping, faceting, or redundant encoding"
+        )
+    assigned.update(zip(unresolved, available[: len(unresolved)], strict=True))
+    return assigned
+
+
+_FAMILY_MIX_WEIGHTS = (0.75, 0.55, 0.35, 0.18, 0.0, -0.25)
+
+
+def _interpolated_mix_weight(position: float) -> float:
+    lower = min(int(position), len(_FAMILY_MIX_WEIGHTS) - 1)
+    upper = min(lower + 1, len(_FAMILY_MIX_WEIGHTS) - 1)
+    fraction = position - lower
+    return (
+        _FAMILY_MIX_WEIGHTS[lower] * (1.0 - fraction)
+        + _FAMILY_MIX_WEIGHTS[upper] * fraction
+    )
+
+
+def generate_colour_family(
+    base_colour: object,
+    levels: int = 6,
+    *,
+    anchor_index: int | None = None,
+) -> list[str]:
+    """Generate a deterministic light-to-dark family from one base colour.
+
+    The six-level default mixes 75%, 55%, 35%, and 18% toward white, uses the
+    exact base, then mixes 25% toward black. For another level count, sample the
+    same progression. Supply ``anchor_index`` when a natural nominal/reference
+    level must remain the exact base colour.
+    """
+
+    if levels < 1:
+        raise ValueError("levels must be at least 1")
+    if anchor_index is not None and not 0 <= anchor_index < levels:
+        raise ValueError("anchor_index must identify one generated level")
+
+    base_rgb = to_rgb(base_colour)
+    base_hex = to_hex(base_rgb).upper()
+    if levels == 1:
+        return [base_hex]
+
+    if anchor_index is None:
+        weights = [
+            _interpolated_mix_weight(index * 5.0 / (levels - 1))
+            for index in range(levels)
+        ]
+    elif levels == 6 and anchor_index == 4:
+        weights = list(_FAMILY_MIX_WEIGHTS)
+    else:
+        weights = []
+        for index in range(levels):
+            if index < anchor_index:
+                weight = 0.75 * (anchor_index - index) / anchor_index
+            elif index == anchor_index:
+                weight = 0.0
+            else:
+                darker_steps = levels - 1 - anchor_index
+                weight = -0.25 * (index - anchor_index) / darker_steps
+            weights.append(weight)
+
+    colours: list[str] = []
+    for weight in weights:
+        target = (1.0, 1.0, 1.0) if weight >= 0.0 else (0.0, 0.0, 0.0)
+        amount = abs(weight)
+        mixed = tuple(
+            channel * (1.0 - amount) + target_channel * amount
+            for channel, target_channel in zip(base_rgb, target, strict=True)
+        )
+        colours.append(to_hex(mixed).upper())
+    return colours
 
 
 def _validate_profile(profile: str) -> str:
