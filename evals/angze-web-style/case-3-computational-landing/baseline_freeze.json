@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "condition": "A_baseline_no_angze_web_style",
+  "freeze_order": "Baseline files were completed and validated before the generating agent was allowed to read the treatment skill.",
+  "isolation_note": "The baseline agent was started with no conversation history and instructed not to inspect the treatment skill or its source websites. The coordinating agent had prior skill exposure but did not author the baseline files.",
+  "files_sha256": {
+    "baseline/index.html": "37c1f02dde72581676c353112e8285789133cd38037fa62782cd51ece5ec32ff",
+    "baseline/styles.css": "8fa118b5295abaa5623c5542292246d1e2a7527cb4f401641ab9e1013ad21de1",
+    "baseline/theme.js": "7bd9dabfd2e13fc7c10d80195a2185ede620351ddf3dc0612ba4409d2ff12e09"
+  }
+}

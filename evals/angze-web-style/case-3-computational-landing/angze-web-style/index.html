@@ -1,0 +1,558 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta
+      name="description"
+      content="TesseraChem is an open-source computational chemistry environment for molecular, periodic, and reproducible simulation workflows."
+    >
+    <meta name="theme-color" content="#f2efe8" data-theme-color>
+    <title>TesseraChem — Reproducible computational chemistry</title>
+    <script src="theme.js"></script>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+
+    <main class="site-main" id="main-content">
+      <section class="hero" id="top" aria-labelledby="page-title">
+        <header class="hero-topline">
+          <a class="site-identity" href="#top" aria-label="TesseraChem home">
+            <span class="site-identity__name">TesseraChem</span>
+            <span class="site-identity__descriptor">Open computational science</span>
+          </a>
+
+          <nav class="site-nav" aria-label="Primary navigation">
+            <a href="#capabilities">Capabilities</a>
+            <a href="#workflow">Workflow</a>
+            <a href="#architecture">Architecture</a>
+            <a href="#documentation">Docs</a>
+            <a href="#community">Community</a>
+          </nav>
+
+          <div class="theme-region">
+            <div class="theme-toggle" role="group" aria-label="Color theme">
+              <button type="button" data-theme-choice="light" aria-pressed="false">Day</button>
+              <span aria-hidden="true">/</span>
+              <button type="button" data-theme-choice="dark" aria-pressed="false">Night</button>
+            </div>
+            <noscript><span class="theme-fallback">System theme</span></noscript>
+          </div>
+        </header>
+
+        <div class="hero-content">
+          <p class="eyebrow">An academic, open-source computation environment</p>
+          <h1 id="page-title">From atomic structure to a result you can reproduce.</h1>
+          <p class="hero-subtitle">
+            TesseraChem connects molecular and periodic electronic-structure methods
+            to transparent workflow automation, analysis, and provenance. Every run
+            remains inspectable—from the first coordinate to the final figure.
+          </p>
+          <div class="hero-actions" aria-label="Primary actions">
+            <a href="#getting-started">Get started <span aria-hidden="true">↓</span></a>
+            <a href="#publication">Read the methods note <span aria-hidden="true">→</span></a>
+          </div>
+          <ul class="hero-meta" aria-label="Project summary">
+            <li><span>License</span><strong>BSD-3-Clause</strong></li>
+            <li><span>Interface</span><strong>Python 3.11+</strong></li>
+            <li><span>Execution</span><strong>Workstation · HPC</strong></li>
+          </ul>
+        </div>
+
+        <aside class="stage-node result-node run-record" aria-label="Example reproducible run record">
+          <div class="run-record__heading">
+            <div>
+              <p class="node-stage">Validated run / water-on-rutile</p>
+              <h2 class="stage-title">Complete scientific record</h2>
+            </div>
+            <span class="status"><i aria-hidden="true"></i> complete</span>
+          </div>
+          <div class="run-record__body">
+            <dl class="run-facts">
+              <div><dt>Structure</dt><dd>TiO<sub>2</sub>(110) + H<sub>2</sub>O</dd></div>
+              <div><dt>Method</dt><dd>PBE-D3(BJ) / DZVP</dd></div>
+              <div><dt>Boundary</dt><dd>periodic · 3 × 2 × 1</dd></div>
+              <div><dt>Engine</dt><dd>CP2K 2026.1</dd></div>
+            </dl>
+            <pre aria-label="Example command"><code><span>$</span> tessera run relax.yaml
+✓ input validated
+✓ 48 tasks resolved
+✓ provenance sealed</code></pre>
+          </div>
+          <p class="run-record__footer"><span>manifest.json</span><span>sha256: 6d2a…91bf</span></p>
+        </aside>
+      </section>
+
+      <section class="site-section overview" id="overview" aria-labelledby="overview-title">
+        <div class="section-intro">
+          <div>
+            <p class="section-label">01 / Overview</p>
+            <h2 id="overview-title">One consistent record across different scales of chemistry.</h2>
+          </div>
+          <div>
+            <p>
+              Computational projects often fragment into hand-edited structures,
+              engine-specific input files, scheduler scripts, and one-off notebooks.
+              TesseraChem treats these as connected stages in a single scientific record.
+            </p>
+            <p>
+              The package does not hide the underlying methods. It validates explicit
+              parameters, writes native engine inputs, captures the exact runtime context,
+              and returns analysis-ready data with a traceable origin.
+            </p>
+          </div>
+        </div>
+        <dl class="method-strategy" aria-label="Project principles">
+          <div>
+            <dt>Explicit</dt>
+            <dd>Methods, units, and convergence criteria are declared.</dd>
+          </div>
+          <div>
+            <dt>Composable</dt>
+            <dd>Small tasks connect without locking data to one engine.</dd>
+          </div>
+          <div>
+            <dt>Auditable</dt>
+            <dd>Inputs, versions, logs, and derived outputs remain linked.</dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="site-section workflow-board" id="capabilities" aria-labelledby="capabilities-title">
+        <div class="section-intro">
+          <div>
+            <p class="section-label">02 / Capabilities</p>
+            <h2 id="capabilities-title">A practical toolkit for the full calculation lifecycle.</h2>
+          </div>
+          <p>
+            Use only the layers you need. Each module exposes stable Python objects and
+            writes ordinary, documented files.
+          </p>
+        </div>
+
+        <div class="branch-columns capability-branches">
+          <section class="branch-column" aria-labelledby="science-branch-title">
+            <header class="column-heading">
+              <p class="branch-label">Scientific systems</p>
+              <h3 id="science-branch-title">Define the chemistry</h3>
+            </header>
+
+            <article class="stage-node preparation-step">
+              <p class="node-stage">Capability 01 / Preparation</p>
+              <h4 class="stage-title">Structure preparation</h4>
+              <p class="node-purpose">Build, inspect, and transform molecular or periodic models while preserving atom identity.</p>
+              <ul class="detail-list">
+                <li>File-format normalization</li>
+                <li>Surface and supercell builders</li>
+                <li>Constraint and region assignment</li>
+              </ul>
+            </article>
+            <div class="connector connector--mini" aria-hidden="true"></div>
+            <article class="stage-node reference-node">
+              <p class="node-stage">Capability 02 / Molecular</p>
+              <h4 class="stage-title">Molecular quantum chemistry</h4>
+              <p class="node-purpose">Prepare finite-system calculations with clear charge, multiplicity, and method validation.</p>
+              <ul class="detail-list">
+                <li>Geometry and frequency jobs</li>
+                <li>Excited-state workflows</li>
+                <li>Composite energy protocols</li>
+              </ul>
+            </article>
+            <div class="connector connector--mini" aria-hidden="true"></div>
+            <article class="stage-node reference-node">
+              <p class="node-stage">Capability 03 / Periodic</p>
+              <h4 class="stage-title">Periodic materials calculations</h4>
+              <p class="node-purpose">Represent crystalline and interfacial systems without losing cell or sampling metadata.</p>
+              <ul class="detail-list">
+                <li>Brillouin-zone sampling</li>
+                <li>Bulk, slab, and defect models</li>
+                <li>Equation-of-state studies</li>
+              </ul>
+            </article>
+          </section>
+
+          <section class="branch-column" aria-labelledby="delivery-branch-title">
+            <header class="column-heading">
+              <p class="branch-label">Research operations</p>
+              <h3 id="delivery-branch-title">Deliver the evidence</h3>
+            </header>
+
+            <article class="stage-node engine-node">
+              <p class="node-stage">Capability 04 / Automation</p>
+              <h4 class="stage-title">Workflow automation</h4>
+              <p class="node-purpose">Resolve dependent tasks, scheduler resources, retries, and checkpoints as explicit policies.</p>
+              <ul class="detail-list">
+                <li>Local and batch execution</li>
+                <li>Dependency-aware task graphs</li>
+                <li>Safe restart semantics</li>
+              </ul>
+            </article>
+            <div class="connector connector--mini" aria-hidden="true"></div>
+            <article class="stage-node result-node">
+              <p class="node-stage">Capability 05 / Interpretation</p>
+              <h4 class="stage-title">Analysis and visualization</h4>
+              <p class="node-purpose">Parse physical observables into typed tables and figures with source-linked metadata.</p>
+              <ul class="detail-list">
+                <li>Electronic and vibrational data</li>
+                <li>Trajectories and ensembles</li>
+                <li>Publication-ready exports</li>
+              </ul>
+            </article>
+            <div class="connector connector--mini" aria-hidden="true"></div>
+            <article class="stage-node output-node">
+              <p class="node-stage">Capability 06 / Reproduction</p>
+              <h4 class="stage-title">Reproducible pipelines</h4>
+              <p class="node-purpose">Capture inputs, software, environment, and transformations in a portable run manifest.</p>
+              <ul class="detail-list">
+                <li>Content-addressed artifacts</li>
+                <li>Machine-readable provenance</li>
+                <li>Deterministic report rebuilds</li>
+              </ul>
+            </article>
+          </section>
+        </div>
+      </section>
+
+      <section class="site-section workflow-board" id="workflow" aria-labelledby="workflow-title">
+        <div class="section-intro">
+          <div>
+            <p class="section-label">03 / Workflow</p>
+            <h2 id="workflow-title">A pipeline that exposes every scientific decision.</h2>
+          </div>
+          <p>
+            Stages exchange versioned artifacts, not implicit session state. Stop,
+            inspect, replace, or reproduce any stage independently.
+          </p>
+        </div>
+
+        <div class="workflow-grid">
+          <section class="stage-row stage-row--paired" aria-label="Workflow inputs">
+            <article class="stage-node preparation-step">
+              <p class="node-stage">Stage 01 / Prepare</p>
+              <h3 class="stage-title">Define the structure</h3>
+              <p class="node-purpose">Read structures, assign chemical identity, and define boundaries.</p>
+              <p class="node-artifact"><span>Artifact</span><code>structure.xyz</code></p>
+            </article>
+            <article class="stage-node reference-node">
+              <p class="node-stage">Stage 02 / Specify</p>
+              <h3 class="stage-title">Declare the protocol</h3>
+              <p class="node-purpose">Declare methods, parameters, resources, and acceptance criteria.</p>
+              <p class="node-artifact"><span>Artifact</span><code>protocol.yaml</code></p>
+            </article>
+          </section>
+
+          <div class="connector connector--merge" aria-hidden="true"></div>
+
+          <section class="stage-row stage-row--shared" aria-label="Workflow validation">
+            <article class="stage-node shared-node gate-node">
+              <p class="node-stage">Stage 03 / Validate</p>
+              <h3 class="stage-title">Resolve a calculation plan</h3>
+              <p class="node-purpose">Check units, electron counts, compatibility, and resource limits.</p>
+              <p class="node-artifact"><span>Validated artifact</span><code>plan.json</code></p>
+            </article>
+          </section>
+
+          <div class="connector connector--vertical" aria-hidden="true"></div>
+
+          <section class="stage-row stage-row--shared" aria-label="Workflow execution">
+            <article class="stage-node shared-node engine-node">
+              <p class="node-stage">Stage 04 / Execute</p>
+              <h3 class="stage-title">Run with controlled checkpoints</h3>
+              <p class="node-purpose">Run locally or through a scheduler with controlled checkpoints.</p>
+              <p class="node-artifact"><span>Execution evidence</span><code>events.log</code></p>
+            </article>
+          </section>
+
+          <div class="connector connector--vertical" aria-hidden="true"></div>
+
+          <section class="stage-row stage-row--shared" aria-label="Workflow analysis">
+            <article class="stage-node shared-node result-node">
+              <p class="node-stage">Stage 05 / Analyse</p>
+              <h3 class="stage-title">Extract physical observables</h3>
+              <p class="node-purpose">Parse observables and apply recorded transformations.</p>
+              <p class="node-artifact"><span>Analysis record</span><code>results.parquet</code></p>
+            </article>
+          </section>
+
+          <div class="connector connector--vertical" aria-hidden="true"></div>
+
+          <section class="stage-row stage-row--shared" aria-label="Workflow publication output">
+            <article class="stage-node output-node">
+              <p class="node-stage">Stage 06 / Publish</p>
+              <h3 class="stage-title">Package the scientific record</h3>
+              <p class="node-purpose">Bundle figures, tables, citations, and a verification manifest.</p>
+              <p class="node-artifact"><span>Portable output</span><code>record.tgz</code></p>
+            </article>
+          </section>
+        </div>
+      </section>
+
+      <section class="site-section applications" id="applications" aria-labelledby="applications-title">
+        <div class="section-intro">
+          <div>
+            <p class="section-label">04 / Applications</p>
+            <h2 id="applications-title">Designed for questions that cross method boundaries.</h2>
+          </div>
+          <p>
+            The same project model can connect isolated molecules, extended solids,
+            interfaces, and derived observables without flattening their physical differences.
+          </p>
+        </div>
+
+        <article class="stage-node output-node application-node">
+          <p class="node-stage">Common scientific outputs</p>
+          <div class="application-list" role="list" aria-label="Research applications">
+            <section role="listitem">
+              <p class="application-context">Photochemistry / Molecules</p>
+              <h3 class="app-name">Excited-state pathways</h3>
+              <p class="app-purpose">Screen conformers, optimize states, and compare vertical transitions with aligned provenance.</p>
+            </section>
+            <section role="listitem">
+              <p class="application-context">Catalysis / Interfaces</p>
+              <h3 class="app-name">Reaction landscapes</h3>
+              <p class="app-purpose">Track adsorbates, transition-state searches, corrections, and uncertainty across surfaces.</p>
+            </section>
+            <section role="listitem">
+              <p class="application-context">Materials / Periodic</p>
+              <h3 class="app-name">Defects and transport</h3>
+              <p class="app-purpose">Generate charged defects, converge supercells, and retain correction provenance.</p>
+            </section>
+            <section role="listitem">
+              <p class="application-context">Spectroscopy / Multi-scale</p>
+              <h3 class="app-name">Experiment-facing signals</h3>
+              <p class="app-purpose">Connect computed ensembles to spectra with declared broadening and alignment choices.</p>
+            </section>
+          </div>
+        </article>
+      </section>
+
+      <section class="site-section workflow-board" id="architecture" aria-labelledby="architecture-title">
+        <div class="section-intro">
+          <div>
+            <p class="section-label">05 / Technical architecture</p>
+            <h2 id="architecture-title">A small core, explicit adapters, ordinary data.</h2>
+          </div>
+          <p>
+            TesseraChem separates scientific intent from engine syntax and execution
+            infrastructure. No proprietary database or hosted service is required.
+          </p>
+        </div>
+
+        <div class="workflow-grid architecture-map">
+          <section class="stage-row stage-row--paired" aria-label="Architecture inputs">
+            <article class="stage-node reference-node architecture-node">
+              <p class="node-stage">Interface</p>
+              <h3 class="tool-name">CLI · Python API · notebooks</h3>
+              <p class="node-purpose">User-facing specification and inspection.</p>
+            </article>
+            <article class="stage-node preparation-step architecture-node">
+              <p class="node-stage">Scientific model</p>
+              <h3 class="tool-name">Structures · methods · tasks · results</h3>
+              <p class="node-purpose">Typed objects with units and validation.</p>
+            </article>
+          </section>
+
+          <div class="connector connector--merge" aria-hidden="true"></div>
+
+          <section class="stage-row stage-row--shared" aria-label="Shared workflow core">
+            <article class="stage-node shared-node">
+              <p class="node-stage">Workflow engine / shared abstraction</p>
+              <h3 class="stage-title">DAG resolution · cache · provenance</h3>
+              <p class="node-purpose">Deterministic orchestration and identity.</p>
+            </article>
+          </section>
+
+          <div class="connector connector--split" aria-hidden="true"></div>
+
+          <section class="stage-row stage-row--paired" aria-label="Architecture execution branches">
+            <article class="stage-node engine-node architecture-node">
+              <p class="node-stage">Adapters</p>
+              <h3 class="tool-name">ORCA · CP2K · Quantum ESPRESSO · ASE</h3>
+              <p class="node-purpose">Native input writers and output parsers.</p>
+            </article>
+            <article class="stage-node engine-node architecture-node">
+              <p class="node-stage">Execution</p>
+              <h3 class="tool-name">Local · Slurm · PBS · containers</h3>
+              <p class="node-purpose">Portable runtime and resource policies.</p>
+            </article>
+          </section>
+
+          <div class="connector connector--merge" aria-hidden="true"></div>
+
+          <section class="stage-row stage-row--shared" aria-label="Architecture evidence">
+            <article class="stage-node result-node architecture-result">
+              <div>
+                <p class="node-stage">Validated architecture contract</p>
+                <h3 class="stage-title">Portable inputs and inspectable outputs</h3>
+                <ul class="detail-list detail-list--two">
+                  <li><strong>Interoperable</strong> — XYZ, CIF, JSON, YAML, CSV, Parquet, HDF5</li>
+                  <li><strong>Testable</strong> — Dry-run planning and schema validation before execution</li>
+                  <li><strong>Portable</strong> — Lockable environments and container-aware manifests</li>
+                  <li><strong>Extensible</strong> — Documented adapters for new engines and analyses</li>
+                </ul>
+              </div>
+              <div class="code-sample" aria-label="Example TesseraChem configuration">
+                <p><span>relax.yaml</span><span>schema v1</span></p>
+                <pre><code><span>system</span>:
+  source: rutile-110.xyz
+  periodic: [true, true, false]
+
+<span>task</span>:
+  type: geometry_optimization
+  method: PBE-D3(BJ)
+  engine: cp2k
+  criteria:
+    max_force: 4.5e-4 hartree/bohr
+
+<span>execution</span>:
+  profile: hpc-cpu
+  walltime: 04:00:00</code></pre>
+              </div>
+            </article>
+          </section>
+        </div>
+      </section>
+
+      <section class="site-section documentation" id="documentation" aria-labelledby="documentation-title">
+        <div class="section-intro">
+          <div>
+            <p class="section-label">06 / Documentation</p>
+            <h2 id="documentation-title">Begin with a verified example, then go deeper.</h2>
+          </div>
+          <p>
+            Documentation is organized by scientific task and includes the generated
+            native inputs beside each TesseraChem specification.
+          </p>
+        </div>
+
+        <div class="stage-row stage-row--paired docs-row" id="getting-started">
+          <article class="stage-node engine-node install-node">
+            <p class="node-stage">Quick installation</p>
+            <h3 class="stage-title">Plan a verified example</h3>
+            <pre><code><span>$</span> python -m pip install tesserachem
+<span>$</span> tessera example water-relax
+<span>$</span> cd water-relax &amp;&amp; tessera plan</code></pre>
+            <p class="node-purpose">The example plans a run but does not submit a calculation.</p>
+          </article>
+
+          <nav class="stage-node reference-node docs-index" aria-label="Documentation topics">
+            <p class="node-stage">Documentation index</p>
+            <a href="#overview">
+              <span>Concepts and data model</span>
+              <small>Understand structures, tasks, artifacts, and run identity.</small>
+            </a>
+            <a href="#workflow">
+              <span>Workflow reference</span>
+              <small>Compose tasks, checkpoints, resources, and acceptance rules.</small>
+            </a>
+            <a href="#architecture">
+              <span>Engine adapter guide</span>
+              <small>Add an input writer, parser, or execution backend.</small>
+            </a>
+            <a href="#publication">
+              <span>Reproducibility handbook</span>
+              <small>Package a calculation record for review and publication.</small>
+            </a>
+          </nav>
+        </div>
+      </section>
+
+      <section class="site-section publication" id="publication" aria-labelledby="publication-title">
+        <div class="section-intro">
+          <div>
+            <p class="section-label">07 / Publication &amp; citation</p>
+            <h2 id="publication-title">Methods belong beside the results.</h2>
+          </div>
+          <p>
+            When TesseraChem contributes to published work, cite the software release,
+            its methods paper, and the underlying electronic-structure engines. Generated
+            citation metadata lists the versions actually used by a run.
+          </p>
+        </div>
+
+        <article class="stage-node output-node citation-node" id="citation-record">
+          <div>
+            <p class="node-stage">Recommended citation / v0.9 methods paper</p>
+            <p class="paper-citation">
+              L. Moreno, A. Iqbal, and the TesseraChem contributors,
+              <cite>“TesseraChem: explicit and reproducible computational chemistry workflows,”</cite>
+              Journal of Open Molecular Science 4, 118–132 (2026).
+            </p>
+          </div>
+          <div class="code-sample">
+            <p><span>BibTeX</span><span>citation record</span></p>
+            <pre><code>@article{tesserachem2026,
+  title   = {TesseraChem: explicit and
+             reproducible workflows},
+  author  = {Moreno, L. and Iqbal, A.
+             and TesseraChem contributors},
+  journal = {J. Open Mol. Sci.},
+  year    = {2026},
+  volume  = {4},
+  pages   = {118--132}
+}</code></pre>
+          </div>
+        </article>
+      </section>
+
+      <section class="site-section community" id="community" aria-labelledby="community-title">
+        <div class="section-intro">
+          <div>
+            <p class="section-label">08 / Community</p>
+            <h2 id="community-title">Built in the open, reviewed like research software.</h2>
+          </div>
+          <p>
+            Chemists, materials scientists, research software engineers, and HPC
+            specialists shape the project together. Contributions are evaluated for
+            scientific transparency, test coverage, and long-term readability.
+          </p>
+        </div>
+
+        <div class="stage-row stage-row--paired contribution-paths">
+          <article class="stage-node reference-node">
+            <p class="node-stage">Contribution path 01</p>
+            <h3 class="stage-title">Use and discuss</h3>
+            <p class="node-purpose">Bring a research question, report an unclear assumption, or propose a documented workflow example.</p>
+            <a class="node-link" href="#documentation">Read the contributor pathway <span aria-hidden="true">→</span></a>
+          </article>
+          <article class="stage-node reference-node">
+            <p class="node-stage">Contribution path 02</p>
+            <h3 class="stage-title">Extend the package</h3>
+            <p class="node-purpose">Implement an engine adapter, analysis routine, schema improvement, or synthetic validation case.</p>
+            <a class="node-link" href="#architecture">Review the extension contract <span aria-hidden="true">→</span></a>
+          </article>
+        </div>
+        <aside class="governance-note">
+          <strong>Project governance</strong>
+          <span>public roadmap · two-reviewer changes · archived releases · contributor code of conduct</span>
+        </aside>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-main">
+        <div>
+          <a class="site-identity" href="#top">
+            <span class="site-identity__name">TesseraChem</span>
+            <span class="site-identity__descriptor">Open computational science</span>
+          </a>
+          <p>A fictional academic software project presented as a design demonstration.</p>
+        </div>
+        <nav aria-label="Footer navigation">
+          <a href="#overview">Overview</a>
+          <a href="#capabilities">Capabilities</a>
+          <a href="#workflow">Workflow</a>
+          <a href="#architecture">Architecture</a>
+          <a href="#documentation">Documentation</a>
+          <a href="#publication">Citation</a>
+          <a href="#community">Community</a>
+        </nav>
+      </div>
+      <div class="footer-meta">
+        <p>© 2026 TesseraChem contributors · BSD-3-Clause</p>
+        <p>Documentation build 0.9.0</p>
+      </div>
+    </footer>
+  </body>
+</html>

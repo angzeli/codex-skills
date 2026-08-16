@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "condition": "A_baseline_no_angze_web_style",
+  "freeze_order": "Baseline files were completed and validated before the generating agent was allowed to read the treatment skill.",
+  "isolation_note": "The baseline agent was started with no conversation history and instructed not to inspect the treatment skill or its source websites. The coordinating agent had prior skill exposure but did not author the baseline files.",
+  "files_sha256": {
+    "baseline/about.html": "38d50855aaa7780197f002ca77b8638f7ab6bdb8247e5012ccb26320fad2c184",
+    "baseline/archive.html": "9cce762eaacd315679261344b98b070db86df6a13f55abd02c5d81fff4aee9ab",
+    "baseline/essay-city.html": "96dcd56c2197b42a7b01cd161d383d074dc23fec98845e9a23ae61abcf17754b",
+    "baseline/essay-research.html": "e19d6192d682fe0d4c361d957557c77a7911153133d9e33de4706e7b7ba96c19",
+    "baseline/index.html": "58e289a4ac258e6ecc4ecf59d3dff692bc44d4e18d816e56f02dd423886f7d71",
+    "baseline/research.html": "f13798fff7ca57b2c680257169751af50f99daba7238e1e4e6f89620e76a4a77",
+    "baseline/styles.css": "27cf9a1a12f85473f2418a1b9b553c77ba2bc4bb4c4a807fda2a1e3362f97b03",
+    "baseline/theme.js": "0cebee1f9cc7972ea3ecc6cd28328349bb0475b5f4f9ee8eddb1f8436da6394a",
+    "baseline/travel.html": "beb2114b9acd80e924b04d84ae67489fb280a9e39ce07faa157ae07b8ba60896"
+  }
+}

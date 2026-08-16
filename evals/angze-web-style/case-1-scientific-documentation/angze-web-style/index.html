@@ -1,0 +1,485 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Moleculum documentation for reproducible molecular simulation workflows.">
+  <meta id="theme-color" name="theme-color" content="#11181d">
+  <title>Moleculum Documentation</title>
+  <script src="theme.js"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to documentation</a>
+
+  <main class="site-main" id="main-content" tabindex="-1">
+    <section class="hero" id="overview" aria-labelledby="page-title">
+      <div class="hero-topline">
+        <a class="site-identity" href="#overview" aria-label="Moleculum documentation home">
+          <span>Moleculum</span>
+          <small>Open molecular simulation toolkit</small>
+        </a>
+
+        <nav class="primary-nav" aria-label="Primary documentation">
+          <a href="#getting-started">Quickstart</a>
+          <a href="#workflow">Workflow</a>
+          <a href="#api">API</a>
+        </nav>
+
+        <div class="theme-toggle" role="group" aria-label="Display theme">
+          <button type="button" data-theme-choice="light" aria-pressed="false">Day</button>
+          <span aria-hidden="true">/</span>
+          <button type="button" data-theme-choice="dark" aria-pressed="false">Night</button>
+        </div>
+      </div>
+
+      <div class="hero-content">
+        <p class="eyebrow">Documentation / v1.4.2 / Stable</p>
+        <h1 id="page-title">Moleculum</h1>
+        <p class="hero-subtitle">
+          Moleculum is a Python toolkit for preparing, running, and analysing atomistic simulations.
+          It provides a consistent interface to classical and first-principles engines while keeping
+          structures, parameters, units, and provenance explicit.
+        </p>
+
+        <dl class="hero-metadata" aria-label="Project information">
+          <div><dt>License</dt><dd>BSD-3-Clause</dd></div>
+          <div><dt>Release</dt><dd>1.4.2</dd></div>
+          <div><dt>Core units</dt><dd>eV · Å · fs</dd></div>
+          <div><dt>Backends</dt><dd>5 supported</dd></div>
+        </dl>
+      </div>
+
+      <nav class="document-index" aria-label="On this page">
+        <span class="index-label">On this page</span>
+        <ol>
+          <li><a href="#installation">Installation</a></li>
+          <li><a href="#getting-started">Getting started</a></li>
+          <li><a href="#core-concepts">Core concepts</a></li>
+          <li><a href="#workflow">Computational workflow</a></li>
+          <li><a href="#examples">Examples &amp; tutorials</a></li>
+          <li><a href="#api">API documentation</a></li>
+          <li><a href="#citation">Citation</a></li>
+          <li><a href="#contributing">Contributing</a></li>
+        </ol>
+      </nav>
+    </section>
+
+    <section class="workflow-board overview-board" aria-labelledby="overview-heading">
+      <div class="section-intro">
+        <div>
+          <p class="section-label">System overview / 00</p>
+          <h2 id="overview-heading">Reproducible simulations, from structure to observables.</h2>
+        </div>
+        <p>
+          The toolkit treats a calculation as a traceable scientific sequence rather than a collection
+          of disconnected input files. Structures, methods, execution, and analysis remain explicit at
+          every boundary.
+        </p>
+      </div>
+
+      <div class="stage-row stage-row--triple principles-row">
+        <article class="stage-node reference-node">
+          <p class="node-stage">Principle 01</p>
+          <h3 class="tool-name">Engine-independent</h3>
+          <p class="node-purpose">Move between LAMMPS, CP2K, Quantum ESPRESSO, and local Python calculators without rewriting the workflow.</p>
+        </article>
+        <article class="stage-node reference-node">
+          <p class="node-stage">Principle 02</p>
+          <h3 class="tool-name">Unit-aware</h3>
+          <p class="node-purpose">Validate dimensional quantities at input boundaries and serialize them with every recorded result.</p>
+        </article>
+        <article class="stage-node reference-node">
+          <p class="node-stage">Principle 03</p>
+          <h3 class="tool-name">Provenance-first</h3>
+          <p class="node-purpose">Capture code versions, parameters, structure hashes, and runtime metadata in portable run records.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="workflow-board" id="installation" aria-labelledby="installation-title">
+      <div class="section-intro">
+        <div>
+          <p class="section-label">Setup / 01</p>
+          <h2 id="installation-title">Installation</h2>
+        </div>
+        <p>
+          Install Moleculum in a dedicated environment. The base package includes structure handling,
+          workflow orchestration, analysis, and the reference Lennard–Jones calculator.
+        </p>
+      </div>
+
+      <div class="stage-row stage-row--shared">
+        <article class="stage-node shared-node preparation-step">
+          <div class="node-heading">
+            <div>
+              <p class="node-stage">Preparation / Python environment</p>
+              <h3 class="stage-title">Install the core package</h3>
+            </div>
+            <span class="node-status">Python 3.10–3.13</span>
+          </div>
+
+          <pre class="code-block" aria-label="Terminal installation commands"><code><span class="prompt">$</span> python -m venv .venv
+<span class="prompt">$</span> source .venv/bin/activate
+<span class="prompt">$</span> python -m pip install moleculum</code></pre>
+
+          <aside class="node-note" aria-labelledby="backend-note-title">
+            <h4 id="backend-note-title">Optional backends</h4>
+            <p>External simulation engines are not bundled. Install the relevant adapter, for example <code>moleculum[cp2k]</code>, and configure the executable path in your run profile.</p>
+          </aside>
+
+          <div class="verification-block">
+            <div>
+              <p class="detail-label">Verification command</p>
+              <code>moleculum doctor</code>
+            </div>
+            <ul class="detail-list" aria-label="Expected checks">
+              <li>Python 3.12.4 — OK</li>
+              <li>Core data directory — OK</li>
+              <li>Reference calculator — OK</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="workflow-board" id="getting-started" aria-labelledby="getting-started-title">
+      <div class="section-intro">
+        <div>
+          <p class="section-label">Quickstart / 02</p>
+          <h2 id="getting-started-title">Your first calculation</h2>
+        </div>
+        <p>
+          Optimize a water molecule with the bundled reference potential. Each stage returns an immutable
+          object, so the original geometry and calculation inputs remain available for comparison.
+        </p>
+      </div>
+
+      <div class="stage-sequence" aria-label="Three-stage geometry optimization workflow">
+        <article class="stage-node preparation-step">
+          <p class="node-stage">Stage 01 / Define</p>
+          <h3 class="stage-title">Structure</h3>
+          <p class="node-purpose">Construct a molecular system from symbols and Cartesian coordinates. Coordinate units are required.</p>
+          <pre class="code-block"><code><span class="keyword">from</span> moleculum <span class="keyword">import</span> Structure, units
+
+water = Structure(
+  symbols=[<span class="string">"O"</span>, <span class="string">"H"</span>, <span class="string">"H"</span>],
+  positions=[
+    [<span class="number">0.000</span>,  <span class="number">0.000</span>, <span class="number">0.000</span>],
+    [<span class="number">0.758</span>,  <span class="number">0.000</span>, <span class="number">0.504</span>],
+    [<span class="number">-0.758</span>, <span class="number">0.000</span>, <span class="number">0.504</span>],
+  ] * units.angstrom,
+)</code></pre>
+        </article>
+
+        <div class="connector connector--sequence" aria-hidden="true"><span>Validated structure</span></div>
+
+        <article class="stage-node engine-node">
+          <p class="node-stage">Stage 02 / Calculate</p>
+          <h3 class="stage-title">Optimize geometry</h3>
+          <p class="node-purpose">Attach a calculator and pass explicit convergence criteria to the optimizer.</p>
+          <pre class="code-block"><code><span class="keyword">from</span> moleculum.calculators <span class="keyword">import</span> ReferenceLJ
+<span class="keyword">from</span> moleculum.optimize <span class="keyword">import</span> minimize
+
+calculator = ReferenceLJ(cutoff=<span class="number">8.5</span> * units.angstrom)
+result = minimize(
+  water,
+  calculator=calculator,
+  force_tolerance=<span class="number">0.02</span> * units.eV / units.angstrom,
+  max_steps=<span class="number">200</span>,
+)</code></pre>
+        </article>
+
+        <div class="connector connector--sequence" aria-hidden="true"><span>Converged result</span></div>
+
+        <article class="stage-node result-node">
+          <p class="node-stage">Stage 03 / Inspect</p>
+          <h3 class="stage-title">Record outputs</h3>
+          <p class="node-purpose">Results contain the final structure, trajectory, observables, and a complete provenance record.</p>
+          <pre class="code-block"><code><span class="function">print</span>(result.converged)        <span class="comment"># True</span>
+<span class="function">print</span>(result.energy.to(<span class="string">"eV"</span>))  <span class="comment"># -0.317 eV</span>
+result.write(<span class="string">"runs/water-opt.mrun"</span>)</code></pre>
+        </article>
+      </div>
+    </section>
+
+    <section class="workflow-board" id="core-concepts" aria-labelledby="core-concepts-title">
+      <div class="section-intro">
+        <div>
+          <p class="section-label">Mental model / 03</p>
+          <h2 id="core-concepts-title">Core concepts</h2>
+        </div>
+        <p>Four typed objects define the boundary between scientific intent, numerical execution, and durable evidence.</p>
+      </div>
+
+      <div class="stage-row stage-row--paired concept-row">
+        <article class="stage-node reference-node">
+          <p class="node-stage">Object / Geometry</p>
+          <h3 class="tool-name">Structure</h3>
+          <p class="node-purpose">An immutable collection of atoms, positions, cell vectors, boundary conditions, and per-atom metadata. Transformations return new instances and retain parent identifiers.</p>
+          <p class="signature"><code>Structure(symbols, positions, cell=None, periodic=False)</code></p>
+        </article>
+        <article class="stage-node reference-node">
+          <p class="node-stage">Protocol / Evaluation</p>
+          <h3 class="tool-name">Calculator</h3>
+          <p class="node-purpose">A backend that maps a structure and method settings to energies, forces, stresses, or electronic properties. Calculators declare capabilities before execution.</p>
+          <p class="signature"><code>Calculator.evaluate(structure, properties)</code></p>
+        </article>
+        <article class="stage-node reference-node">
+          <p class="node-stage">Artifact / Provenance</p>
+          <h3 class="tool-name">Run record</h3>
+          <p class="node-purpose">A self-describing result bundle containing inputs, outputs, logs, environment metadata, and content hashes. Records can be queried without the original backend.</p>
+          <p class="signature"><code>RunRecord.open(path)</code></p>
+        </article>
+        <article class="stage-node reference-node">
+          <p class="node-stage">Value / Dimension</p>
+          <h3 class="tool-name">Quantity</h3>
+          <p class="node-purpose">A numerical value with an explicit physical dimension and unit. Compatible units convert automatically; incompatible arithmetic raises a dimensionality error.</p>
+          <p class="signature"><code>Quantity(value, unit)</code></p>
+        </article>
+      </div>
+
+      <aside class="stage-node gate-node concept-gate" aria-labelledby="coordinate-convention-title">
+        <p class="node-stage">Validation gate / Coordinate shape</p>
+        <h3 class="tool-name" id="coordinate-convention-title">Coordinate convention</h3>
+        <p class="node-purpose">Positions use row-major Cartesian coordinates with shape <code>(n_atoms, 3)</code>. Fractional coordinates must be converted with <code>structure.from_fractional(...)</code>.</p>
+      </aside>
+    </section>
+
+    <section class="workflow-board" id="workflow" aria-labelledby="workflow-title">
+      <div class="section-intro">
+        <div>
+          <p class="section-label">Execution model / 04</p>
+          <h2 id="workflow-title">Computational workflow</h2>
+        </div>
+        <p>
+          A workflow is a directed sequence of typed tasks. Moleculum validates dependencies before submission,
+          isolates each task in its own run directory, and resumes only from verified outputs.
+        </p>
+      </div>
+
+      <div class="workflow-strip" aria-label="Four-stage computational workflow">
+        <article>
+          <span>01</span><h3>Prepare</h3><p>Structure + method</p>
+        </article>
+        <div class="mini-connector" aria-hidden="true"></div>
+        <article>
+          <span>02</span><h3>Validate</h3><p>Units + capabilities</p>
+        </article>
+        <div class="mini-connector" aria-hidden="true"></div>
+        <article>
+          <span>03</span><h3>Execute</h3><p>Local or scheduler</p>
+        </article>
+        <div class="mini-connector" aria-hidden="true"></div>
+        <article>
+          <span>04</span><h3>Analyse</h3><p>Observables + record</p>
+        </article>
+      </div>
+
+      <div class="connector connector--down" aria-hidden="true"><span>Typed dependencies</span></div>
+
+      <article class="stage-node engine-node workflow-definition" id="workflow-definition">
+        <div class="node-heading">
+          <div>
+            <p class="node-stage">Engine / Directed workflow</p>
+            <h3 class="stage-title">Silicon relaxation and bands</h3>
+          </div>
+          <span class="node-status">Profile: slurm-cpu</span>
+        </div>
+        <pre class="code-block"><code><span class="keyword">from</span> moleculum.workflow <span class="keyword">import</span> Workflow
+
+workflow = Workflow(<span class="string">"silicon-relaxation"</span>)
+relax = workflow.add(
+  <span class="string">"relax"</span>, task=<span class="string">"geometry_optimization"</span>,
+  structure=<span class="string">"silicon.cif"</span>, calculator=<span class="string">"cp2k/pbe-d3"</span>,
+)
+workflow.add(
+  <span class="string">"bands"</span>, task=<span class="string">"band_structure"</span>,
+  structure=relax.output.structure, path=<span class="string">"G-X-W-K-G-L"</span>,
+)
+workflow.run(profile=<span class="string">"slurm-cpu"</span>)</code></pre>
+      </article>
+
+      <div class="stage-row stage-row--paired state-row">
+        <article class="stage-node gate-node">
+          <p class="node-stage">Runtime evidence / Active</p>
+          <h3 class="tool-name">Ready → Running</h3>
+          <ul class="detail-list">
+            <li><strong>ready</strong> — inputs validated; dependencies satisfied</li>
+            <li><strong>running</strong> — backend process is active</li>
+          </ul>
+        </article>
+        <article class="stage-node result-node">
+          <p class="node-stage">Runtime evidence / Terminal</p>
+          <h3 class="tool-name">Complete → Failed</h3>
+          <ul class="detail-list">
+            <li><strong>complete</strong> — outputs passed structural validation</li>
+            <li><strong>failed</strong> — execution or validation ended with an error</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="workflow-board" id="examples" aria-labelledby="examples-title">
+      <div class="section-intro">
+        <div>
+          <p class="section-label">Learn by doing / 05</p>
+          <h2 id="examples-title">Examples &amp; tutorials</h2>
+        </div>
+        <p>Each tutorial includes a complete environment file, a small reference dataset, and expected numerical ranges for validation.</p>
+      </div>
+
+      <div class="stage-row stage-row--paired tutorial-row">
+        <article class="stage-node preparation-step">
+          <p class="node-stage">Beginner / 12 min</p>
+          <h3 class="tool-name"><a href="#getting-started">Geometry optimization</a></h3>
+          <p class="node-purpose">Relax a molecular geometry, inspect force convergence, and compare the initial and final structures.</p>
+          <ul class="detail-list detail-list--inline"><li>Molecules</li><li>Optimization</li></ul>
+        </article>
+        <article class="stage-node preparation-step">
+          <p class="node-stage">Intermediate / 25 min</p>
+          <h3 class="tool-name"><a href="#workflow-definition">Silicon band structure</a></h3>
+          <p class="node-purpose">Build a two-stage periodic DFT workflow and evaluate a high-symmetry path through reciprocal space.</p>
+          <ul class="detail-list detail-list--inline"><li>Periodic DFT</li><li>Bands</li></ul>
+        </article>
+        <article class="stage-node preparation-step">
+          <p class="node-stage">Intermediate / 30 min</p>
+          <h3 class="tool-name"><a href="#molecular-dynamics-api">NVT molecular dynamics</a></h3>
+          <p class="node-purpose">Equilibrate liquid argon, monitor temperature stability, and calculate a radial distribution function.</p>
+          <ul class="detail-list detail-list--inline"><li>Dynamics</li><li>Analysis</li></ul>
+        </article>
+        <article class="stage-node preparation-step">
+          <p class="node-stage">Advanced / 45 min</p>
+          <h3 class="tool-name"><a href="#workflow">Surface adsorption scan</a></h3>
+          <p class="node-purpose">Map adsorption energies across surface sites with parameterized tasks and scheduler execution.</p>
+          <ul class="detail-list detail-list--inline"><li>Surfaces</li><li>HPC</li></ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="workflow-board" id="api" aria-labelledby="api-title">
+      <div class="section-intro">
+        <div>
+          <p class="section-label">Reference / 06</p>
+          <h2 id="api-title">API documentation</h2>
+        </div>
+        <p>The public API is grouped by scientific responsibility. Objects imported from these modules follow semantic versioning.</p>
+      </div>
+
+      <nav class="api-index" aria-label="API modules">
+        <a href="#structure-api"><code>moleculum.structure</code><span>Structures and geometry</span></a>
+        <a href="#calculator-api"><code>moleculum.calculators</code><span>Energy and force backends</span></a>
+        <a href="#molecular-dynamics-api"><code>moleculum.dynamics</code><span>Molecular dynamics</span></a>
+        <a href="#analysis-api"><code>moleculum.analysis</code><span>Trajectory observables</span></a>
+      </nav>
+
+      <article class="stage-node reference-node api-primary" id="structure-api">
+        <p class="node-stage">Class / moleculum.structure</p>
+        <h3 class="app-name">Structure</h3>
+        <p class="node-purpose">Immutable atomic structure with validated dimensions and optional periodic boundary conditions.</p>
+        <p class="signature signature--block"><code>Structure(symbols, positions, *, cell=None, periodic=False, metadata=None)</code></p>
+
+        <h4 class="detail-label">Parameters</h4>
+        <dl class="method-strategy">
+          <div><dt><code>symbols</code><span>Sequence[str]</span></dt><dd>Chemical symbols in atomic index order.</dd></div>
+          <div><dt><code>positions</code><span>Quantity[n, 3]</span></dt><dd>Cartesian atomic coordinates with a length unit.</dd></div>
+          <div><dt><code>cell</code><span>Quantity[3, 3] | None</span></dt><dd>Lattice vectors as rows. Required for periodic structures.</dd></div>
+          <div><dt><code>periodic</code><span>bool | tuple[bool, bool, bool]</span></dt><dd>Boundary condition for each cell direction.</dd></div>
+        </dl>
+      </article>
+
+      <div class="stage-row stage-row--triple api-secondary">
+        <article class="stage-node reference-node" id="calculator-api">
+          <p class="node-stage">Protocol / calculators</p>
+          <h3 class="tool-name">Calculator</h3>
+          <p class="signature"><code>evaluate(structure, properties=("energy", "forces")) → Evaluation</code></p>
+        </article>
+        <article class="stage-node reference-node" id="molecular-dynamics-api">
+          <p class="node-stage">Function / dynamics</p>
+          <h3 class="tool-name">run_md</h3>
+          <p class="signature"><code>run_md(structure, calculator, *, ensemble, timestep, steps, temperature=None)</code></p>
+        </article>
+        <article class="stage-node reference-node" id="analysis-api">
+          <p class="node-stage">Function / analysis</p>
+          <h3 class="tool-name">radial_distribution</h3>
+          <p class="signature"><code>radial_distribution(trajectory, *, pairs=None, r_max, bins=200)</code></p>
+        </article>
+      </div>
+    </section>
+
+    <section class="workflow-board final-board" aria-labelledby="research-software-title">
+      <div class="section-intro">
+        <div>
+          <p class="section-label">Research software / 07–08</p>
+          <h2 id="research-software-title">Cite the evidence. Improve the system.</h2>
+        </div>
+        <p>Published calculations should identify the software release; contributions should arrive with numerical evidence and explicit scientific conventions.</p>
+      </div>
+
+      <div class="stage-row stage-row--paired final-row">
+        <article class="stage-node output-node" id="citation">
+          <p class="node-stage">Scientific output / Citation</p>
+          <h3 class="stage-title">Cite Moleculum</h3>
+          <p class="node-purpose">If Moleculum contributes to published work, cite both the software paper and the exact version used in your calculation.</p>
+          <blockquote>
+            R. Imani, T. Varga, and L. Chen, “Moleculum: explicit and reproducible atomistic simulation workflows,”
+            <cite>Journal of Open Computational Materials</cite> <strong>8</strong>, 114–126 (2025).
+          </blockquote>
+          <dl class="identifier-list">
+            <div><dt>Article DOI</dt><dd><code>10.5555/jocm.2025.114</code></dd></div>
+            <div><dt>Software DOI</dt><dd><code>10.5281/zenodo.1234567</code></dd></div>
+          </dl>
+          <details>
+            <summary>BibTeX record</summary>
+            <pre class="code-block"><code>@article{imani2025moleculum,
+  title   = {Moleculum: Explicit and reproducible
+             atomistic simulation workflows},
+  author  = {Imani, Rana and Varga, Tomas and Chen, Lina},
+  journal = {Journal of Open Computational Materials},
+  volume  = {8},
+  pages   = {114--126},
+  year    = {2025},
+  doi     = {10.5555/jocm.2025.114}
+}</code></pre>
+          </details>
+        </article>
+
+        <article class="stage-node output-node" id="contributing">
+          <p class="node-stage">Project input / Contribution</p>
+          <h3 class="stage-title">Contribute with evidence</h3>
+          <p class="node-purpose">Contributions are welcome across code, backend adapters, documentation, and reference data. New scientific methods must include a literature reference, numerical validation case, and stated unit conventions.</p>
+          <ol class="contribution-list">
+            <li><span>01</span>Open an issue describing the scientific or technical motivation.</li>
+            <li><span>02</span>Create a focused branch and add tests for changed behavior.</li>
+            <li><span>03</span>Run the validation suite and document numerical tolerances.</li>
+            <li><span>04</span>Submit a pull request using the scientific-change checklist.</li>
+          </ol>
+          <aside class="node-note" aria-labelledby="community-resources-title">
+            <h4 id="community-resources-title">Community resources</h4>
+            <nav aria-label="Community resources">
+              <a href="#api">Developer API reference</a>
+              <a href="#examples">Example gallery</a>
+              <a href="#citation">Citation guidance</a>
+            </nav>
+            <p>Questions about models and numerical settings belong in the scientific discussion forum.</p>
+          </aside>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div>
+      <strong>Moleculum</strong>
+      <span>Open tools for reproducible molecular simulation.</span>
+    </div>
+    <nav aria-label="Footer navigation">
+      <a href="#overview">Overview</a>
+      <a href="#api">API</a>
+      <a href="#citation">Citation</a>
+      <a href="#contributing">Contributing</a>
+    </nav>
+    <p>Documentation for version 1.4.2 · Last updated 18 June 2026</p>
+  </footer>
+</body>
+</html>

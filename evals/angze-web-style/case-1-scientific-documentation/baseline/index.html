@@ -1,0 +1,539 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Moleculum documentation for reproducible molecular simulation workflows.">
+  <title>Moleculum Documentation</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="theme.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to documentation</a>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="#overview" aria-label="Moleculum documentation home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 36 36" role="img">
+            <circle cx="9" cy="18" r="4"></circle>
+            <circle cx="26" cy="9" r="4"></circle>
+            <circle cx="27" cy="27" r="4"></circle>
+            <path d="M12.6 16.2 22.3 11M12.7 20l10.5 5.3M26.3 13v10"></path>
+          </svg>
+        </span>
+        <span>
+          <strong>Moleculum</strong>
+          <small>Documentation</small>
+        </span>
+      </a>
+
+      <div class="header-actions">
+        <span class="version" aria-label="Documentation version">v1.4.2</span>
+        <a class="header-link" href="#contributing">Contribute</a>
+        <button class="theme-toggle" type="button" aria-label="Switch to dark theme" aria-pressed="false">
+          <svg class="sun-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="3.5"></circle>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path>
+          </svg>
+          <svg class="moon-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M20.2 15.3A8.5 8.5 0 0 1 8.7 3.8a8.5 8.5 0 1 0 11.5 11.5Z"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="page-shell">
+    <aside class="sidebar" aria-label="Documentation navigation">
+      <nav>
+        <p class="nav-label">Introduction</p>
+        <a href="#overview">Overview</a>
+        <a href="#installation">Installation</a>
+        <a href="#getting-started">Getting started</a>
+
+        <p class="nav-label">User guide</p>
+        <a href="#core-concepts">Core concepts</a>
+        <a href="#workflow">Computational workflow</a>
+        <a href="#examples">Examples &amp; tutorials</a>
+
+        <p class="nav-label">Reference</p>
+        <a href="#api">API documentation</a>
+        <a href="#citation">Citation</a>
+        <a href="#contributing">Contributing</a>
+      </nav>
+
+      <div class="sidebar-meta">
+        <span class="status-dot" aria-hidden="true"></span>
+        <span>Stable release</span>
+        <small>Python 3.10–3.13</small>
+      </div>
+    </aside>
+
+    <main id="main-content" tabindex="-1">
+      <article>
+        <section class="hero section" id="overview" aria-labelledby="overview-title">
+          <div class="eyebrow">Open-source molecular simulation toolkit</div>
+          <h1 id="overview-title">Reproducible simulations, from structure to observables.</h1>
+          <p class="hero-summary">
+            Moleculum is a Python toolkit for preparing, running, and analysing atomistic simulations.
+            It provides a consistent interface to classical and first-principles engines while keeping
+            structures, parameters, units, and provenance explicit.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#getting-started">Start the quickstart</a>
+            <a class="button secondary" href="#api">Browse the API</a>
+          </div>
+
+          <dl class="project-facts" aria-label="Project information">
+            <div>
+              <dt>License</dt>
+              <dd>BSD-3-Clause</dd>
+            </div>
+            <div>
+              <dt>Current release</dt>
+              <dd>1.4.2</dd>
+            </div>
+            <div>
+              <dt>Core units</dt>
+              <dd>eV · Å · fs</dd>
+            </div>
+            <div>
+              <dt>Backends</dt>
+              <dd>5 supported</dd>
+            </div>
+          </dl>
+
+          <div class="principles-grid">
+            <div class="principle">
+              <span class="principle-number">01</span>
+              <h2>Engine-independent</h2>
+              <p>Move between LAMMPS, CP2K, Quantum ESPRESSO, and local Python calculators without rewriting the workflow.</p>
+            </div>
+            <div class="principle">
+              <span class="principle-number">02</span>
+              <h2>Unit-aware</h2>
+              <p>Validate dimensional quantities at input boundaries and serialize them with every recorded result.</p>
+            </div>
+            <div class="principle">
+              <span class="principle-number">03</span>
+              <h2>Provenance-first</h2>
+              <p>Capture code versions, parameters, structure hashes, and runtime metadata in portable run records.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="installation" aria-labelledby="installation-title">
+          <div class="section-heading">
+            <span class="section-index">01</span>
+            <div>
+              <p class="section-kicker">Setup</p>
+              <h2 id="installation-title">Installation</h2>
+            </div>
+          </div>
+          <p>
+            Install Moleculum in a dedicated environment. The base package includes structure handling,
+            workflow orchestration, analysis, and the reference Lennard–Jones calculator.
+          </p>
+
+          <div class="tabs-static" aria-label="Installation options">
+            <div class="tab-labels" aria-hidden="true">
+              <span class="active">pip</span>
+              <span>conda</span>
+              <span>source</span>
+            </div>
+            <div class="code-block">
+              <div class="code-label">Terminal</div>
+              <pre><code><span class="prompt">$</span> python -m venv .venv
+<span class="prompt">$</span> source .venv/bin/activate
+<span class="prompt">$</span> python -m pip install moleculum</code></pre>
+            </div>
+          </div>
+
+          <div class="callout note">
+            <strong>Optional backends</strong>
+            <p>External simulation engines are not bundled. Install the relevant adapter, for example <code>moleculum[cp2k]</code>, and configure the executable path in your run profile.</p>
+          </div>
+
+          <h3 id="verify-installation">Verify the installation</h3>
+          <div class="code-block">
+            <div class="code-label">Terminal</div>
+            <pre><code><span class="prompt">$</span> moleculum doctor
+Moleculum 1.4.2
+Python 3.12.4             <span class="ok">OK</span>
+Core data directory       <span class="ok">OK</span>
+Reference calculator      <span class="ok">OK</span></code></pre>
+          </div>
+        </section>
+
+        <section class="section" id="getting-started" aria-labelledby="getting-started-title">
+          <div class="section-heading">
+            <span class="section-index">02</span>
+            <div>
+              <p class="section-kicker">Quickstart</p>
+              <h2 id="getting-started-title">Your first calculation</h2>
+            </div>
+          </div>
+          <p>
+            This example optimizes a water molecule with the bundled reference potential. Each stage returns
+            an immutable object, so the original geometry and calculation inputs remain available for comparison.
+          </p>
+
+          <ol class="workflow-steps">
+            <li>
+              <div class="step-marker">1</div>
+              <div>
+                <h3>Define the structure</h3>
+                <p>Construct a molecular system from symbols and Cartesian coordinates. Coordinate units are required.</p>
+                <div class="code-block">
+                  <div class="code-label">Python</div>
+                  <pre><code><span class="keyword">from</span> moleculum <span class="keyword">import</span> Structure, units
+
+water = Structure(
+    symbols=[<span class="string">"O"</span>, <span class="string">"H"</span>, <span class="string">"H"</span>],
+    positions=[
+        [<span class="number">0.000</span>,  <span class="number">0.000</span>, <span class="number">0.000</span>],
+        [<span class="number">0.758</span>,  <span class="number">0.000</span>, <span class="number">0.504</span>],
+        [<span class="number">-0.758</span>, <span class="number">0.000</span>, <span class="number">0.504</span>],
+    ] * units.angstrom,
+)</code></pre>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="step-marker">2</div>
+              <div>
+                <h3>Configure and run</h3>
+                <p>Attach a calculator and pass explicit convergence criteria to the optimizer.</p>
+                <div class="code-block">
+                  <div class="code-label">Python</div>
+                  <pre><code><span class="keyword">from</span> moleculum.calculators <span class="keyword">import</span> ReferenceLJ
+<span class="keyword">from</span> moleculum.optimize <span class="keyword">import</span> minimize
+
+calculator = ReferenceLJ(cutoff=<span class="number">8.5</span> * units.angstrom)
+result = minimize(
+    water,
+    calculator=calculator,
+    force_tolerance=<span class="number">0.02</span> * units.eV / units.angstrom,
+    max_steps=<span class="number">200</span>,
+)</code></pre>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="step-marker">3</div>
+              <div>
+                <h3>Inspect and save</h3>
+                <p>Results contain the final structure, trajectory, observables, and a complete provenance record.</p>
+                <div class="code-block">
+                  <div class="code-label">Python</div>
+                  <pre><code><span class="function">print</span>(result.converged)               <span class="comment"># True</span>
+<span class="function">print</span>(result.energy.to(<span class="string">"eV"</span>))         <span class="comment"># -0.317 eV</span>
+result.write(<span class="string">"runs/water-opt.mrun"</span>)</code></pre>
+                </div>
+              </div>
+            </li>
+          </ol>
+        </section>
+
+        <section class="section" id="core-concepts" aria-labelledby="core-concepts-title">
+          <div class="section-heading">
+            <span class="section-index">03</span>
+            <div>
+              <p class="section-kicker">Mental model</p>
+              <h2 id="core-concepts-title">Core concepts</h2>
+            </div>
+          </div>
+
+          <div class="concept-list">
+            <article class="concept">
+              <div class="concept-icon" aria-hidden="true">S</div>
+              <div>
+                <h3>Structure</h3>
+                <p>An immutable collection of atoms, positions, cell vectors, boundary conditions, and per-atom metadata. Structure transformations return new instances and retain parent identifiers.</p>
+                <p class="type-signature"><code>Structure(symbols, positions, cell=None, periodic=False)</code></p>
+              </div>
+            </article>
+            <article class="concept">
+              <div class="concept-icon" aria-hidden="true">C</div>
+              <div>
+                <h3>Calculator</h3>
+                <p>A backend that maps a structure and method settings to energies, forces, stresses, or electronic properties. Calculators declare their capabilities before execution.</p>
+                <p class="type-signature"><code>Calculator.evaluate(structure, properties)</code></p>
+              </div>
+            </article>
+            <article class="concept">
+              <div class="concept-icon" aria-hidden="true">R</div>
+              <div>
+                <h3>Run record</h3>
+                <p>A self-describing result bundle containing inputs, outputs, logs, environment metadata, and content hashes. Records can be queried without the original backend.</p>
+                <p class="type-signature"><code>RunRecord.open(path)</code></p>
+              </div>
+            </article>
+            <article class="concept">
+              <div class="concept-icon" aria-hidden="true">Q</div>
+              <div>
+                <h3>Quantity</h3>
+                <p>A numerical value with an explicit physical dimension and unit. Compatible units convert automatically; incompatible arithmetic raises a dimensionality error.</p>
+                <p class="type-signature"><code>Quantity(value, unit)</code></p>
+              </div>
+            </article>
+          </div>
+
+          <div class="callout warning">
+            <strong>Coordinate convention</strong>
+            <p>Positions use row-major Cartesian coordinates with shape <code>(n_atoms, 3)</code>. Fractional coordinates must be converted with <code>structure.from_fractional(...)</code>.</p>
+          </div>
+        </section>
+
+        <section class="section" id="workflow" aria-labelledby="workflow-title">
+          <div class="section-heading">
+            <span class="section-index">04</span>
+            <div>
+              <p class="section-kicker">Execution model</p>
+              <h2 id="workflow-title">Computational workflow</h2>
+            </div>
+          </div>
+          <p>
+            A workflow is a directed sequence of typed tasks. Moleculum validates dependencies before submission,
+            isolates each task in its own run directory, and resumes only from verified outputs.
+          </p>
+
+          <div class="pipeline" aria-label="A four-stage molecular simulation workflow">
+            <div class="pipeline-stage">
+              <span>01</span>
+              <strong>Prepare</strong>
+              <small>structure + method</small>
+            </div>
+            <div class="pipeline-arrow" aria-hidden="true">→</div>
+            <div class="pipeline-stage">
+              <span>02</span>
+              <strong>Validate</strong>
+              <small>units + capabilities</small>
+            </div>
+            <div class="pipeline-arrow" aria-hidden="true">→</div>
+            <div class="pipeline-stage">
+              <span>03</span>
+              <strong>Execute</strong>
+              <small>local or scheduler</small>
+            </div>
+            <div class="pipeline-arrow" aria-hidden="true">→</div>
+            <div class="pipeline-stage">
+              <span>04</span>
+              <strong>Analyse</strong>
+              <small>observables + record</small>
+            </div>
+          </div>
+
+          <h3 id="workflow-definition">Define a workflow</h3>
+          <div class="code-block">
+            <div class="code-label">Python</div>
+            <pre><code><span class="keyword">from</span> moleculum.workflow <span class="keyword">import</span> Workflow
+
+workflow = Workflow(<span class="string">"silicon-relaxation"</span>)
+relax = workflow.add(
+    <span class="string">"relax"</span>,
+    task=<span class="string">"geometry_optimization"</span>,
+    structure=<span class="string">"silicon.cif"</span>,
+    calculator=<span class="string">"cp2k/pbe-d3"</span>,
+)
+workflow.add(
+    <span class="string">"bands"</span>,
+    task=<span class="string">"band_structure"</span>,
+    structure=relax.output.structure,
+    path=<span class="string">"G-X-W-K-G-L"</span>,
+)
+
+workflow.run(profile=<span class="string">"slurm-cpu"</span>)</code></pre>
+          </div>
+
+          <div class="data-table-wrap">
+            <table>
+              <caption>Workflow task states</caption>
+              <thead>
+                <tr>
+                  <th scope="col">State</th>
+                  <th scope="col">Meaning</th>
+                  <th scope="col">May resume?</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td><span class="state ready">ready</span></td><td>Inputs validated; dependencies satisfied</td><td>Yes</td></tr>
+                <tr><td><span class="state running">running</span></td><td>Backend process is active</td><td>No</td></tr>
+                <tr><td><span class="state complete">complete</span></td><td>Outputs passed structural validation</td><td>Not required</td></tr>
+                <tr><td><span class="state failed">failed</span></td><td>Execution or validation ended with an error</td><td>After correction</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="section" id="examples" aria-labelledby="examples-title">
+          <div class="section-heading">
+            <span class="section-index">05</span>
+            <div>
+              <p class="section-kicker">Learn by doing</p>
+              <h2 id="examples-title">Examples &amp; tutorials</h2>
+            </div>
+          </div>
+          <p>Each tutorial includes a complete environment file, a small reference dataset, and expected numerical ranges for validation.</p>
+
+          <div class="tutorial-grid">
+            <article class="tutorial-card">
+              <div class="tutorial-meta"><span>Beginner</span><span>12 min</span></div>
+              <h3><a href="#getting-started">Geometry optimization</a></h3>
+              <p>Relax a molecular geometry, inspect force convergence, and compare the initial and final structures.</p>
+              <ul class="tag-list" aria-label="Topics"><li>molecules</li><li>optimization</li></ul>
+            </article>
+            <article class="tutorial-card">
+              <div class="tutorial-meta"><span>Intermediate</span><span>25 min</span></div>
+              <h3><a href="#workflow-definition">Silicon band structure</a></h3>
+              <p>Build a two-stage periodic DFT workflow and evaluate a high-symmetry path through reciprocal space.</p>
+              <ul class="tag-list" aria-label="Topics"><li>periodic DFT</li><li>bands</li></ul>
+            </article>
+            <article class="tutorial-card">
+              <div class="tutorial-meta"><span>Intermediate</span><span>30 min</span></div>
+              <h3><a href="#molecular-dynamics-api">NVT molecular dynamics</a></h3>
+              <p>Equilibrate liquid argon, monitor temperature stability, and calculate a radial distribution function.</p>
+              <ul class="tag-list" aria-label="Topics"><li>dynamics</li><li>analysis</li></ul>
+            </article>
+            <article class="tutorial-card">
+              <div class="tutorial-meta"><span>Advanced</span><span>45 min</span></div>
+              <h3><a href="#workflow">Surface adsorption scan</a></h3>
+              <p>Map adsorption energies across surface sites with parameterized tasks and scheduler execution.</p>
+              <ul class="tag-list" aria-label="Topics"><li>surfaces</li><li>HPC</li></ul>
+            </article>
+          </div>
+        </section>
+
+        <section class="section" id="api" aria-labelledby="api-title">
+          <div class="section-heading">
+            <span class="section-index">06</span>
+            <div>
+              <p class="section-kicker">Reference</p>
+              <h2 id="api-title">API documentation</h2>
+            </div>
+          </div>
+          <p>The public API is grouped by scientific responsibility. Objects imported from these modules follow semantic versioning.</p>
+
+          <div class="api-layout">
+            <div class="api-modules" aria-label="API modules">
+              <a class="active" href="#structure-api"><code>moleculum.structure</code><span>Structures and geometry</span></a>
+              <a href="#calculator-api"><code>moleculum.calculators</code><span>Energy and force backends</span></a>
+              <a href="#molecular-dynamics-api"><code>moleculum.dynamics</code><span>Molecular dynamics</span></a>
+              <a href="#analysis-api"><code>moleculum.analysis</code><span>Trajectory observables</span></a>
+            </div>
+
+            <div class="api-detail">
+              <div class="api-entry" id="structure-api">
+                <div class="api-kind">class</div>
+                <h3><code>Structure</code></h3>
+                <p>Immutable atomic structure with validated dimensions and optional periodic boundary conditions.</p>
+                <div class="signature"><code>Structure(symbols, positions, *, cell=None, periodic=False, metadata=None)</code></div>
+                <h4>Parameters</h4>
+                <dl class="parameter-list">
+                  <div><dt><code>symbols</code> <span>Sequence[str]</span></dt><dd>Chemical symbols in atomic index order.</dd></div>
+                  <div><dt><code>positions</code> <span>Quantity[n, 3]</span></dt><dd>Cartesian atomic coordinates with a length unit.</dd></div>
+                  <div><dt><code>cell</code> <span>Quantity[3, 3] | None</span></dt><dd>Lattice vectors as rows. Required for periodic structures.</dd></div>
+                  <div><dt><code>periodic</code> <span>bool | tuple[bool, bool, bool]</span></dt><dd>Boundary condition for each cell direction.</dd></div>
+                </dl>
+              </div>
+
+              <div class="api-entry compact" id="calculator-api">
+                <div class="api-kind">protocol</div>
+                <h3><code>Calculator</code></h3>
+                <div class="signature"><code>evaluate(structure, properties=("energy", "forces")) → Evaluation</code></div>
+              </div>
+              <div class="api-entry compact" id="molecular-dynamics-api">
+                <div class="api-kind">function</div>
+                <h3><code>run_md</code></h3>
+                <div class="signature"><code>run_md(structure, calculator, *, ensemble, timestep, steps, temperature=None)</code></div>
+              </div>
+              <div class="api-entry compact" id="analysis-api">
+                <div class="api-kind">function</div>
+                <h3><code>radial_distribution</code></h3>
+                <div class="signature"><code>radial_distribution(trajectory, *, pairs=None, r_max, bins=200) → Distribution</code></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="citation" aria-labelledby="citation-title">
+          <div class="section-heading">
+            <span class="section-index">07</span>
+            <div>
+              <p class="section-kicker">Research software</p>
+              <h2 id="citation-title">Citation</h2>
+            </div>
+          </div>
+          <p>If Moleculum contributes to published work, cite both the software paper and the exact version used in your calculation.</p>
+          <div class="citation-card">
+            <p>R. Imani, T. Varga, and L. Chen, “Moleculum: explicit and reproducible atomistic simulation workflows,” <em>Journal of Open Computational Materials</em> <strong>8</strong>, 114–126 (2025).</p>
+            <div class="citation-identifiers">
+              <span>DOI <code>10.5555/jocm.2025.114</code></span>
+              <span>Software DOI <code>10.5281/zenodo.1234567</code></span>
+            </div>
+          </div>
+          <details>
+            <summary>BibTeX</summary>
+            <div class="code-block bibtex">
+              <pre><code>@article{imani2025moleculum,
+  title   = {Moleculum: Explicit and reproducible atomistic simulation workflows},
+  author  = {Imani, Rana and Varga, Tomas and Chen, Lina},
+  journal = {Journal of Open Computational Materials},
+  volume  = {8},
+  pages   = {114--126},
+  year    = {2025},
+  doi     = {10.5555/jocm.2025.114}
+}</code></pre>
+            </div>
+          </details>
+        </section>
+
+        <section class="section" id="contributing" aria-labelledby="contributing-title">
+          <div class="section-heading">
+            <span class="section-index">08</span>
+            <div>
+              <p class="section-kicker">Community</p>
+              <h2 id="contributing-title">Contributing</h2>
+            </div>
+          </div>
+          <div class="contribute-layout">
+            <div>
+              <p>
+                Contributions are welcome across code, backend adapters, documentation, and reference data.
+                New scientific methods must include a literature reference, numerical validation case, and stated unit conventions.
+              </p>
+              <ol class="contribution-steps">
+                <li>Open an issue describing the scientific or technical motivation.</li>
+                <li>Create a focused branch and add tests for changed behavior.</li>
+                <li>Run the validation suite and document numerical tolerances.</li>
+                <li>Submit a pull request using the scientific-change checklist.</li>
+              </ol>
+            </div>
+            <aside class="help-card" aria-label="Community resources">
+              <h3>Community resources</h3>
+              <a href="#api">Developer API reference <span aria-hidden="true">→</span></a>
+              <a href="#examples">Example gallery <span aria-hidden="true">→</span></a>
+              <a href="#citation">Citation guidance <span aria-hidden="true">→</span></a>
+              <p>Questions about models and numerical settings belong in the scientific discussion forum.</p>
+            </aside>
+          </div>
+        </section>
+      </article>
+    </main>
+  </div>
+
+  <footer class="site-footer">
+    <div>
+      <strong>Moleculum</strong>
+      <span>Open tools for reproducible molecular simulation.</span>
+    </div>
+    <nav aria-label="Footer navigation">
+      <a href="#overview">Documentation</a>
+      <a href="#citation">Citation</a>
+      <a href="#contributing">Contributing</a>
+    </nav>
+    <p>Documentation for version 1.4.2 · Last updated 18 June 2026</p>
+  </footer>
+</body>
+</html>
