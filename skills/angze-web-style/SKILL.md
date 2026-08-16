@@ -76,6 +76,22 @@ page.
 - Keep output self-contained within the target project. Do not add a dependency
   on this skill directory.
 
+## Load the relevant evidence
+
+- Read [references/design-system.md](references/design-system.md) whenever color,
+  surface, theme order, identity assets, or provenance matters.
+- Read [references/typography.md](references/typography.md) when selecting or
+  auditing type roles, font stacks, measures, or responsive type behavior.
+- Read [references/layout-patterns.md](references/layout-patterns.md) when
+  building or changing page structure, grids, reading shells, or responsive
+  order.
+- Read [references/components.md](references/components.md) only for the
+  component families and interaction states present in the requested page.
+
+Treat the source keys in those files as the audit trail. Exact values belong to
+their original technical or editorial variant; an inferred principle never
+overrides an observed selector, token, structure, or behavior.
+
 ## Completion check
 
 Confirm that the result retains the selected variant's hierarchy, token roles,
