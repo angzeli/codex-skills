@@ -1,0 +1,4 @@
+interface:
+  display_name: "Angze Web Style"
+  short_description: "Recreate Angze's evidence-backed web style"
+  default_prompt: "Use $angze-web-style to create or restyle this website in Angze’s established design language."
