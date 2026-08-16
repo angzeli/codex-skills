@@ -87,6 +87,8 @@ page.
   order.
 - Read [references/components.md](references/components.md) only for the
   component families and interaction states present in the requested page.
+- Read [references/implementation-notes.md](references/implementation-notes.md)
+  when creating, refactoring, theme-wiring, or validating an implementation.
 
 Treat the source keys in those files as the audit trail. Exact values belong to
 their original technical or editorial variant; an inferred principle never
