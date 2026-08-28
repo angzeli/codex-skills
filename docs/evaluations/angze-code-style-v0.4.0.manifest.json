@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "skill": "angze-code-style",
+  "version": "0.4.0",
+  "release_date": "2026-08-28",
+  "runtime_snapshot": {
+    "algorithm": "sha256 of tracked runtime files as C-sorted LF-delimited file_sha256, two spaces, and runtime-relative path records",
+    "sha256": "7f79b22c4694717963966132967b1a03b4cf5790529e6c229ef2ef31920fad84",
+    "files": [
+      {
+        "path": "skills/angze-code-style/SKILL.md",
+        "sha256": "5e1c49383585d6aa1f5694e1fc7add25e4b7ccf3e3a62185606b685b3b556851",
+        "bytes": 23187
+      },
+      {
+        "path": "skills/angze-code-style/agents/openai.yaml",
+        "sha256": "767b50465dd17eb490efa1d4a8569803c597d03247bb60b0f4818c5ec67f8690",
+        "bytes": 253
+      },
+      {
+        "path": "skills/angze-code-style/references/comment-examples.md",
+        "sha256": "55eff6a16876d47b97670afe5b681d9b4735181cbb5d9e7d9f63530001e41c3b",
+        "bytes": 6217
+      },
+      {
+        "path": "skills/angze-code-style/references/jupyter-notebooks.md",
+        "sha256": "24dfddd405d91e586447027b386919b44274bc0c00bc96e0c35ff2d4f50975c5",
+        "bytes": 2996
+      },
+      {
+        "path": "skills/angze-code-style/references/scientific-contracts.md",
+        "sha256": "4d9837faf31d7d5e23f1fd7ba5703546a5a9a7a249ce5122455ae0a8ccc45948",
+        "bytes": 2588
+      }
+    ]
+  },
+  "notebook_acceptance_fixtures": {
+    "scope": "tracked synthetic fixtures, contracts, validator, and validator tests",
+    "files": [
+      {
+        "path": "evals/angze-code-style/fixtures/notebook/editable_scientific.contract.json",
+        "sha256": "56ee49c547dfe3fdcd84226fb256976c3381cc8a91a333cfb69fdc130bb6b046",
+        "bytes": 1009
+      },
+      {
+        "path": "evals/angze-code-style/fixtures/notebook/editable_scientific.ipynb",
+        "sha256": "114daea3eb4d15611bd66414e879f12cc20e28a90d949be1ab7d3eecf1919707",
+        "bytes": 1877
+      },
+      {
+        "path": "evals/angze-code-style/fixtures/notebook/generated_pipeline_report.contract.json",
+        "sha256": "7a80ca5ed2f16380401c22d34beb70ae2bd028125327f9d8ba97f970b9e26069",
+        "bytes": 209
+      },
+      {
+        "path": "evals/angze-code-style/fixtures/notebook/generated_pipeline_report.ipynb",
+        "sha256": "72e5a312bb04c6ab02724ec4cb611b882d37763d7aafd5993014f2ff6389462a",
+        "bytes": 874
+      },
+      {
+        "path": "evals/angze-code-style/fixtures/notebook/over_commented.contract.json",
+        "sha256": "25f2136a7f64b98adaf69b7bd58f2462b2855ada25d94d65e9ce28673be01ad3",
+        "bytes": 620
+      },
+      {
+        "path": "evals/angze-code-style/fixtures/notebook/over_commented.ipynb",
+        "sha256": "dcab864eaee5cdd365147f41e5e11a3e91888416060595d67a395664df3a6d9d",
+        "bytes": 1208
+      },
+      {
+        "path": "evals/angze-code-style/fixtures/notebook/review_only_stale_claim.contract.json",
+        "sha256": "62f79d2b99dca0e4dac4599ada7c80d7744915477b92287994f9a49454f9ce71",
+        "bytes": 217
+      },
+      {
+        "path": "evals/angze-code-style/fixtures/notebook/review_only_stale_claim.ipynb",
+        "sha256": "bfa6ca039930bcc922084d801ade9f6456fbcb548309034ec7894cbff97a6fd7",
+        "bytes": 748
+      },
+      {
+        "path": "evals/angze-code-style/fixtures/notebook/test_notebook_contract.py",
+        "sha256": "1a04595fc2d1ae8fb8c92c15d3a56f794f331fea79c98e3337696d71dd4c4147",
+        "bytes": 14247
+      },
+      {
+        "path": "evals/angze-code-style/fixtures/notebook/validate_notebook_contract.py",
+        "sha256": "cfd8e33838c36acd3fad34a350c975c11035fad1efb82bc10f0e426e651855c9",
+        "bytes": 23033
+      }
+    ]
+  },
+  "controlled_results": {
+    "editing_pairs": 6,
+    "skill_wins": 6,
+    "skill_score_average": 17.5,
+    "skill_score_minimum": 17,
+    "behavior_preservation_score": "3/3 for every accepted editing fixture",
+    "accepted_second_passes_byte_identical": "6/6",
+    "post_rename_positive_triggers": "10/10",
+    "post_rename_negative_triggers": "0/10",
+    "post_rename_representative_notebook_validation": "pass",
+    "post_rename_representative_second_pass_byte_identical": true,
+    "real_notebook_acceptance": "pending explicit authorization"
+  }
+}

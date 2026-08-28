@@ -48,7 +48,7 @@ else
 fi
 
 if command -v pdflatex >/dev/null 2>&1; then
-    tex_output=$(mktemp -d "${TMPDIR:-/tmp}/scientific-code-documenter-tex.XXXXXX")
+    tex_output=$(mktemp -d "${TMPDIR:-/tmp}/angze-code-style-tex.XXXXXX")
     run_required "LaTeX compilation" \
         pdflatex -interaction=nonstopmode -halt-on-error -output-directory "$tex_output" "$eval_root/fixtures/latex/report.tex"
 else

@@ -97,7 +97,7 @@ No new five-fixture Python A/B or real-repository acceptance run was required be
 
 The six controlled fixtures are synthetic and public-safe. Each pair started from one neutral commit and used fresh ephemeral sessions with the same model, reasoning effort, prompt body, sandbox, CLI, and independent post-run contract. The comparison differed only by explicit skill invocation. Skill arms used an immutable runtime snapshot and recorded a skill read; baseline and blind-judge conditions exposed no user skills. Candidate mappings were randomized and hidden until structured judge output passed validation.
 
-Tracked materials include the [evaluation overview](../../evals/scientific-code-documenter/README.md), [prompt matrix](../../evals/scientific-code-documenter/prompts.yaml), [rubric](../../evals/scientific-code-documenter/rubric.md), [fixture contracts](../../evals/scientific-code-documenter/fixtures/cross-language-contracts.md), and [synthetic fixtures](../../evals/scientific-code-documenter/fixtures/). Raw model events, diffs, mappings, and generated outputs remain ignored local audit evidence.
+Tracked materials include the [evaluation overview](../../evals/angze-code-style/README.md), [prompt matrix](../../evals/angze-code-style/prompts.yaml), [rubric](../../evals/angze-code-style/rubric.md), [fixture contracts](../../evals/angze-code-style/fixtures/cross-language-contracts.md), and [synthetic fixtures](../../evals/angze-code-style/fixtures/). Raw model events, diffs, mappings, and generated outputs remain ignored local audit evidence.
 
 ## Limitations
 

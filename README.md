@@ -2,7 +2,7 @@
 
 This repository is the editable source of truth for a growing collection of custom Codex skills. Each direct child of `skills/` is an independent runtime package; collection documentation, evaluation suites, and shared tooling stay outside those packages.
 
-New to Codex skills? Follow [Getting started](GETTING_STARTED.md) to install and use `scientific-code-documenter`.
+New to Codex skills? Follow [Getting started](GETTING_STARTED.md) to install and use `angze-code-style`.
 
 ## Source and runtime installations
 
@@ -12,7 +12,7 @@ Edit skills in this repository. Runtime discovery uses one symbolic link per ski
 codex_skills/
 ├── skills/
 │   ├── README.md
-│   └── scientific-code-documenter/
+│   └── angze-code-style/
 │       ├── SKILL.md
 │       ├── agents/openai.yaml
 │       └── references/
@@ -21,7 +21,7 @@ codex_skills/
 │           └── scientific-contracts.md
 ├── evals/
 │   ├── README.md
-│   └── scientific-code-documenter/
+│   └── angze-code-style/
 │       ├── fixtures/
 │       ├── results/
 │       ├── checks.sh
@@ -40,7 +40,7 @@ codex_skills/
 
 | Skill | Purpose | Status |
 | --- | --- | --- |
-| `scientific-code-documenter` | Document and prune scientific code and Jupyter notebooks using explicit contract inventory, evidence classes, and risk grading | Experimental v0.4.0 release candidate; synthetic notebook and controlled Python, Shell, LaTeX, HTML, trigger, restraint, and idempotence gates pass; authorized real-notebook acceptance is pending |
+| `angze-code-style` | Document and prune scientific code and Jupyter notebooks using explicit contract inventory, evidence classes, and risk grading | Experimental v0.4.0 release candidate; synthetic notebook and controlled Python, Shell, LaTeX, HTML, trigger, restraint, and idempotence gates pass; authorized real-notebook acceptance is pending |
 
 ## Validate and install
 
@@ -48,12 +48,12 @@ The collection-level commands work from any checkout path:
 
 ```sh
 ./scripts/list_skills.sh
-./scripts/check_skill.sh scientific-code-documenter
+./scripts/check_skill.sh angze-code-style
 ./scripts/check_all_skills.sh
-./scripts/run_fixture_checks.sh scientific-code-documenter
+./scripts/run_fixture_checks.sh angze-code-style
 
-./scripts/install_skill.sh --dry-run scientific-code-documenter
-./scripts/install_skill.sh scientific-code-documenter
+./scripts/install_skill.sh --dry-run angze-code-style
+./scripts/install_skill.sh angze-code-style
 ./scripts/install_all_skills.sh --dry-run
 ./scripts/install_all_skills.sh
 ```
@@ -70,10 +70,10 @@ Installers derive the repository root from their own location and create individ
 
 ## Invoke a skill
 
-Use `scientific-code-documenter` for review-only documentation assessments, focused docstring and comment work, or behavior-preserving readability improvements. Invoke it explicitly for a review-only request:
+Use `angze-code-style` for review-only documentation assessments, focused docstring and comment work, or behavior-preserving readability improvements. Invoke it explicitly for a review-only request:
 
 ```text
-$scientific-code-documenter
+$angze-code-style
 Review this file for readability and documentation quality. Do not modify it.
 ```
 
@@ -90,7 +90,7 @@ Codex may also select it implicitly for requests such as:
 For an editing-mode request:
 
 ```text
-$scientific-code-documenter
+$angze-code-style
 Apply only high-confidence documentation and readability improvements to this file. Preserve calculations, public interfaces, file formats, and numerical behaviour.
 ```
 
@@ -116,9 +116,9 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for the complete workflow.
 
 Structural validation proves that a skill can be discovered and parsed; it does not prove usefulness. Evaluation therefore combines controlled A/B runs, trigger and scope-boundary measurements, independent behavior checks, adversarial fixtures, and authorized real-repository acceptance.
 
-`scientific-code-documenter` v0.4.0 changes runtime behavior. It adds scientific/artifact contract inventory, `evidence-backed` / `observable-only` / `unknown` classification, Tier 0–3 risk grading, structured review findings, conservative notebook policy, comment pruning, and repeated-pass stability.
+`angze-code-style` v0.4.0 changes runtime behavior and completes a clean-break rename from `scientific-code-documenter`. It adds scientific/artifact contract inventory, `evidence-backed` / `observable-only` / `unknown` classification, Tier 0–3 risk grading, structured review findings, conservative notebook policy, comment pruning, and repeated-pass stability.
 
-Controlled synthetic evaluation covered an editable notebook, review-only stale claim, over-commented notebook, generated notebook, and representative Python, Shell, LaTeX, and HTML fixtures. The accepted skill candidates averaged 17.5/18, won all six editing comparisons, passed every behavior and notebook hard gate, and were byte-stable on fresh second passes. Positive implicit triggering was 10/10; one of ten negative prompts falsely triggered. Scoring was manual rather than independently blind. ShellCheck and `pdflatex` were unavailable, so Shell syntax/dynamic contracts and static LaTeX contracts were used. See the [sanitized v0.4.0 evaluation summary](docs/evaluations/scientific-code-documenter-v0.4.0.md).
+Controlled synthetic evaluation covered an editable notebook, review-only stale claim, over-commented notebook, generated notebook, and representative Python, Shell, LaTeX, and HTML fixtures. The accepted skill candidates averaged 17.5/18, won all six editing comparisons, passed every behavior and notebook hard gate, and were byte-stable on fresh second passes. The initial trigger matrix scored 10/10 positives with one false trigger; the full post-rename rerun scored 10/10 positives and 0/10 negatives. Scoring was manual rather than independently blind. ShellCheck and `pdflatex` were unavailable, so Shell syntax/dynamic contracts and static LaTeX contracts were used. See the [sanitized v0.4.0 evaluation summary](docs/evaluations/angze-code-style-v0.4.0.md) and [integrity manifest](docs/evaluations/angze-code-style-v0.4.0.manifest.json).
 
 Historical v0.1–v0.3 scientific Python and ORCA Shell evidence remains useful predecessor evidence, but it is not accepted as proof for the changed v0.4 runtime. No real notebook was supplied with explicit authorization, so real-notebook acceptance remains pending. The skill remains experimental; limited probes do not prove notebook equivalence or scientific correctness, and human scientific review remains mandatory.
 

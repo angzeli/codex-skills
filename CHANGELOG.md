@@ -19,6 +19,7 @@ No changes yet.
 
 ### Changed
 
+- Renamed the active skill from `scientific-code-documenter` to `angze-code-style` as a clean break; the old invocation is not retained as an alias.
 - Runtime behavior now covers scientific contracts, notebook artifacts, pruning, and explicit preservation boundaries.
 - Controlled A/B evaluation now includes notebooks plus Python, Shell, LaTeX, and HTML regressions.
 - Historical v0.1–v0.3 results remain predecessor evidence rather than acceptance of the changed runtime.
@@ -29,11 +30,12 @@ No changes yet.
 - Editable, review-only, pruning, and generated notebook hard gates, including exact probe output and byte-level locality.
 - Six accepted editing candidates remained byte-identical on fresh second passes.
 - Positive implicit triggering at 10/10 and false triggering at 1/10.
+- Full post-rename trigger rerun at 10/10 positives and 0/10 negatives, plus one renamed editable-notebook validation and byte-identical fresh second pass.
 
 ### Known limitations
 
 - Explicitly authorized real-notebook acceptance remains pending.
-- One notebook feature-development prompt falsely triggered the skill.
+- One notebook feature-development prompt falsely triggered the skill in the original matrix; the post-rename rerun did not reproduce it.
 - Manual A/B scoring was not independently blind.
 - ShellCheck and rendered LaTeX compilation were unavailable in the release environment.
 - Deterministic fixture probes do not prove general notebook equivalence or scientific correctness.

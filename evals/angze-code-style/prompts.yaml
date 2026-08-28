@@ -1,5 +1,5 @@
 schema_version: 1
-skill: scientific-code-documenter
+skill: angze-code-style
 
 positive_implicit:
   - id: positive-python-docstrings
@@ -237,32 +237,32 @@ explicit_invocation:
   - id: explicit-review-only
     language: mixed
     mode: review-only
-    prompt: "$scientific-code-documenter\nReview this file for readability and documentation quality. Do not modify it. Identify the five highest-value improvements."
+    prompt: "$angze-code-style\nReview this file for readability and documentation quality. Do not modify it. Identify the five highest-value improvements."
   - id: explicit-limited-edit
     language: mixed
     mode: limited-edit
-    prompt: "$scientific-code-documenter\nApply only high-confidence documentation and readability improvements to this file. Preserve calculations, public interfaces, file formats, and numerical behaviour."
+    prompt: "$angze-code-style\nApply only high-confidence documentation and readability improvements to this file. Preserve calculations, public interfaces, file formats, and numerical behaviour."
   - id: explicit-new-function
     language: python
     mode: write-new-code
-    prompt: "$scientific-code-documenter\nImplement the requested function using this repository's conventions. Document its units, array shapes, assumptions, failure modes, and return values without over-commenting it."
+    prompt: "$angze-code-style\nImplement the requested function using this repository's conventions. Document its units, array shapes, assumptions, failure modes, and return values without over-commenting it."
   - id: explicit-shell-review
     language: shell
     mode: review-only
-    prompt: "$scientific-code-documenter\nReview this workflow for comment quality and unstated path assumptions. Do not edit or run it."
+    prompt: "$angze-code-style\nReview this workflow for comment quality and unstated path assumptions. Do not edit or run it."
   - id: explicit-html-limited
     language: html-css
     mode: limited-edit
-    prompt: "$scientific-code-documenter\nImprove only semantic structure, accessibility documentation, and opaque names in this report component; leave generated CSS untouched."
+    prompt: "$angze-code-style\nImprove only semantic structure, accessibility documentation, and opaque names in this report component; leave generated CSS untouched."
   - id: explicit-latex-review
     language: latex
     mode: review-only
-    prompt: "$scientific-code-documenter\nReview report.tex for source readability, label and macro contracts, and unsupported scientific interpretation. Do not modify it."
+    prompt: "$angze-code-style\nReview report.tex for source readability, label and macro contracts, and unsupported scientific interpretation. Do not modify it."
   - id: explicit-notebook-review
     language: jupyter
     mode: review-only
-    prompt: "$scientific-code-documenter\nReview this notebook's role, scientific and data contracts, execution state, outputs, and documentation risks. Do not modify or execute it."
+    prompt: "$angze-code-style\nReview this notebook's role, scientific and data contracts, execution state, outputs, and documentation risks. Do not modify or execute it."
   - id: explicit-notebook-limited
     language: jupyter
     mode: limited-edit
-    prompt: "$scientific-code-documenter\nApply only evidence-backed Markdown, comment, and docstring improvements to the explicitly allowlisted cells. Preserve all other notebook bytes and do not execute it."
+    prompt: "$angze-code-style\nApply only evidence-backed Markdown, comment, and docstring improvements to the explicitly allowlisted cells. Preserve all other notebook bytes and do not execute it."

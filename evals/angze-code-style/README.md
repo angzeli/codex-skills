@@ -1,4 +1,4 @@
-# Scientific Code Documenter evaluation
+# Angze Code Style evaluation
 
 This suite tests whether the skill improves documentation and readability without changing behavior or expanding scope. It includes contract-aware Jupyter Notebook cases without treating notebook JSON as ordinary text. Tracked fixtures are synthetic and contain no unpublished research or third-party project code. Authorized real-repository runs retain raw source, diffs, and logs only in ignored local result directories; tracked summaries are sanitized.
 
@@ -6,7 +6,7 @@ This suite tests whether the skill improves documentation and readability withou
 
 1. Run collection structural validation to check frontmatter, naming, references, and portable runtime content.
 2. Use `prompts.yaml` to test explicit invocation, positive implicit triggering, false triggers, and boundary decisions in fresh sessions.
-3. Run `./scripts/run_fixture_checks.sh scientific-code-documenter` before and after each fixture edit. Notebook candidates must also pass their fixture-specific contract file.
+3. Run `./scripts/run_fixture_checks.sh angze-code-style` before and after each fixture edit. Notebook candidates must also pass their fixture-specific contract file.
 4. Compare baseline and skill-assisted diffs from identical starting commits using the same model and prompt.
 5. Score both outputs with `rubric.md`; preserve raw diffs and command logs under `results/`.
 6. Exercise adversarial and notebook fixtures to confirm that unknown meaning is not invented and generated, review-only, or protected notebook state remains untouched.
@@ -30,7 +30,7 @@ Baseline fixtures are intentionally imperfect. A good edit may change their styl
 
 - Create sibling worktrees outside the main checkout at the same starting commit.
 - Start fresh Codex sessions with the same model and prompt.
-- Run the baseline without explicit invocation and the comparison with `$scientific-code-documenter`.
+- Run the baseline without explicit invocation and the comparison with `$angze-code-style`.
 - Compare the four notebook cases and representative Python, Shell, LaTeX, and HTML cases. Count the 75% win threshold across editing fixtures; both notebook editing fixtures must beat baseline.
 - Use write-enabled workspaces for review-only and generated pairs so restraint is demonstrated rather than enforced by permissions. These cases may tie, but the skill must not lose or modify a byte.
 - Save each diff and validation log, then score both independently.

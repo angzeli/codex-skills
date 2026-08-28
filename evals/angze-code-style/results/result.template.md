@@ -1,4 +1,4 @@
-# Scientific Code Documenter evaluation result
+# Angze Code Style evaluation result
 
 - Date:
 - Model and interface:

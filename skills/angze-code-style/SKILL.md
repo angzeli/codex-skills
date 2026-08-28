@@ -1,9 +1,9 @@
 ---
-name: scientific-code-documenter
+name: angze-code-style
 description: Document, prune, refactor, or review scientific code and Jupyter notebooks while preserving scientific, data, interface, execution-state, and artifact contracts. Use for evidence-backed comments, docstrings, notebook Markdown, units, shapes, schemas, ordering, missing-value conventions, assumptions, numerical choices, or readability work that must not change analysis semantics. Do not trigger for ordinary notebook execution, data analysis, debugging, performance work, methodology changes, output regeneration, dependency updates, or feature implementation.
 ---
 
-# Scientific Code Documenter
+# Angze Code Style
 
 Improve scientific and technical code without obscuring its logic or silently changing its behavior. Match the repository's established conventions when they are coherent and intentional.
 

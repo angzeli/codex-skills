@@ -1,12 +1,15 @@
-# scientific-code-documenter v0.4.0 validation
+# angze-code-style v0.4.0 validation
 
 ## Version status
 
-- Version: `scientific-code-documenter` v0.4.0, before the final `angze-code-style` migration
+- Version: `angze-code-style` v0.4.0
+- Migration: clean-break rename from `scientific-code-documenter`; no compatibility alias
 - Release status: experimental local release candidate
 - Runtime behavior changed from v0.3.0: yes
 - Real-notebook acceptance: pending explicit authorization
-- Provisional verdict: **PARTIALLY READY — REAL-NOTEBOOK ACCEPTANCE PENDING**
+- Verdict: **PARTIALLY READY — REAL-NOTEBOOK ACCEPTANCE PENDING**
+- Tracked runtime snapshot SHA-256: `7f79b22c4694717963966132967b1a03b4cf5790529e6c229ef2ef31920fad84`
+- Integrity manifest: [`angze-code-style-v0.4.0.manifest.json`](angze-code-style-v0.4.0.manifest.json)
 
 ## Methodology
 
@@ -52,6 +55,12 @@ The validator uses strict standard-library JSON parsing, exact original hashes, 
 Ten positive implicit prompts covered Python, Shell, LaTeX, HTML, notebook documentation, notebook readability, data contracts, and comment pruning. All ten activated or read the skill. Ten negative prompts covered debugging, dependencies, tests, performance, data analysis, notebook execution, crashes, methodology, and features. One notebook feature prompt read the skill, for a 10% false-trigger rate.
 
 Thus positive accuracy was 100% and false triggering was 10%, meeting the release thresholds. The feature false positive is retained as a known limitation.
+
+After the clean-break rename, the same full 20-prompt matrix was rerun in fresh isolated sessions. All twenty sessions were valid: positives were 10/10 and negative activations were 0/10. The global skill inventory matched exactly after restoration. An initial path-sensitive detector undercount was corrected over the saved JSONL because the CLI resolved the isolated symlink to `runtime-snapshot/SKILL.md`; no session was rerun or replaced.
+
+## Post-rename representative check
+
+One explicit `$angze-code-style` editable-notebook run changed only the allowlisted source values and passed the strict notebook contract validator. A fresh second session read the same frozen runtime and left the first candidate byte-identical; the validator passed again. This is a rename-sensitive synthetic migration check, not real-notebook acceptance.
 
 ## Retained failed attempts
 
