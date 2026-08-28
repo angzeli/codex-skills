@@ -215,18 +215,18 @@ def validate_restraint(source: Path, *, compile_output: bool = True) -> None:
 def main() -> int:
     mode = sys.argv[1] if len(sys.argv) > 1 else "all"
     explicit_path = Path(sys.argv[2]).resolve() if len(sys.argv) > 2 else None
-    compile_output = mode != "static"
-    if mode in {"all", "main", "static"}:
+    compile_output = mode not in {"static", "main-static", "restraint-static"}
+    if mode in {"all", "main", "static", "main-static"}:
         validate_main(
             explicit_path or FIXTURE_ROOT / "latex/crowded_scientific_report.tex",
             compile_output=compile_output,
         )
-    if mode in {"all", "restraint", "static"}:
+    if mode in {"all", "restraint", "static", "restraint-static"}:
         validate_restraint(
             explicit_path or FIXTURE_ROOT / "latex/fragile_template_snippet.tex",
             compile_output=compile_output,
         )
-    if mode not in {"all", "main", "restraint", "static"}:
+    if mode not in {"all", "main", "restraint", "static", "main-static", "restraint-static"}:
         raise SystemExit(f"unknown mode: {mode}")
     return 0
 
