@@ -29,6 +29,20 @@ def absorbance(transmitted, incident):
     """This function is responsible for taking two arrays and returning an array."""
 ```
 
+## Data contracts and missing values
+
+Prefer evidence-backed schema and ordering information:
+
+```python
+def export_summary(rows: list[Result]) -> str:
+    """Serialize `sample_id`, `estimate`, and `status` in input row order.
+
+    Missing estimates remain empty fields; they are not imputed.
+    """
+```
+
+Do not claim that missing values are below detection limits unless repository evidence says so.
+
 ## Logical stages and inline decisions
 
 Prefer comments that expose intent or a constraint:
@@ -58,6 +72,40 @@ Do not guess at an undocumented correction:
 # Apply the legacy correction exactly; its physical basis is not documented here.
 corrected = signal - 0.037 * reference
 ```
+
+In a review finding, distinguish observation from intent: “The implementation subtracts `0.037 * reference`; the repository does not establish the factor's units or physical basis. Expert confirmation is required before assigning scientific meaning.”
+
+## Comment pruning and notebook duplication
+
+Prefer one authoritative notebook explanation:
+
+```markdown
+The next cell preserves acquisition order because the exported table is consumed positionally.
+```
+
+Remove an adjacent `# Preserve acquisition order for positional export` comment if it adds no local detail. Do not add a third explanation.
+
+Prune narration:
+
+```python
+# Loop over every row.
+for row in rows:
+    # Append the row.
+    serialized.append(encode(row))
+```
+
+The code is clearer without either comment. Add documentation only if ordering, encoding, or failure behavior is non-obvious and evidence-backed.
+
+## Unsupported explanations and expert boundaries
+
+Replace an unsupported claim with neutral wording only when repository evidence establishes that the neutral wording is accurate:
+
+```python
+# Apply the configured scaling factor; its units and scientific interpretation are not documented.
+scaled = raw * factor
+```
+
+If the repository does not establish a safe replacement, report the unsupported claim without changing the file. If the correct interpretation would affect methodology or results, require expert confirmation even when other edits are authorized.
 
 Do not invent provenance or interpretation:
 
