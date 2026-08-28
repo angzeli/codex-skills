@@ -1,4 +1,0 @@
-interface:
-  display_name: "Scientific Code Documenter"
-  short_description: "Document and clarify scientific code"
-  default_prompt: "Use $scientific-code-documenter to improve this scientific code documentation and readability without changing its behavior."

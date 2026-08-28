@@ -1,9 +1,9 @@
 ---
-name: scientific-code-documenter
-description: Write, refactor, document, or review scientific and technical code for readable structure, concise human-sounding comments and docstrings, and explicit units, shapes, assumptions, conventions, and numerical choices while preserving behavior. Use when users ask to add or improve comments or docstrings, clean up cramped code, improve scientific-code readability, document units, dimensions, array or table shapes, scientific assumptions, or numerical conventions, remove excessive or AI-like comments, or review documentation quality. Do not trigger for ordinary debugging, dependency updates, test execution, or feature implementation that does not request documentation or readability work.
+name: angze-code-style
+description: Document, prune, refactor, or review scientific code and Jupyter notebooks while preserving scientific, data, interface, execution-state, and artifact contracts. Use for evidence-backed comments, docstrings, notebook Markdown, units, shapes, schemas, ordering, missing-value conventions, assumptions, numerical choices, or readability work that must not change analysis semantics. Do not trigger for ordinary notebook execution, data analysis, debugging, performance work, methodology changes, output regeneration, dependency updates, or feature implementation.
 ---
 
-# Scientific Code Documenter
+# Angze Code Style
 
 Improve scientific and technical code without obscuring its logic or silently changing its behavior. Match the repository's established conventions when they are coherent and intentional.
 
@@ -16,17 +16,42 @@ Improve scientific and technical code without obscuring its logic or silently ch
    - Read nearby code to learn naming, layout, docstring, and comment conventions.
    - Identify generated and vendored files that should remain untouched.
    - Check the working tree and preserve unrelated user changes.
-2. Classify the request as new code, documentation, readability refactoring, or review. Perform only the requested mode or modes.
-3. Define the smallest coherent scope. Prefer focused edits over repository-wide style churn.
-4. Apply repository-specific conventions first. Improve local inconsistency only when the existing pattern is unclear, cramped, or misleading.
-5. Preserve public interfaces, calculations, numerical behavior, outputs, and file formats unless the user explicitly requests a behavioral change.
-6. Run the most relevant available validation and report exactly what ran.
+   - If a tracked target already has documentation or readability changes, treat them as user or prior-pass work. Do not refine, replace, or stack another pass unless the user explicitly asks to continue from those existing changes.
+2. Classify the operating mode and treat review-only or no-edit language as a hard boundary.
+3. Build a compact contract inventory for the requested scope. Classify each relevant item as `evidence-backed`, `observable-only`, or `unknown`.
+4. For notebooks, classify the artifact role as `source`, `tutorial`, `analysis artifact`, `generated`, or `unknown` before deciding whether an edit is safe.
+5. Grade the proposed work from Tier 0 through Tier 3 and perform only the authorized, protectable tier.
+6. Define the smallest coherent scope and apply repository-specific conventions before general preferences.
+7. Treat documentation that already satisfies the requested contracts as complete. Do not create a diff merely to rephrase, expand, rename local variables, or apply another plausible cleanup.
+8. Preserve public interfaces, calculations, numerical behavior, outputs, notebook state, and file formats unless the user explicitly authorizes and protects a change.
+9. Run the narrowest relevant validation. Fail closed on unexplained contract changes and report exactly what ran.
 
 ### Treat operating mode as a hard boundary
 
 - Before acting, classify the request as editing, review only, explanation only, recommendations only, or planning only. Treat explicit scope and no-edit instructions as overriding all documentation, readability, cleanup, formatting, and refactoring preferences in this skill, including validation that would modify files.
 - In any non-editing mode, inspect and report inaccurate, stale, unsupported, or missing documentation; explain its impact and location; and propose concrete replacement wording when useful. Do not apply the replacement, edit, rename, reformat, or restructure source files, or run formatters, fixers, or other commands that modify files. Use read-only validation when useful, and verify that the working tree remains unchanged before finishing.
 - Report a stale or dangerous comment as a high-priority issue when warranted, but do not treat its seriousness as authorization to edit.
+
+## Inventory scientific and artifact contracts
+
+Before editing, record only the contract items relevant to the target. Consider scientific meaning, units, shapes, schemas, ordering, missing values, state dependencies, public and filesystem interfaces, expected outputs, stored outputs, notebook structure, and notebook role.
+
+- `evidence-backed`: supported by tests, schemas, types, authoritative code or documentation, or user instructions. Document it precisely.
+- `observable-only`: visible in the implementation, but its scientific intent is not established. Describe only the observed operation.
+- `unknown`: insufficient evidence exists. Preserve the behavior and request or recommend expert confirmation.
+
+Do not infer a scientific contract from domain familiarity or an arithmetic pattern. Consult [references/scientific-contracts.md](references/scientific-contracts.md) when units, schemas, ordering, missing values, state, or interface boundaries need detailed treatment.
+
+## Grade risk before acting
+
+- **Tier 0 — review/planning only:** make no changes when the request is non-editing, intent is too uncertain, the artifact is generated or unknown, or preservation cannot be verified.
+- **Tier 1 — documentation only:** edit comments, docstrings, or Markdown; prune redundant or misleading commentary; state evidence-backed contracts precisely and observable-only operations neutrally. Leave unknown meaning unresolved. Do not change behavior.
+- **Tier 2 — local readability refactoring:** refactor only when explicitly requested, locally protectable, and free of Tier-3 effects. Require targeted behavior checks.
+- **Tier 3 — protected/high risk:** report by default. This includes numerical evaluation order, public interfaces, notebook structure or identity, execution state, stored outputs, metadata, and artifact contracts. Edit only with explicit authorization and suitable protection.
+
+Label Tier-3 findings with one or more reasons: `numerical-semantics`, `public-interface`, `notebook-structure`, `execution-state`, `stored-output`, `metadata`, or `artifact-contract`.
+
+For review findings, report: location, issue, evidence, contract affected, confidence, behavior risk, proposed wording or action, and required expert confirmation. Separate established facts from inference.
 
 ## Adapt to the task
 
@@ -44,10 +69,13 @@ Improve scientific and technical code without obscuring its logic or silently ch
 - Explain purpose, interpretation, assumptions, and non-obvious choices.
 - Remove or correct stale, misleading, redundant, and obviously generated-sounding comments when confidence is high.
 - Leave suspicious logic unchanged and flag it separately when its intended behavior is uncertain.
+- Prefer deleting or consolidating stale, obvious, duplicated, or unsupported commentary over adding another explanation.
+- A pruning pass is incomplete if it deletes the only documentation of a non-obvious observable contract. Replace line-by-line narration with one concise Markdown statement or docstring when the code visibly filters missing values, imposes ordering, or changes representation.
 
 ### Refactor for readability
 
 - Simplify dense expressions, deep nesting, long functions, or opaque transformations only where understanding materially improves.
+- Require a concrete current readability defect before applying a Tier-2 refactor. A broad readability request is not sufficient when the existing implementation and documentation already expose the relevant contracts.
 - Use clear intermediate variables and coherent helpers.
 - Preserve evaluation order, floating-point behavior, side effects, exception behavior, and data ordering unless change is requested.
 - Keep public names stable. Treat symbol renaming and extraction across module boundaries as higher-risk changes.
@@ -59,6 +87,22 @@ Improve scientific and technical code without obscuring its logic or silently ch
 - Distinguish defects from preferences.
 - Cite concrete files and tight line ranges, explain impact, and suggest the smallest remedy.
 - State when no actionable issue is found.
+
+## Make repeated invocation stable
+
+Before editing, ask whether the current artifact already meets the request. If its high-value contracts are documented, unsupported meaning remains explicitly unknown, and no stale or redundant commentary remains, make no change and report that the existing documentation is sufficient.
+
+Use the initial working-tree state as a preservation boundary. When the requested tracked file already contains in-scope documentation or readability changes, a generic request to improve that file is not permission to revise those changes. Inspect and validate them read-only, report any remaining concern separately, and leave the file unchanged unless the user explicitly authorizes building on the existing diff. In a controlled second pass, this existing diff is the prior candidate and must remain byte-identical.
+
+Do not use a repeated invocation to:
+
+- add lower-value detail omitted by a focused prior pass;
+- rephrase accurate documentation without a demonstrated clarity defect;
+- add more comments around already documented behavior;
+- rename locals, expand formatting, or perform a new Tier-2 refactor merely because another form is possible;
+- alternate between equivalent wording or representation choices.
+
+Make the first accepted edit coherent enough that the same request against its result produces no tracked change. In an evaluation or release workflow, verify this with a fresh second pass and fail the candidate if content or notebook bytes drift.
 
 ## Readability rules
 
@@ -137,6 +181,9 @@ Maintain distinctions that affect interpretation, including measured versus calc
 - Avoid stock phrases such as “This function is responsible for,” “This block handles,” “Here, we,” and “It is important to note that.”
 - Avoid vague praise such as “robust,” “seamless,” “comprehensive,” or “efficient” unless technically defined.
 - Avoid repeatedly stating “This ensures that” when the consequence is already evident.
+- Remove comments that narrate syntax, duplicate nearby Markdown, contradict the code, or bury the important contract.
+- When pruning narration, preserve or consolidate any evidence-backed or directly observable data contract it obscures. A visible conditional, sort operation, schema, or test can establish neutral missing-value or ordering behavior without establishing its scientific purpose. If such a non-obvious contract would otherwise be undocumented, keep one concise authoritative explanation instead of deleting all context.
+- Replace or remove an unsupported scientific claim only when repository evidence establishes the correction or the claim is clearly redundant. Otherwise report the ambiguity and require expert confirmation, even when editing is authorized.
 
 Consult [references/comment-examples.md](references/comment-examples.md) when concrete wording examples would help. Do not load it when the repository's own conventions already settle the choice.
 
@@ -189,6 +236,20 @@ nanoseconds to seconds” when the units are not documented.
 - Do not add TODO or FIXME comments unless they name a concrete unresolved action, its importance, and any condition needed to resolve it.
 
 ## Apply language-specific conventions
+
+### Jupyter Notebook
+
+- Treat `.ipynb` as a structured artifact, not ordinary JSON. Classify its role before editing; generated, cached, result, publication, and unknown-role notebooks are normally Tier 0.
+- Preserve `nbformat`, `nbformat_minor`, notebook and cell metadata, cell count and order, cell IDs and types, execution counts, outputs, attachments, and untouched source by default.
+- Do not execute, clear or regenerate outputs, normalize JSON or metadata, convert to a script, add or remove cells, reorder cells, or repair hidden state unless explicitly requested and protected.
+- Change only the minimum existing Markdown or code-cell source needed. Prefer one authoritative explanation instead of duplicated Markdown and comments.
+- During notebook comment pruning, do not reduce explanatory Markdown to a bare heading when the allowlisted code visibly filters missing values, sorts records, or otherwise imposes a data contract. Consolidate that observable behavior once without inventing its scientific purpose.
+- Require both structural preservation and a focused textual diff. If the editing mechanism would rewrite unrelated serialization, report the limitation and do not edit.
+- Report hidden or prior-state dependencies without silently restructuring the notebook.
+- When source changes but stored outputs remain, say the notebook was not executed and do not imply that displayed outputs were recomputed.
+- Use a dependency-free structural comparison or repository validator when available. A deterministic fixture probe may add evidence, but it does not prove general notebook equivalence.
+
+Consult [references/jupyter-notebooks.md](references/jupyter-notebooks.md) before editing a notebook or reviewing notebook state, serialization, generated status, or stale outputs.
 
 ### Python
 
@@ -246,6 +307,8 @@ nanoseconds to seconds” when the units are not documented.
 
 Run the narrowest relevant checks available, such as the formatter, linter, type checker, unit or integration tests, syntax compiler, TeX build, ShellCheck, or a targeted smoke test. For documentation-only edits, still check parsing, compilation, or rendered structure when practical.
 
+For notebook edits, validate protected structure and intended source allowances without executing the original notebook. Treat validator errors, ambiguous results, unexpected source changes, and protected-field changes as failures. When the task is repeatable, check that a second identical documentation pass converges to no meaningful diff.
+
 Never claim a check passed unless it ran successfully. If a check cannot run, name it and explain why.
 
 Finish with a concise report that states:
@@ -255,3 +318,4 @@ Finish with a concise report that states:
 - whether behavior was intentionally preserved;
 - which validation commands ran and their outcomes;
 - any unresolved ambiguity, scientific assumption, or suspicious logic left unchanged.
+- for notebooks, the apparent role, whether execution occurred, and whether stored outputs were preserved rather than regenerated.

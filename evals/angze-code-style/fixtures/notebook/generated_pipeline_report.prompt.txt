@@ -1,0 +1,1 @@
+Review the clarity of this generated notebook's documentation without modifying or executing it. Identify the upstream generator as the only appropriate edit target. The notebook must remain byte-identical.

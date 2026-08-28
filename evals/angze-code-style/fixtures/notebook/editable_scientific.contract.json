@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "original_sha256": "114daea3eb4d15611bd66414e879f12cc20e28a90d949be1ab7d3eecf1919707",
+  "notebook_role": "source",
+  "policy": "allowlisted-source-edits",
+  "allowed_source_changes": [
+    {
+      "cell_index": 0,
+      "cell_id": "contract-overview",
+      "cell_type": "markdown",
+      "edit_kind": "markdown",
+      "max_changed_lines": 8
+    },
+    {
+      "cell_index": 1,
+      "cell_id": "transform-records",
+      "cell_type": "code",
+      "edit_kind": "python-comments-docstrings",
+      "max_changed_lines": 6
+    }
+  ],
+  "locality": {
+    "max_changed_lines_total": 14
+  },
+  "behavior_probe": {
+    "selected_code_cells": [
+      {
+        "cell_index": 1,
+        "cell_id": "transform-records"
+      }
+    ],
+    "callable": "notebook_contract_probe",
+    "timeout_seconds": 5,
+    "expected_json": {
+      "values": [
+        0.002,
+        null,
+        0.001
+      ],
+      "serialized_rows": "[[\"beta\",0.002],[\"alpha\",null],[\"gamma\",0.001]]"
+    }
+  }
+}

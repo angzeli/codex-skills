@@ -57,7 +57,7 @@ The skill source, target source, global skill state, and prior evaluation eviden
 
 Evaluation used neutral repositories and public-safe synthetic fixtures, fresh ephemeral candidate sessions, isolated skill discovery, and identical controlled A/B prompts except for explicit skill invocation. Outputs were judged blind to condition, and behavior was checked independently of qualitative scoring. Real-repository candidates came from immutable, remote-free source and skill snapshots so acceptance could be tied to one exact runtime hash.
 
-Tracked materials are available in the [evaluation overview](../../evals/scientific-code-documenter/README.md), [prompt matrix](../../evals/scientific-code-documenter/prompts.yaml), [scoring rubric](../../evals/scientific-code-documenter/rubric.md), and [synthetic fixtures](../../evals/scientific-code-documenter/fixtures/). Detailed raw runs remain local, ignored audit evidence and are not part of the release.
+Tracked materials are available in the [evaluation overview](../../evals/angze-code-style/README.md), [prompt matrix](../../evals/angze-code-style/prompts.yaml), [scoring rubric](../../evals/angze-code-style/rubric.md), and [synthetic fixtures](../../evals/angze-code-style/fixtures/). Detailed raw runs remain local, ignored audit evidence and are not part of the release.
 
 ## Known limitations
 

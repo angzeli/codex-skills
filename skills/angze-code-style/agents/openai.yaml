@@ -1,0 +1,4 @@
+interface:
+  display_name: "Angze Code Style"
+  short_description: "Document scientific code and notebooks"
+  default_prompt: "Use $angze-code-style to improve this scientific code or notebook documentation while preserving its contracts and behavior."

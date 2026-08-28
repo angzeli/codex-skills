@@ -1,0 +1,7 @@
+{
+  "schema_version": 1,
+  "original_sha256": "bfa6ca039930bcc922084d801ade9f6456fbcb548309034ec7894cbff97a6fd7",
+  "notebook_role": "analysis artifact",
+  "policy": "byte-identical",
+  "allowed_source_changes": []
+}

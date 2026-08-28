@@ -1,0 +1,7 @@
+{
+  "schema_version": 1,
+  "original_sha256": "72e5a312bb04c6ab02724ec4cb611b882d37763d7aafd5993014f2ff6389462a",
+  "notebook_role": "generated",
+  "policy": "byte-identical",
+  "allowed_source_changes": []
+}

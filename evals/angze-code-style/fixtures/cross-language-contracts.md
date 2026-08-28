@@ -110,3 +110,49 @@ preferred implementation or formatting style.
   `data-row-order` values, and the exact JSON byte payload.
 - Validation: source SHA-256, HTML parsing, exact structural and embedded-data
   assertions, and post-review byte identity.
+
+## Jupyter: `editable_scientific.ipynb`
+
+- Mode: Tier-1 documentation editing.
+- Role: source notebook.
+- Editable: only the allowlisted `source` fields of `contract-overview` and
+  `transform-records`.
+- Scientific contract: input record order and `None` missing values remain
+  unchanged. `SCALE_FACTOR` has no established units or scientific meaning.
+- Protected state: notebook and cell metadata, formats, cell count and order,
+  cell IDs and types, execution count 7, stored output, attachment, raw cell,
+  and every non-allowlisted source field.
+- Validation: exact original hash, raw-byte locality outside changed source
+  values, Python AST equality after stripping docstrings, and an isolated
+  synthetic probe of numerical values, missing values, and serialized order.
+  The probe is not notebook execution or a general equivalence proof.
+
+## Jupyter: `review_only_stale_claim.ipynb`
+
+- Mode: Tier-0 review only.
+- Role: analysis artifact.
+- Editable: no; the notebook must remain byte-identical.
+- Ambiguity: the stated time-unit conversion is not established by the code
+  and appears inconsistent with the configured arithmetic. Report the claim
+  with evidence and request expert confirmation; do not edit it.
+- Validation: strict JSON parsing, exact original hash, and byte identity.
+
+## Jupyter: `over_commented.ipynb`
+
+- Mode: Tier-1 comment and Markdown pruning.
+- Role: tutorial notebook.
+- Editable: only the allowlisted source fields of `workflow-narration` and
+  `summarize-values`.
+- Contract: remove or consolidate narration without changing executable AST,
+  stored output, execution state, notebook structure, metadata, or unrelated
+  serialization.
+- Validation: exact original hash, changed-line budgets, Python AST equality,
+  protected-field comparison, and raw-byte locality.
+
+## Jupyter: `generated_pipeline_report.ipynb`
+
+- Mode: Tier-0 review only.
+- Role: generated notebook with explicit generator provenance.
+- Editable: no; direct changes belong in the upstream generator and the
+  notebook must remain byte-identical.
+- Validation: strict JSON parsing, exact original hash, and byte identity.

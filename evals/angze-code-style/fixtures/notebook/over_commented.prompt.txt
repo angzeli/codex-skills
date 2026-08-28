@@ -1,0 +1,1 @@
+Prune or consolidate the Markdown and comments that merely narrate syntax. Preserve the function, call, stored output, execution state, metadata, cell structure, and serialization outside the two allowlisted source fields. Do not execute the notebook or add replacement commentary unless it records a real contract.

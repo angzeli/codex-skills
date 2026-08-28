@@ -19,6 +19,8 @@ run_required() {
 
 run_required "Python numerical behavior" \
     python3 -m unittest discover -s "$eval_root/fixtures/python" -p 'test_*.py'
+run_required "Notebook contract validator" \
+    python3 -B -m unittest discover -s "$eval_root/fixtures/notebook" -p 'test_*.py'
 run_required "HTML and CSS fixture integrity" \
     python3 "$eval_root/fixtures/html/validate_html.py" "$eval_root/fixtures/html/index.html" "$eval_root/fixtures/html/styles.css"
 run_required "Shell syntax" \
@@ -27,8 +29,13 @@ run_required "Adversarial protections" \
     python3 -m unittest discover -s "$eval_root/fixtures/adversarial" -p 'test_*.py'
 run_required "Cross-language Shell contracts" \
     python3 "$eval_root/fixtures/contracts/test_shell_fixtures.py"
-run_required "Cross-language LaTeX contracts" \
-    python3 "$eval_root/fixtures/contracts/test_latex_fixtures.py"
+if command -v pdflatex >/dev/null 2>&1; then
+    run_required "Cross-language LaTeX contracts" \
+        python3 "$eval_root/fixtures/contracts/test_latex_fixtures.py"
+else
+    run_required "Cross-language LaTeX static contracts" \
+        python3 "$eval_root/fixtures/contracts/test_latex_fixtures.py" static
+fi
 run_required "Cross-language HTML contracts" \
     python3 "$eval_root/fixtures/contracts/test_html_fixtures.py"
 
@@ -41,7 +48,7 @@ else
 fi
 
 if command -v pdflatex >/dev/null 2>&1; then
-    tex_output=$(mktemp -d "${TMPDIR:-/tmp}/scientific-code-documenter-tex.XXXXXX")
+    tex_output=$(mktemp -d "${TMPDIR:-/tmp}/angze-code-style-tex.XXXXXX")
     run_required "LaTeX compilation" \
         pdflatex -interaction=nonstopmode -halt-on-error -output-directory "$tex_output" "$eval_root/fixtures/latex/report.tex"
 else

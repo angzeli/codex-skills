@@ -1,0 +1,1 @@
+Review this notebook's scientific documentation. The scaling explanation may be stale or unsupported. Report the issue, evidence, affected contract, confidence, risk, proposed action, and whether expert confirmation is needed. Do not modify or execute the notebook; it must remain byte-identical.

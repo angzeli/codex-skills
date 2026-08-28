@@ -34,9 +34,7 @@ for temperature in $temperatures; do
         resume_args=""
     fi
 
-    $solver simulate --input $input_file --temperature-k $temperature --basis synthetic-dz --convergence-energy 1e-8 --convergence-density 1e-6 --max-iterations 300 --grid radial-96-angular-302 $resume_args --output $output_file
-
-    if [ "$?" -ne 0 ]; then
+    if ! $solver simulate --input $input_file --temperature-k $temperature --basis synthetic-dz --convergence-energy 1e-8 --convergence-density 1e-6 --max-iterations 300 --grid radial-96-angular-302 $resume_args --output $output_file; then
         printf 'solver failed at temperature %s K\n' "$temperature" >&2
         exit 1
     fi
