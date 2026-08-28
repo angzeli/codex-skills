@@ -31,14 +31,14 @@ No changes yet.
 - Six accepted editing candidates remained byte-identical on fresh second passes.
 - Positive implicit triggering at 10/10 and false triggering at 1/10.
 - Full post-rename trigger rerun at 10/10 positives and 0/10 negatives, plus one renamed editable-notebook validation and byte-identical fresh second pass.
+- Authorized immutable real tutorial-notebook acceptance: zero-edit review, controlled Markdown-only A/B, strict notebook validation, unchanged executable sources, and byte-identical fresh-session idempotence.
 
 ### Known limitations
 
-- Explicitly authorized real-notebook acceptance remains pending.
 - One notebook feature-development prompt falsely triggered the skill in the original matrix; the post-rename rerun did not reproduce it.
 - Manual A/B scoring was not independently blind.
 - ShellCheck and rendered LaTeX compilation were unavailable in the release environment.
-- Deterministic fixture probes do not prove general notebook equivalence or scientific correctness.
+- Deterministic fixtures and bounded Markdown-only real-notebook evidence do not prove general notebook equivalence or scientific correctness.
 - Human scientific review remains required; the release remains experimental.
 
 ## [0.3.0] - 2026-07-29

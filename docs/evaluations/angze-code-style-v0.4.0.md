@@ -6,10 +6,11 @@
 - Migration: clean-break rename from `scientific-code-documenter`; no compatibility alias
 - Release status: experimental local release candidate
 - Runtime behavior changed from v0.3.0: yes
-- Real-notebook acceptance: pending explicit authorization
-- Verdict: **PARTIALLY READY — REAL-NOTEBOOK ACCEPTANCE PENDING**
+- Real-notebook acceptance: passed
+- Verdict: **READY FOR LOCAL REVIEW**
 - Tracked runtime snapshot SHA-256: `7f79b22c4694717963966132967b1a03b4cf5790529e6c229ef2ef31920fad84`
 - Integrity manifest: [`angze-code-style-v0.4.0.manifest.json`](angze-code-style-v0.4.0.manifest.json)
+- Real-notebook record: [`angze-code-style-v0.4.0-real-notebook.md`](angze-code-style-v0.4.0-real-notebook.md)
 
 ## Methodology
 
@@ -62,6 +63,14 @@ After the clean-break rename, the same full 20-prompt matrix was rerun in fresh 
 
 One explicit `$angze-code-style` editable-notebook run changed only the allowlisted source values and passed the strict notebook contract validator. A fresh second session read the same frozen runtime and left the first candidate byte-identical; the validator passed again. This is a rename-sensitive synthetic migration check, not real-notebook acceptance.
 
+## Authorized real-notebook acceptance
+
+An immutable snapshot of one authorized real tutorial notebook was accepted without exposing its personal path or substantive research content in tracked evidence. The snapshot contained 44 cells (30 Markdown and 14 code), nine stored outputs, no attachments, and notebook format 4.5.
+
+Review-only inspection changed zero bytes and reported six categories of documentation or contract findings. A bounded task added a concise observable data/history contract to one existing Markdown cell. Baseline and skill candidates began from the same snapshot; both passed the strict validator and the honest human comparison was a tie. The skill introduced no unsupported scientific claims and was not materially worse than baseline.
+
+For the skill candidate, protected-structure, metadata, output, attachment, execution-count, cell-ID, non-allowlisted-source, and serialization-locality violations were all zero. All 14 executable source values remained exactly equal to the snapshot. A fresh second skill session changed zero bytes and passed the validator again. The original notebook was unchanged and was not executed. This is bounded Markdown-only preservation evidence; general notebook equivalence is not claimed. Full sanitized details are in the [real-notebook acceptance record](angze-code-style-v0.4.0-real-notebook.md).
+
 ## Retained failed attempts
 
 - One orchestration attempt used incompatible current CLI flags and exited before model launch; no candidate changed.
@@ -74,6 +83,4 @@ These attempts remain in the local result bundle and were not removed or scored 
 
 Historical v0.1–v0.3 scientific Python and ORCA Shell acceptance remains predecessor evidence only because v0.4 changes runtime instructions.
 
-No notebook owner explicitly authorized a real immutable notebook snapshot. Per the release boundary, no arbitrary personal or research notebook was substituted. Real-notebook zero-edit review and controlled baseline-versus-skill editing remain pending.
-
-ShellCheck and `pdflatex` were unavailable. Required Shell syntax and dynamic contract checks passed; LaTeX static contracts passed, but rendered compilation did not run. The deterministic notebook probe is limited fixture evidence, not general equivalence or scientific validation. Human scientific review remains mandatory.
+ShellCheck and `pdflatex` were unavailable. Required Shell syntax and dynamic contract checks passed; LaTeX static contracts passed, but rendered compilation did not run. Manual A/B scoring was not independently blind. The deterministic probe and bounded real-notebook acceptance are limited evidence, not general equivalence or scientific validation. Human scientific review remains mandatory.

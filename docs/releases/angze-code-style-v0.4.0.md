@@ -25,6 +25,8 @@ Positive implicit triggering was 10/10. One of ten negative prompts—a notebook
 
 One renamed editable-notebook candidate then passed the strict contract validator, and a fresh second session produced a byte-identical candidate. Both sessions read the frozen `angze-code-style` runtime.
 
+An explicitly authorized immutable snapshot of a real tutorial notebook also passed. Review-only inspection changed zero bytes. A bounded one-cell Markdown task produced a controlled A/B tie, introduced no unsupported scientific claims, preserved every protected notebook field, left all 14 executable source values unchanged, and was byte-identical on a fresh second skill pass. The original notebook was neither modified nor executed. See the [sanitized acceptance record](../evaluations/angze-code-style-v0.4.0-real-notebook.md).
+
 ## Integrity
 
 The tracked runtime snapshot SHA-256 is `7f79b22c4694717963966132967b1a03b4cf5790529e6c229ef2ef31920fad84`. It covers the five tracked runtime files as sorted file-hash and runtime-relative-path records. The [machine-readable manifest](../evaluations/angze-code-style-v0.4.0.manifest.json) records the algorithm, per-file hashes and sizes, notebook fixtures, validator files, and accepted result summary without personal paths.
@@ -37,13 +39,12 @@ The deterministic probe executes only selected trusted synthetic fixture code in
 
 ## Limitations and release status
 
-- No real notebook was supplied with explicit authorization. Required real-notebook review and controlled-edit acceptance remain pending.
 - Scoring was manual side-by-side review, not an independent blind judge.
 - ShellCheck and `pdflatex` were unavailable. Shell behavior contracts and static LaTeX contracts passed, but rendered LaTeX validation did not run.
 - One notebook feature prompt falsely triggered the skill in the original controlled matrix; a post-rename rerun did not reproduce it.
-- Notebook structure preservation does not establish scientific correctness, output freshness, provenance completeness, or hidden-state safety.
+- The accepted real-notebook edit was Markdown-only. Unchanged executable sources are bounded preservation evidence, not proof of general notebook equivalence, scientific correctness, output freshness, provenance completeness, or hidden-state safety.
 - Jupyter is the only newly supported environment; R, MATLAB, Julia, and Fortran remain out of scope.
 - Human scientific and maintainer review remains mandatory.
 - The release remains experimental.
 
-Verdict: **PARTIALLY READY — REAL-NOTEBOOK ACCEPTANCE PENDING**.
+Verdict: **READY FOR LOCAL REVIEW**.

@@ -40,7 +40,7 @@ codex_skills/
 
 | Skill | Purpose | Status |
 | --- | --- | --- |
-| `angze-code-style` | Document and prune scientific code and Jupyter notebooks using explicit contract inventory, evidence classes, and risk grading | Experimental v0.4.0 release candidate; synthetic notebook and controlled Python, Shell, LaTeX, HTML, trigger, restraint, and idempotence gates pass; authorized real-notebook acceptance is pending |
+| `angze-code-style` | Document and prune scientific code and Jupyter notebooks using explicit contract inventory, evidence classes, and risk grading | Experimental v0.4.0 release candidate; synthetic and authorized real-notebook acceptance plus controlled Python, Shell, LaTeX, HTML, trigger, restraint, and idempotence gates pass |
 
 ## Validate and install
 
@@ -118,9 +118,9 @@ Structural validation proves that a skill can be discovered and parsed; it does 
 
 `angze-code-style` v0.4.0 changes runtime behavior and completes a clean-break rename from `scientific-code-documenter`. It adds scientific/artifact contract inventory, `evidence-backed` / `observable-only` / `unknown` classification, Tier 0–3 risk grading, structured review findings, conservative notebook policy, comment pruning, and repeated-pass stability.
 
-Controlled synthetic evaluation covered an editable notebook, review-only stale claim, over-commented notebook, generated notebook, and representative Python, Shell, LaTeX, and HTML fixtures. The accepted skill candidates averaged 17.5/18, won all six editing comparisons, passed every behavior and notebook hard gate, and were byte-stable on fresh second passes. The initial trigger matrix scored 10/10 positives with one false trigger; the full post-rename rerun scored 10/10 positives and 0/10 negatives. Scoring was manual rather than independently blind. ShellCheck and `pdflatex` were unavailable, so Shell syntax/dynamic contracts and static LaTeX contracts were used. See the [sanitized v0.4.0 evaluation summary](docs/evaluations/angze-code-style-v0.4.0.md) and [integrity manifest](docs/evaluations/angze-code-style-v0.4.0.manifest.json).
+Controlled synthetic evaluation covered an editable notebook, review-only stale claim, over-commented notebook, generated notebook, and representative Python, Shell, LaTeX, and HTML fixtures. The accepted skill candidates averaged 17.5/18, won all six editing comparisons, passed every behavior and notebook hard gate, and were byte-stable on fresh second passes. The initial trigger matrix scored 10/10 positives with one false trigger; the full post-rename rerun scored 10/10 positives and 0/10 negatives. A separately authorized real tutorial-notebook snapshot passed zero-edit review, controlled A/B editing, strict preservation validation, behavior-preservation, and fresh-session idempotence. Scoring was manual rather than independently blind. ShellCheck and `pdflatex` were unavailable, so Shell syntax/dynamic contracts and static LaTeX contracts were used. See the [sanitized v0.4.0 evaluation summary](docs/evaluations/angze-code-style-v0.4.0.md), [real-notebook acceptance record](docs/evaluations/angze-code-style-v0.4.0-real-notebook.md), and [integrity manifest](docs/evaluations/angze-code-style-v0.4.0.manifest.json).
 
-Historical v0.1–v0.3 scientific Python and ORCA Shell evidence remains useful predecessor evidence, but it is not accepted as proof for the changed v0.4 runtime. No real notebook was supplied with explicit authorization, so real-notebook acceptance remains pending. The skill remains experimental; limited probes do not prove notebook equivalence or scientific correctness, and human scientific review remains mandatory.
+Historical v0.1–v0.3 scientific Python and ORCA Shell evidence remains useful predecessor evidence, but it is not accepted as proof for the changed v0.4 runtime. The real-notebook acceptance established bounded Markdown-only preservation, not general notebook equivalence or scientific correctness. The skill remains experimental, and human scientific review remains mandatory.
 
 ## Privacy and publication
 

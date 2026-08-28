@@ -100,6 +100,31 @@
     "post_rename_negative_triggers": "0/10",
     "post_rename_representative_notebook_validation": "pass",
     "post_rename_representative_second_pass_byte_identical": true,
-    "real_notebook_acceptance": "pending explicit authorization"
+    "real_notebook_acceptance": {
+      "status": "pass",
+      "sanitized_identifier": "part-5-worked-tutorial-01",
+      "role": "tutorial",
+      "snapshot_sha256": "e160f1ac42055375c6d498957d64538fff4f76694ac26e4374074a2831721395",
+      "bytes": 527494,
+      "notebook_format": "4.5",
+      "cell_count": 44,
+      "cell_types": {
+        "markdown": 30,
+        "code": 14
+      },
+      "stored_output_items": 9,
+      "attachments": 0,
+      "zero_edit_changed_bytes": 0,
+      "zero_edit_findings": 6,
+      "ab_outcome": "tie",
+      "unexpected_protected_changes": 0,
+      "non_allowlisted_source_changes": 0,
+      "executable_sources_unchanged": "14/14",
+      "unsupported_scientific_claims_introduced": 0,
+      "accepted_candidate_sha256": "19e0bec2539426c7d25f5f74f4b3562300daa184f475cccf1a37ca72cb0b5ee3",
+      "second_pass_changed_bytes": 0,
+      "notebook_executed": false,
+      "general_notebook_equivalence_claimed": false
+    }
   }
 }
