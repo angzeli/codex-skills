@@ -96,6 +96,18 @@ for row in rows:
 
 The code is clearer without either comment. Add documentation only if ordering, encoding, or failure behavior is non-obvious and evidence-backed.
 
+If the removed narration was the only description of a real data contract,
+consolidate that contract once:
+
+```python
+def summarize(values):
+    """Omit missing values and return the remainder in ascending order."""
+    ...
+```
+
+This is preferable to either narrating the loop line by line or deleting the
+only statement of the missing-value and ordering policy.
+
 ## Unsupported explanations and expert boundaries
 
 Replace an unsupported claim with neutral wording only when repository evidence establishes that the neutral wording is accurate:
