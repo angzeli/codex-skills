@@ -70,6 +70,7 @@ For review findings, report: location, issue, evidence, contract affected, confi
 - Remove or correct stale, misleading, redundant, and obviously generated-sounding comments when confidence is high.
 - Leave suspicious logic unchanged and flag it separately when its intended behavior is uncertain.
 - Prefer deleting or consolidating stale, obvious, duplicated, or unsupported commentary over adding another explanation.
+- A pruning pass is incomplete if it deletes the only documentation of a non-obvious observable contract. Replace line-by-line narration with one concise Markdown statement or docstring when the code visibly filters missing values, imposes ordering, or changes representation.
 
 ### Refactor for readability
 
@@ -242,6 +243,7 @@ nanoseconds to seconds” when the units are not documented.
 - Preserve `nbformat`, `nbformat_minor`, notebook and cell metadata, cell count and order, cell IDs and types, execution counts, outputs, attachments, and untouched source by default.
 - Do not execute, clear or regenerate outputs, normalize JSON or metadata, convert to a script, add or remove cells, reorder cells, or repair hidden state unless explicitly requested and protected.
 - Change only the minimum existing Markdown or code-cell source needed. Prefer one authoritative explanation instead of duplicated Markdown and comments.
+- During notebook comment pruning, do not reduce explanatory Markdown to a bare heading when the allowlisted code visibly filters missing values, sorts records, or otherwise imposes a data contract. Consolidate that observable behavior once without inventing its scientific purpose.
 - Require both structural preservation and a focused textual diff. If the editing mechanism would rewrite unrelated serialization, report the limitation and do not edit.
 - Report hidden or prior-state dependencies without silently restructuring the notebook.
 - When source changes but stored outputs remain, say the notebook was not executed and do not imply that displayed outputs were recomputed.
