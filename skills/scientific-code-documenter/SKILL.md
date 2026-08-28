@@ -21,8 +21,9 @@ Improve scientific and technical code without obscuring its logic or silently ch
 4. For notebooks, classify the artifact role as `source`, `tutorial`, `analysis artifact`, `generated`, or `unknown` before deciding whether an edit is safe.
 5. Grade the proposed work from Tier 0 through Tier 3 and perform only the authorized, protectable tier.
 6. Define the smallest coherent scope and apply repository-specific conventions before general preferences.
-7. Preserve public interfaces, calculations, numerical behavior, outputs, notebook state, and file formats unless the user explicitly authorizes and protects a change.
-8. Run the narrowest relevant validation. Fail closed on unexplained contract changes and report exactly what ran.
+7. Treat documentation that already satisfies the requested contracts as complete. Do not create a diff merely to rephrase, expand, rename local variables, or apply another plausible cleanup.
+8. Preserve public interfaces, calculations, numerical behavior, outputs, notebook state, and file formats unless the user explicitly authorizes and protects a change.
+9. Run the narrowest relevant validation. Fail closed on unexplained contract changes and report exactly what ran.
 
 ### Treat operating mode as a hard boundary
 
@@ -72,6 +73,7 @@ For review findings, report: location, issue, evidence, contract affected, confi
 ### Refactor for readability
 
 - Simplify dense expressions, deep nesting, long functions, or opaque transformations only where understanding materially improves.
+- Require a concrete current readability defect before applying a Tier-2 refactor. A broad readability request is not sufficient when the existing implementation and documentation already expose the relevant contracts.
 - Use clear intermediate variables and coherent helpers.
 - Preserve evaluation order, floating-point behavior, side effects, exception behavior, and data ordering unless change is requested.
 - Keep public names stable. Treat symbol renaming and extraction across module boundaries as higher-risk changes.
@@ -83,6 +85,20 @@ For review findings, report: location, issue, evidence, contract affected, confi
 - Distinguish defects from preferences.
 - Cite concrete files and tight line ranges, explain impact, and suggest the smallest remedy.
 - State when no actionable issue is found.
+
+## Make repeated invocation stable
+
+Before editing, ask whether the current artifact already meets the request. If its high-value contracts are documented, unsupported meaning remains explicitly unknown, and no stale or redundant commentary remains, make no change and report that the existing documentation is sufficient.
+
+Do not use a repeated invocation to:
+
+- add lower-value detail omitted by a focused prior pass;
+- rephrase accurate documentation without a demonstrated clarity defect;
+- add more comments around already documented behavior;
+- rename locals, expand formatting, or perform a new Tier-2 refactor merely because another form is possible;
+- alternate between equivalent wording or representation choices.
+
+Make the first accepted edit coherent enough that the same request against its result produces no tracked change. In an evaluation or release workflow, verify this with a fresh second pass and fail the candidate if content or notebook bytes drift.
 
 ## Readability rules
 
