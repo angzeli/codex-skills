@@ -96,8 +96,10 @@ for row in rows:
 
 The code is clearer without either comment. Add documentation only if ordering, encoding, or failure behavior is non-obvious and evidence-backed.
 
-If the removed narration was the only description of a real data contract,
-consolidate that contract once:
+If the removed narration was the only description of a real or directly
+observable data contract, consolidate that contract once. A visible `None`
+filter and ascending `sort()` establish the behavior below without establishing
+why the scientific workflow chose it:
 
 ```python
 def summarize(values):

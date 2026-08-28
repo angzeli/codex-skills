@@ -45,7 +45,7 @@ Do not infer a scientific contract from domain familiarity or an arithmetic patt
 ## Grade risk before acting
 
 - **Tier 0 — review/planning only:** make no changes when the request is non-editing, intent is too uncertain, the artifact is generated or unknown, or preservation cannot be verified.
-- **Tier 1 — documentation only:** edit comments, docstrings, or Markdown; prune redundant or misleading commentary; document only evidence-backed contracts. Do not change behavior.
+- **Tier 1 — documentation only:** edit comments, docstrings, or Markdown; prune redundant or misleading commentary; state evidence-backed contracts precisely and observable-only operations neutrally. Leave unknown meaning unresolved. Do not change behavior.
 - **Tier 2 — local readability refactoring:** refactor only when explicitly requested, locally protectable, and free of Tier-3 effects. Require targeted behavior checks.
 - **Tier 3 — protected/high risk:** report by default. This includes numerical evaluation order, public interfaces, notebook structure or identity, execution state, stored outputs, metadata, and artifact contracts. Edit only with explicit authorization and suitable protection.
 
@@ -181,7 +181,7 @@ Maintain distinctions that affect interpretation, including measured versus calc
 - Avoid vague praise such as “robust,” “seamless,” “comprehensive,” or “efficient” unless technically defined.
 - Avoid repeatedly stating “This ensures that” when the consequence is already evident.
 - Remove comments that narrate syntax, duplicate nearby Markdown, contradict the code, or bury the important contract.
-- When pruning narration, preserve or consolidate any evidence-backed data contract it obscures. If missing-value handling, ordering, units, or another non-obvious contract would otherwise be undocumented, keep one concise authoritative explanation instead of deleting all context.
+- When pruning narration, preserve or consolidate any evidence-backed or directly observable data contract it obscures. A visible conditional, sort operation, schema, or test can establish neutral missing-value or ordering behavior without establishing its scientific purpose. If such a non-obvious contract would otherwise be undocumented, keep one concise authoritative explanation instead of deleting all context.
 - Replace or remove an unsupported scientific claim only when repository evidence establishes the correction or the claim is clearly redundant. Otherwise report the ambiguity and require expert confirmation, even when editing is authorized.
 
 Consult [references/comment-examples.md](references/comment-examples.md) when concrete wording examples would help. Do not load it when the repository's own conventions already settle the choice.
