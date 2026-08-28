@@ -1,0 +1,79 @@
+name: Validation
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Python ${{ matrix.python-version }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version:
+          - "3.11"
+          - "3.12"
+
+    steps:
+      - name: Check out the tested revision
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Confirm the tested SHA
+        env:
+          EXPECTED_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          actual_sha=$(git rev-parse HEAD)
+          test "$actual_sha" = "$EXPECTED_SHA"
+          printf 'Tested SHA: %s\n' "$actual_sha"
+
+      - name: Validate skill packages
+        run: ./scripts/check_all_skills.sh
+
+      - name: Run deterministic angze-code-style fixtures
+        run: ./scripts/run_fixture_checks.sh angze-code-style
+
+      - name: Verify v0.4.0 release integrity
+        run: >-
+          python3 scripts/check_release_integrity.py
+          docs/evaluations/angze-code-style-v0.4.0.manifest.json
+          --expected-runtime-sha
+          7f79b22c4694717963966132967b1a03b4cf5790529e6c229ef2ef31920fad84
+          --expected-skill angze-code-style
+          --expected-version 0.4.0
+          --forbid-invocation '$scientific-code-documenter'
+
+      - name: Check changed whitespace
+        env:
+          PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          PUSH_BEFORE_SHA: ${{ github.event.before }}
+        run: |
+          if [ "$GITHUB_EVENT_NAME" = "pull_request" ]; then
+            git diff --check "$PR_BASE_SHA...HEAD"
+          elif [ "$GITHUB_EVENT_NAME" = "push" ] &&
+               [ -n "$PUSH_BEFORE_SHA" ] &&
+               [ "$PUSH_BEFORE_SHA" != "0000000000000000000000000000000000000000" ]; then
+            git diff --check "$PUSH_BEFORE_SHA..HEAD"
+          else
+            git diff-tree --check --no-commit-id --root -r HEAD
+          fi
+
+      - name: Confirm checks did not modify tracked files
+        run: git diff --exit-code
