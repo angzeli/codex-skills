@@ -37,7 +37,7 @@ No changes yet.
 
 - One notebook feature-development prompt falsely triggered the skill in the original matrix; the post-rename rerun did not reproduce it.
 - Manual A/B scoring was not independently blind.
-- ShellCheck and rendered LaTeX compilation were unavailable and did not run. Deterministic Shell contracts and static LaTeX contracts passed; the unavailable tools remain disclosed, non-blocking confidence-depth limitations for this experimental release.
+- ShellCheck and rendered LaTeX compilation were unavailable in the original local acceptance environment. Deterministic Shell contracts and static LaTeX contracts passed. ShellCheck subsequently ran and passed under the existing policy in remote CI on Ubuntu for Python 3.11 and 3.12; rendered LaTeX compilation remains a disclosed, non-blocking confidence-depth limitation.
 - Deterministic fixtures and bounded Markdown-only real-notebook evidence do not prove general notebook equivalence or scientific correctness.
 - Human scientific review remains required; the release remains experimental.
 

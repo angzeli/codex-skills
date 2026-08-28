@@ -36,6 +36,12 @@ Every accepted skill fixture scored at least 17/18 and behavior preservation was
 
 The baseline Python candidate added public annotations and asserted more scientific interpretation than the repository established. The accepted skill candidate retained public signatures and described the threshold neutrally. The skill notebook candidate explicitly kept the scale factor's units and scientific meaning unknown. The pruning candidate consolidated visible `None` filtering and ascending ordering once while deleting syntax narration. Shell, LaTeX, and HTML candidates documented concrete contracts more locally and concisely.
 
+### Targeted Shell provenance confirmation
+
+The first remote CI run later found ShellCheck `SC2181` in `fixtures/shell/run_campaign.sh`. That auxiliary syntax/lint fixture was corrected without changing behavior (`e60803dd268b820f139af580f39ffb92aedafef5269ab9304e38e6a1c3f900c5` to `2d61b1f3b088b83ccee9f9868e9dccf83c7766100a88e9e38ca9b3f25fc262d5`). The scored Shell A/B input was instead `fixtures/shell/cramped_orca_batch.sh`; its SHA-256 remained `c6558b5065325b51aa4effafa93e8e67849b8ff3369022bf2f3546dca87a29b6` before and after that correction. The original scored provenance was therefore not invalidated.
+
+For conservative current-fixture confirmation, only the Shell editing pair was rerun with the original prompt, `gpt-5.6-terra`, medium reasoning, fresh isolated sessions, a zero-user-skill baseline, and the frozen runtime. Both arms began from the same `c6558b…` input and passed Bash syntax plus the current deterministic Shell contract. The baseline scored 16/18 and the skill candidate scored 17/18 with behavior preservation at 3/3, reproducing the original skill win. The accepted skill candidate SHA-256 was `13939830ff6d6463b5a51571f7e8134308eb85c9497ccde4419cbfbb1704effb`; fresh repeated skill prompts left it byte-identical and the deterministic contract passed again. No unaffected A/B, trigger, or real-notebook evaluation was rerun, and the frozen runtime did not change. Raw prompts, logs, diffs, excluded attempts, hashes, and validation records remain in the ignored local result bundle.
+
 ## Notebook hard gates
 
 | Gate | Result |
@@ -76,6 +82,7 @@ For the skill candidate, protected-structure, metadata, output, attachment, exec
 - One orchestration attempt used incompatible current CLI flags and exited before model launch; no candidate changed.
 - Initial Python, Shell, and HTML candidates drifted on a second pass. The runtime added an explicit dirty-target preservation boundary, and all affected reruns became byte-identical.
 - Deletion-only notebook-pruning attempts tied the baseline. The runtime's evidence-class wording was reconciled so visible missing-value and ordering operations are documented neutrally without inventing scientific purpose; the final retained candidate passed and won.
+- One targeted Shell-refresh skill attempt was excluded before scoring because its raw log did not record a frozen-runtime read; the accepted retry read the frozen runtime and reproduced the original score and outcome.
 
 These attempts remain in the local result bundle and were not removed or scored as accepted outputs.
 
@@ -83,4 +90,4 @@ These attempts remain in the local result bundle and were not removed or scored 
 
 Historical v0.1–v0.3 scientific Python and ORCA Shell acceptance remains predecessor evidence only because v0.4 changes runtime instructions.
 
-ShellCheck and rendered `pdflatex` compilation were unavailable and did not run. Required Shell syntax and deterministic dynamic contract checks passed, and required LaTeX static contracts passed. The unavailable tools remain disclosed, non-blocking confidence-depth limitations for this experimental release; neither is represented as executed validation. Manual A/B scoring was not independently blind. The deterministic probe and bounded real-notebook acceptance are limited evidence, not general equivalence or scientific validation. Human scientific review remains mandatory.
+ShellCheck and rendered `pdflatex` compilation were unavailable in the original local acceptance environment. Required Shell syntax and deterministic dynamic contract checks passed, and required LaTeX static contracts passed. ShellCheck subsequently ran and passed under the repository's existing policy in remote CI on Ubuntu for Python 3.11 and 3.12, including the intentional `SC2086` exclusion for the baseline fixture. Rendered `pdflatex` compilation remains an unavailable, non-blocking confidence-depth limitation. Manual A/B scoring was not independently blind. The deterministic probe and bounded real-notebook acceptance are limited evidence, not general equivalence or scientific validation. Human scientific review remains mandatory.
