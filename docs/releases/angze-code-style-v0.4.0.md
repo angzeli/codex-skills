@@ -40,7 +40,7 @@ The deterministic probe executes only selected trusted synthetic fixture code in
 ## Limitations and release status
 
 - Scoring was manual side-by-side review, not an independent blind judge.
-- ShellCheck and `pdflatex` were unavailable. Shell behavior contracts and static LaTeX contracts passed, but rendered LaTeX validation did not run.
+- ShellCheck and rendered `pdflatex` compilation were unavailable and did not run. Required Shell syntax and deterministic behavior contracts passed, and required LaTeX static contracts passed. The unavailable tools remain disclosed, non-blocking confidence-depth limitations for this experimental release.
 - One notebook feature prompt falsely triggered the skill in the original controlled matrix; a post-rename rerun did not reproduce it.
 - The accepted real-notebook edit was Markdown-only. Unchanged executable sources are bounded preservation evidence, not proof of general notebook equivalence, scientific correctness, output freshness, provenance completeness, or hidden-state safety.
 - Jupyter is the only newly supported environment; R, MATLAB, Julia, and Fortran remain out of scope.
