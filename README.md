@@ -15,7 +15,10 @@ codex_skills/
 │   └── scientific-code-documenter/
 │       ├── SKILL.md
 │       ├── agents/openai.yaml
-│       └── references/comment-examples.md
+│       └── references/
+│           ├── comment-examples.md
+│           ├── jupyter-notebooks.md
+│           └── scientific-contracts.md
 ├── evals/
 │   ├── README.md
 │   └── scientific-code-documenter/
@@ -37,7 +40,7 @@ codex_skills/
 
 | Skill | Purpose | Status |
 | --- | --- | --- |
-| `scientific-code-documenter` | Improve scientific and technical code documentation and readability while preserving behavior | Experimental v0.3.0; validated with scientific Python and ORCA Shell real-repository acceptance plus controlled Python, Shell, LaTeX, HTML/CSS/JavaScript, trigger, and boundary tests |
+| `scientific-code-documenter` | Document and prune scientific code and Jupyter notebooks using explicit contract inventory, evidence classes, and risk grading | Experimental v0.4.0 release candidate; synthetic notebook and controlled Python, Shell, LaTeX, HTML, trigger, restraint, and idempotence gates pass; authorized real-notebook acceptance is pending |
 
 ## Validate and install
 
@@ -81,6 +84,8 @@ Codex may also select it implicitly for requests such as:
 - “Clarify this Shell workflow's aggregate-error behavior without changing its exit codes.”
 - “Organize these LaTeX macros while preserving labels, rendered content, and the template workaround.”
 - “Make this scientific dashboard easier to maintain without changing its DOM or CSV contracts.”
+- “Document this notebook's cell inputs, missing-value rules, ordering, and stored-output state without executing it.”
+- “Prune syntax-narrating notebook comments while preserving outputs, metadata, execution counts, and cell identity.”
 
 For an editing-mode request:
 
@@ -89,7 +94,9 @@ $scientific-code-documenter
 Apply only high-confidence documentation and readability improvements to this file. Preserve calculations, public interfaces, file formats, and numerical behaviour.
 ```
 
-Units, shapes, conventions, physical roles, and numerical context should be documented only when supported by code, tests, configuration, repository documentation, or user-provided evidence. Uncertainty should be stated rather than converted into scientific fact. A review-only or “do not edit” instruction takes precedence over opportunities to fix stale comments or improve code.
+Units, shapes, conventions, physical roles, and numerical context should be documented precisely only when supported by code, tests, configuration, repository documentation, or user-provided evidence. Directly observable operations may be described neutrally; unknown scientific meaning stays unresolved. A review-only or “do not edit” instruction takes precedence over opportunities to fix stale comments or improve code.
+
+Jupyter notebooks are treated as structured artifacts. The skill classifies notebook role and risk before editing, preserves cell identity, metadata, execution counts, attachments, and stored outputs by default, and does not execute notebooks merely to refresh state. Generated, unknown-role, and protected analysis notebooks normally remain review-only.
 
 Ordinary debugging, dependency upgrades, test execution, and unrelated feature work should not trigger the skill merely because code is present.
 
@@ -109,9 +116,11 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for the complete workflow.
 
 Structural validation proves that a skill can be discovered and parsed; it does not prove usefulness. Evaluation therefore combines controlled A/B runs, trigger and scope-boundary measurements, independent behavior checks, adversarial fixtures, and authorized real-repository acceptance.
 
-`scientific-code-documenter` v0.3.0 retains the accepted v0.2.0 runtime unchanged. Its real-repository ORCA Shell acceptance reviewed nine production-style scripts (4,319 lines), made zero review-only edits, and tested three controlled A/B pairs. The skill scored 89/90 versus 80/90 baseline, won all three scripts, and preserved generated ORCA inputs, command order, CLI and environment contracts, failures, restarts, cleanup, logs, outputs, and exit codes under independent mocks and dry runs. No expensive scientific calculation was launched.
+`scientific-code-documenter` v0.4.0 changes runtime behavior. It adds scientific/artifact contract inventory, `evidence-backed` / `observable-only` / `unknown` classification, Tier 0–3 risk grading, structured review findings, conservative notebook policy, comment pruning, and repeated-pass stability.
 
-The prior scientific Python real-repository acceptance and controlled Shell, LaTeX, HTML, CSS, and JavaScript evidence remain applicable because the runtime hash did not change. Mock and dry-run equivalence cannot prove every scheduler, cluster, MPI, or operating-system interaction. See the [sanitized v0.3.0 evaluation summary](docs/evaluations/scientific-code-documenter-v0.3.0.md) for exact results and limitations. The skill remains experimental and scientific edits still require human review.
+Controlled synthetic evaluation covered an editable notebook, review-only stale claim, over-commented notebook, generated notebook, and representative Python, Shell, LaTeX, and HTML fixtures. The accepted skill candidates averaged 17.5/18, won all six editing comparisons, passed every behavior and notebook hard gate, and were byte-stable on fresh second passes. Positive implicit triggering was 10/10; one of ten negative prompts falsely triggered. Scoring was manual rather than independently blind. ShellCheck and `pdflatex` were unavailable, so Shell syntax/dynamic contracts and static LaTeX contracts were used. See the [sanitized v0.4.0 evaluation summary](docs/evaluations/scientific-code-documenter-v0.4.0.md).
+
+Historical v0.1–v0.3 scientific Python and ORCA Shell evidence remains useful predecessor evidence, but it is not accepted as proof for the changed v0.4 runtime. No real notebook was supplied with explicit authorization, so real-notebook acceptance remains pending. The skill remains experimental; limited probes do not prove notebook equivalence or scientific correctness, and human scientific review remains mandatory.
 
 ## Privacy and publication
 

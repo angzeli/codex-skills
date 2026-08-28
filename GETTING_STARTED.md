@@ -1,6 +1,6 @@
 # Getting started
 
-This guide shows how to install and use the `scientific-code-documenter` skill in Codex. The skill helps review and improve scientific or technical code documentation and readability without intentionally changing behavior.
+This guide shows how to install and use the `scientific-code-documenter` skill in Codex. The skill helps review, document, and prune scientific code or Jupyter notebooks while preserving explicit scientific, data, interface, execution-state, and artifact contracts.
 
 ## What you need
 
@@ -38,7 +38,16 @@ Apply only high-confidence documentation and readability improvements to this fi
 
 Attach the file, open its repository in Codex, or name the file path in the prompt. Codex may also select the skill automatically when a request clearly matches its purpose.
 
-Always review scientific edits before accepting them. The skill preserves behavior by design, but it cannot independently confirm undocumented scientific meaning or every environment-specific interaction.
+For a conservative notebook review:
+
+```text
+$scientific-code-documenter
+Review this notebook's role, scientific and data contracts, execution state, outputs, and documentation risks. Do not modify or execute it.
+```
+
+For an authorized notebook documentation edit, name the permitted cells or source fields and the protected state. The skill does not execute notebooks, clear outputs, add or reorder cells, or normalize notebook JSON by default.
+
+Always review scientific edits before accepting them. The skill preserves behavior by design, but it cannot independently confirm undocumented scientific meaning, general notebook equivalence, stored-output validity, or every environment-specific interaction.
 
 ## Manual installation from a clone
 
