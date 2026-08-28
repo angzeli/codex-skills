@@ -98,7 +98,7 @@ def labels_from_aux(aux_path: Path) -> set[str]:
     return set(re.findall(r"\\newlabel\{([^}]+)\}", aux_path.read_text(encoding="utf-8")))
 
 
-def validate_main(source: Path) -> None:
+def validate_main(source: Path, *, compile_output: bool = True) -> None:
     require(source.is_file(), f"missing fixture: {source}")
     text = source.read_text(encoding="utf-8")
     compact = normalized_source(text)
@@ -143,6 +143,10 @@ def validate_main(source: Path) -> None:
     require("Sample & Energy & Dipole & Orbital surface & Density surface" in compact, "descriptor columns changed")
     require(r"Sample & $E_{\mathrm{pa}}$ & $E_{\mathrm{pc}}$ & $R_{\mathrm{s}}$ & $R_{\mathrm{ct}}$ & $n$" in compact, "electrochemical columns changed")
 
+    if not compile_output:
+        print("PASS LaTeX main static contract")
+        return
+
     pdf, aux, _, temporary = compile_tex(source, appendix=False, expected_pages=2)
     try:
         require(labels_from_aux(aux) == MAIN_LABELS, "non-appendix AUX labels changed")
@@ -166,7 +170,7 @@ def validate_main(source: Path) -> None:
     print("PASS LaTeX main contract")
 
 
-def validate_restraint(source: Path) -> None:
+def validate_restraint(source: Path, *, compile_output: bool = True) -> None:
     require(source.is_file(), f"missing fixture: {source}")
     initial_bytes = source.read_bytes()
     require(sha256_bytes(initial_bytes) == FRAGILE_SHA256, "fragile source hash changed")
@@ -192,6 +196,11 @@ def validate_restraint(source: Path) -> None:
     require("source and target units are not established" in compact, "factor ambiguity warning changed")
     require("physical interpretation is deliberately unspecified" in compact, "correction ambiguity warning changed")
 
+    if not compile_output:
+        require(source.read_bytes() == initial_bytes, "fragile source changed during validation")
+        print("PASS LaTeX restraint static contract")
+        return
+
     pdf, _, _, temporary = compile_tex(source, appendix=False, expected_pages=1)
     try:
         visible = extract_normalized_text(pdf)
@@ -206,11 +215,18 @@ def validate_restraint(source: Path) -> None:
 def main() -> int:
     mode = sys.argv[1] if len(sys.argv) > 1 else "all"
     explicit_path = Path(sys.argv[2]).resolve() if len(sys.argv) > 2 else None
-    if mode in {"all", "main"}:
-        validate_main(explicit_path or FIXTURE_ROOT / "latex/crowded_scientific_report.tex")
-    if mode in {"all", "restraint"}:
-        validate_restraint(explicit_path or FIXTURE_ROOT / "latex/fragile_template_snippet.tex")
-    if mode not in {"all", "main", "restraint"}:
+    compile_output = mode != "static"
+    if mode in {"all", "main", "static"}:
+        validate_main(
+            explicit_path or FIXTURE_ROOT / "latex/crowded_scientific_report.tex",
+            compile_output=compile_output,
+        )
+    if mode in {"all", "restraint", "static"}:
+        validate_restraint(
+            explicit_path or FIXTURE_ROOT / "latex/fragile_template_snippet.tex",
+            compile_output=compile_output,
+        )
+    if mode not in {"all", "main", "restraint", "static"}:
         raise SystemExit(f"unknown mode: {mode}")
     return 0
 

@@ -5,11 +5,11 @@ Score each category from 0 to 3. Record evidence from the diff and validation lo
 | Category | 0 | 1 | 2 | 3 |
 | --- | --- | --- | --- | --- |
 | Readability | Harder to scan or substantially churned | Minor cosmetic gains; major density remains | Clearer structure with a few avoidable issues | Focused structure, names, spacing, and flow materially improve scanning |
-| Function documentation | Missing, misleading, or mechanical | Some non-trivial interfaces documented poorly | Important interfaces documented with small omissions | Concise, language-appropriate contracts cover purpose and meaningful failures |
-| Scientific context | Invented or materially wrong | Key units, shapes, or conventions remain ambiguous | Most relevant context is explicit without guessing | Units, shapes, domains, assumptions, and distinctions are precise and evidence-based |
-| Comment quality | Narrates syntax or uses repetitive AI-like phrasing | Too sparse, verbose, or generic | Mostly useful with limited redundancy | Human-sounding comments explain only intent, constraints, conventions, or safeguards |
+| Function documentation | Missing, misleading, or mechanical | Some non-trivial interfaces or cell inputs/outputs documented poorly | Important interfaces and notebook flow documented with small omissions | Concise, language-appropriate contracts cover purpose, cell inputs/outputs, and meaningful failures |
+| Scientific context | Invented or materially wrong | Key units, shapes, conventions, or evidence limits remain ambiguous | Most relevant context and uncertainty are explicit without guessing | Contracts are precise, evidence-classified, and preserve unknown scientific meaning |
+| Comment quality | Narrates syntax, duplicates Markdown, or uses repetitive AI-like phrasing | Too sparse, verbose, generic, or reluctant to prune | Mostly useful with limited redundancy | Human-sounding comments explain only real contracts; obvious or duplicate commentary is removed or consolidated |
 | Behavior preservation | Any syntax, API, format, test, or numerical regression | No detected regression but validation is inadequate | Checks pass but material behavior remains unprotected | All relevant checks pass and public, numerical, ordering, and file-format behavior is preserved |
-| Scope discipline | Unrequested rewrite or generated/vendor edits | Significant unrelated formatting or risky refactor | Mostly focused with small avoidable churn | Minimal, reviewable diff; risky or suspicious logic is reported rather than changed |
+| Scope discipline | Unrequested rewrite or generated/vendor edits | Significant unrelated formatting, notebook churn, or risky refactor | Mostly focused with small avoidable churn | Minimal, reviewable diff; role and risk are classified, and Tier-3 or suspicious work is reported rather than changed |
 
 ## Acceptance criteria
 
@@ -23,6 +23,23 @@ Score each category from 0 to 3. Record evidence from the diff and validation lo
 
 Do not average away a behavior regression. A fixture that scores below any mandatory criterion fails even if the overall mean passes.
 
+## Notebook hard gates
+
+Evaluate these gates before qualitative scoring. Every applicable gate must pass.
+
+| Gate | Required result |
+| --- | --- |
+| Original identity | Contract SHA-256 matches the exact immutable starting notebook |
+| Protected structure | 100% preservation of formats, cells, order, IDs, types, metadata, attachments, execution counts, and outputs |
+| Source allowlist | Zero changes outside explicitly permitted cell source fields |
+| Textual locality | Zero byte changes outside intentionally changed allowlisted source values |
+| Review/generated restraint | Review-only and generated notebooks remain byte-identical |
+| Behavioral probe | Exact numerical values, missing-value behavior, and serialized order for applicable trusted synthetic fixtures |
+| Idempotence | Fresh second skill pass creates zero tracked diff; notebook bytes remain identical to pass 1 |
+| Validator health | Zero parse ambiguities, internal errors, timeouts, or unexplained changes |
+
+A notebook editing candidate must beat its baseline. Review-only and generated candidates may tie, but they must not lose or change a byte.
+
 ## Result record
 
 For each run, capture:
@@ -34,5 +51,7 @@ For each run, capture:
 - baseline and skill scores by category;
 - validation commands and exit status;
 - saved diff and log paths;
+- notebook role, risk tier and reasons, evidence classes, allowlisted source fields, validator report, and hard-gate outcomes;
+- second-pass prompt, raw log, diff, and byte-identity result for accepted editing candidates;
 - observed strengths and regressions;
 - follow-up changes or unresolved ambiguity.

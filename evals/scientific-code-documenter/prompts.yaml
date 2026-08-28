@@ -66,6 +66,30 @@ positive_implicit:
     language: mixed
     mode: limited-edit
     prompt: "Apply focused documentation and readability improvements across the Python analysis and shell entry point, preserving APIs, files, and numerical outputs."
+  - id: positive-notebook-contracts
+    language: jupyter
+    mode: document-existing
+    prompt: "Document this scientific notebook's evidence-backed units, shapes, ordering, missing-value conventions, and stored-output state without executing it."
+  - id: positive-notebook-markdown-comments
+    language: jupyter
+    mode: comment-cleanup
+    prompt: "Improve the existing notebook Markdown and code comments, keeping cell structure, metadata, outputs, execution counts, and unrelated serialization unchanged."
+  - id: positive-notebook-cell-io
+    language: jupyter
+    mode: document-existing
+    prompt: "Clarify the inputs and outputs of the non-trivial cells and record which results are stored rather than recomputed."
+  - id: positive-data-contracts
+    language: mixed
+    mode: document-existing
+    prompt: "Document the table schema, row ordering, missing-value sentinel, array shape, and filesystem output contract without inventing scientific meaning."
+  - id: positive-comment-pruning
+    language: mixed
+    mode: comment-cleanup
+    prompt: "Prune the comments that narrate syntax or duplicate nearby documentation, retaining only evidence-backed constraints and interpretation."
+  - id: positive-notebook-readability
+    language: jupyter
+    mode: limited-edit
+    prompt: "Make this source notebook easier to follow through focused Markdown and comment edits while preserving its calculations, cells, execution state, and stored outputs."
 
 negative:
   - id: negative-debug
@@ -110,6 +134,30 @@ negative:
   - id: negative-html-debug
     language: html
     prompt: "Fix the dashboard filter so selecting a sample updates the visible row count."
+  - id: negative-notebook-execute
+    language: jupyter
+    prompt: "Run every cell in this notebook and save fresh outputs."
+  - id: negative-notebook-crash
+    language: jupyter
+    prompt: "Find why cell 12 crashes and fix the exception."
+  - id: negative-notebook-analysis
+    language: jupyter
+    prompt: "Analyze these measurements in the notebook and report the most significant trend."
+  - id: negative-notebook-methodology
+    language: jupyter
+    prompt: "Optimize the fitting methodology in this notebook to reduce the residual error."
+  - id: negative-notebook-plot
+    language: jupyter
+    prompt: "Add a publication-ready plot of the calculated spectrum to this notebook."
+  - id: negative-notebook-regenerate
+    language: jupyter
+    prompt: "Clear all outputs, restart the kernel, and regenerate the notebook from top to bottom."
+  - id: negative-notebook-debug
+    language: jupyter
+    prompt: "Debug the wrong numerical result in the final notebook cell."
+  - id: negative-notebook-feature
+    language: jupyter
+    prompt: "Add an interactive molecule viewer and export button to the notebook."
 
 boundary:
   - id: boundary-shell-review-only
@@ -160,6 +208,30 @@ boundary:
     language: json
     expected: trigger-and-use-nearby-doc
     prompt: "Explain the units in this JSON configuration without making the JSON invalid."
+  - id: boundary-notebook-cleanup-ambiguous
+    language: jupyter
+    expected: trigger-and-classify-before-editing
+    prompt: "Clean up this notebook."
+  - id: boundary-notebook-review-only
+    language: jupyter
+    expected: trigger-review-only
+    prompt: "Review the notebook for stale scientific claims and missing data contracts. Do not modify or execute it."
+  - id: boundary-notebook-generated
+    language: jupyter
+    expected: trigger-and-skip-generated
+    prompt: "Improve the comments in this generated pipeline notebook, but leave the generated artifact byte-identical and identify the upstream edit target."
+  - id: boundary-notebook-analysis-artifact
+    language: jupyter
+    expected: trigger-and-report-risk
+    prompt: "Assess whether this executed analysis notebook can safely receive documentation edits while preserving every stored output and execution count."
+  - id: boundary-notebook-unknown-role
+    language: jupyter
+    expected: trigger-and-report-risk
+    prompt: "Document this notebook, but its source/generated status and execution provenance are unknown."
+  - id: boundary-notebook-questionable-claim
+    language: jupyter
+    expected: trigger-review-only
+    prompt: "A Markdown cell assigns units to an unexplained scale factor. Determine whether the claim is supported, but do not change the notebook."
 
 explicit_invocation:
   - id: explicit-review-only
@@ -186,3 +258,11 @@ explicit_invocation:
     language: latex
     mode: review-only
     prompt: "$scientific-code-documenter\nReview report.tex for source readability, label and macro contracts, and unsupported scientific interpretation. Do not modify it."
+  - id: explicit-notebook-review
+    language: jupyter
+    mode: review-only
+    prompt: "$scientific-code-documenter\nReview this notebook's role, scientific and data contracts, execution state, outputs, and documentation risks. Do not modify or execute it."
+  - id: explicit-notebook-limited
+    language: jupyter
+    mode: limited-edit
+    prompt: "$scientific-code-documenter\nApply only evidence-backed Markdown, comment, and docstring improvements to the explicitly allowlisted cells. Preserve all other notebook bytes and do not execute it."

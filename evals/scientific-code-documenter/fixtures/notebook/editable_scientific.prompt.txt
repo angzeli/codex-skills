@@ -1,0 +1,1 @@
+Document the notebook's evidence-backed inputs, outputs, ordering, and missing-value behavior. Add only concise Markdown, comments, or docstrings to the existing allowlisted cells. Do not infer units or a scientific interpretation for SCALE_FACTOR, and do not execute, clear, regenerate, reorder, or otherwise normalize the notebook.

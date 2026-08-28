@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "original_sha256": "dcab864eaee5cdd365147f41e5e11a3e91888416060595d67a395664df3a6d9d",
+  "notebook_role": "tutorial",
+  "policy": "allowlisted-source-edits",
+  "allowed_source_changes": [
+    {
+      "cell_index": 0,
+      "cell_id": "workflow-narration",
+      "cell_type": "markdown",
+      "edit_kind": "markdown",
+      "max_changed_lines": 6
+    },
+    {
+      "cell_index": 1,
+      "cell_id": "summarize-values",
+      "cell_type": "code",
+      "edit_kind": "python-comments-docstrings",
+      "max_changed_lines": 12
+    }
+  ],
+  "locality": {
+    "max_changed_lines_total": 18
+  }
+}
