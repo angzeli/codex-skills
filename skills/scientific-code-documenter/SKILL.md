@@ -16,6 +16,7 @@ Improve scientific and technical code without obscuring its logic or silently ch
    - Read nearby code to learn naming, layout, docstring, and comment conventions.
    - Identify generated and vendored files that should remain untouched.
    - Check the working tree and preserve unrelated user changes.
+   - If a tracked target already has documentation or readability changes, treat them as user or prior-pass work. Do not refine, replace, or stack another pass unless the user explicitly asks to continue from those existing changes.
 2. Classify the operating mode and treat review-only or no-edit language as a hard boundary.
 3. Build a compact contract inventory for the requested scope. Classify each relevant item as `evidence-backed`, `observable-only`, or `unknown`.
 4. For notebooks, classify the artifact role as `source`, `tutorial`, `analysis artifact`, `generated`, or `unknown` before deciding whether an edit is safe.
@@ -89,6 +90,8 @@ For review findings, report: location, issue, evidence, contract affected, confi
 ## Make repeated invocation stable
 
 Before editing, ask whether the current artifact already meets the request. If its high-value contracts are documented, unsupported meaning remains explicitly unknown, and no stale or redundant commentary remains, make no change and report that the existing documentation is sufficient.
+
+Use the initial working-tree state as a preservation boundary. When the requested tracked file already contains in-scope documentation or readability changes, a generic request to improve that file is not permission to revise those changes. Inspect and validate them read-only, report any remaining concern separately, and leave the file unchanged unless the user explicitly authorizes building on the existing diff. In a controlled second pass, this existing diff is the prior candidate and must remain byte-identical.
 
 Do not use a repeated invocation to:
 
