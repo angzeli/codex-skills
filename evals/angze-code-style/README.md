@@ -45,7 +45,7 @@ Exact repository-specific commands are maintained in the root `README.md` after 
 
 Historical acceptance covers an authorized scientific Python repository and a production-style ORCA Shell workflow repository. The ORCA run reviewed nine scripts, exercised three controlled edit pairs with isolated mocks and dry runs, and preserved generated calculation inputs and workflow contracts without launching an expensive calculation. See the [v0.3.0 sanitized summary](../../docs/evaluations/scientific-code-documenter-v0.3.0.md). Those runs remain evidence for the predecessor runtime, not acceptance of the contract-aware v0.4 runtime.
 
-Real-notebook acceptance for v0.4 remains pending until a notebook owner explicitly authorizes an immutable review and controlled edit candidate. Do not substitute a personal or research notebook merely because it is locally available.
+Real-notebook acceptance for v0.4 passed using an explicitly authorized immutable tutorial-notebook snapshot. The original notebook remained unchanged and unexecuted; tracked evidence is sanitized in the [acceptance record](../../docs/evaluations/angze-code-style-v0.4.0-real-notebook.md).
 
 Run real-repository candidates only from immutable snapshots, never from the live source tree. Protect and restore tracked source state, and determine validity from the frozen runtime, source inputs, prompts, harnesses, and captured outputs. Ignored calculation outputs and filesystem metadata remain outside that boundary unless explicitly frozen; record concurrent external activity separately without treating live-source quiescence as an evaluation gate.
 
