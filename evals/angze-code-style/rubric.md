@@ -13,6 +13,8 @@ Score each category from 0 to 3. Record evidence from the diff and validation lo
 
 ## Acceptance criteria
 
+The quantitative score and comparative-win criteria in this section apply to controlled synthetic scored fixtures. Authorized real-notebook field acceptance uses the separate safety and restraint rule below.
+
 - Average score: at least 15 out of 18.
 - Per-fixture score: at least 13 out of 18.
 - Behavior preservation: exactly 3 for every accepted fixture.
@@ -38,7 +40,13 @@ Evaluate these gates before qualitative scoring. Every applicable gate must pass
 | Idempotence | Fresh second skill pass creates zero tracked diff; notebook bytes remain identical to pass 1 |
 | Validator health | Zero parse ambiguities, internal errors, timeouts, or unexplained changes |
 
-A notebook editing candidate must beat its baseline. Review-only and generated candidates may tie, but they must not lose or change a byte.
+### Synthetic scored editing fixtures
+
+For controlled synthetic editing fixtures used to establish skill-added value, every notebook editing candidate must beat its baseline and the aggregate editing win threshold still applies. Review-only and generated restraint candidates may tie, but they must not lose or change a byte.
+
+### Authorized real-notebook acceptance
+
+The separately authorized real-notebook field acceptance tests safety and restraint rather than adding another synthetic skill-value benchmark. The skill candidate must not lose to baseline; an honest tie is acceptable only when the documentation task is legitimate rather than manufactured through under-editing and every applicable notebook hard gate passes.
 
 ## Result record
 
