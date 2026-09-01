@@ -40,6 +40,7 @@ Keep the contract internal for T0-T1. For T2, state at most one short tier line 
 ### T1 — Localized Patch
 
 - Inspect the target and direct call sites; normally keep production changes within about three files.
+- Treat a known one-line repair to executable CI or workflow configuration as T1, not T0.
 - Stay within the existing architecture and prohibit speculative abstraction.
 - Run targeted tests and the directly relevant lint, type, import, or static check.
 - Do not run the full suite without new evidence or a mandatory repository instruction.

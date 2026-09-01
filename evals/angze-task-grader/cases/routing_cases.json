@@ -1,0 +1,18 @@
+[
+  {"case_id": "R-POS-01", "should_trigger": true, "prompt": "Fix the localized trailing-field bug in this parser and add a regression test.", "reason": "Localized code fix."},
+  {"case_id": "R-POS-02", "should_trigger": true, "prompt": "Add one inspect subcommand to this CLI using existing helpers.", "reason": "Bounded feature."},
+  {"case_id": "R-POS-03", "should_trigger": true, "prompt": "Change this scientific unit-conversion logic and validate the numerical result.", "reason": "Scientific code change."},
+  {"case_id": "R-POS-04", "should_trigger": true, "prompt": "Repair the failing CI unit-test job in this repository.", "reason": "CI execution task."},
+  {"case_id": "R-POS-05", "should_trigger": true, "prompt": "Prepare this package as a release candidate and run the required release checks.", "reason": "Release work."},
+  {"case_id": "R-POS-06", "should_trigger": true, "prompt": "Audit the parser subsystem for malformed-record handling. Do not edit files.", "reason": "Repository validation audit."},
+  {"case_id": "R-POS-07", "should_trigger": true, "prompt": "Update this persistent JSON schema and add a backward-compatible migration.", "reason": "Schema and migration change."},
+  {"case_id": "R-POS-08", "should_trigger": true, "prompt": "Correct one Markdown cell in this notebook without changing outputs or execution state.", "reason": "Notebook edit."},
+  {"case_id": "R-NEG-01", "should_trigger": false, "prompt": "Explain what a src directory usually means.", "reason": "Conceptual explanation only."},
+  {"case_id": "R-NEG-02", "should_trigger": false, "prompt": "Compare ORCA and CP2K conceptually.", "reason": "General scientific discussion."},
+  {"case_id": "R-NEG-03", "should_trigger": false, "prompt": "Brainstorm five project names for a chemistry toolkit.", "reason": "Brainstorming."},
+  {"case_id": "R-NEG-04", "should_trigger": false, "prompt": "Write an email asking a collaborator about a deadline.", "reason": "Email writing."},
+  {"case_id": "R-NEG-05", "should_trigger": false, "prompt": "Summarize the prose I pasted below.", "reason": "Prose summary."},
+  {"case_id": "R-NEG-06", "should_trigger": false, "prompt": "Give me advice for balancing work and sleep.", "reason": "Ordinary life advice."},
+  {"case_id": "R-NEG-07", "should_trigger": false, "prompt": "Explain Python dataclasses without editing any code.", "reason": "Conceptual coding explanation only."},
+  {"case_id": "R-NEG-08", "should_trigger": false, "prompt": "What is a migration in database engineering?", "reason": "General explanation with no codebase execution."}
+]

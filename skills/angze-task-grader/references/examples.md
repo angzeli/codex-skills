@@ -23,7 +23,7 @@ Use these examples only to resolve boundaries. `Forbidden` names the most likely
 | 17 | Refactor one related module cluster behind existing tests | T2 | None | Affected subsystem | Targeted units plus representative integration | Architecture migration |
 | 18 | Fix ORCA normal-termination parsing | T3 | None | Parser, attempt identity, consumers | Truncated/restart/convergence fixtures | Running production ORCA |
 | 19 | Change a VASP default affecting results | T3 | compatibility/cross-platform | Default precedence and resolved inputs | Input snapshots and scientific review | Production calculation without approval |
-| 20 | Change a persistent CSV schema | T3 | compatibility/cross-platform | Readers, writers, migration path | Old/new round trip and preservation | Silent rewrite of real data |
+| 20 | Change a persistent CSV schema | T3 | None | Readers, writers, migration path | Old/new round trip and preservation | Silent rewrite of real data |
 | 21 | Repair file locking around shared state | T3 | None | Critical section and failure paths | Deterministic contention test | Broad concurrency framework |
 | 22 | Fix cross-platform path normalization | T3 | None | Path boundary and supported platforms | Focused platform cases | Unrelated portability cleanup |
 | 23 | Diagnose a broad failure with unknown root cause | T3 | uncertainty | Dependency-aware until cause is bounded | Reproducer then regrade | Implementing speculative fixes |

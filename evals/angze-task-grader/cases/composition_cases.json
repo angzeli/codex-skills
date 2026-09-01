@@ -1,0 +1,29 @@
+[
+  {
+    "case_id": "C-GENERATED-NOTEBOOK-01",
+    "source_fixture": "notebook/generated_pipeline_report.ipynb",
+    "target_path": "generated_pipeline_report.ipynb",
+    "seed_replacement": {
+      "from": "Generated pipeline report",
+      "to": "Generated pipline report"
+    },
+    "task_prompt": "Correct the heading typo in generated_pipeline_report.ipynb. The notebook is generated, its cells are non-editable, and its upstream generator is unavailable in this fixture.",
+    "expected_task_tiers": [
+      "T0",
+      "T1"
+    ],
+    "expected_worktree_changed": false,
+    "required_response_term_groups": [
+      [
+        "generated"
+      ],
+      [
+        "review-only",
+        "non-editable",
+        "preserve",
+        "unchanged",
+        "upstream generator"
+      ]
+    ]
+  }
+]

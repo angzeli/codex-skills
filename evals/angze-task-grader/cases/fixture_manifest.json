@@ -1,0 +1,10 @@
+[
+  {"fixture": "docs_only", "check": ["python3", "check.py"], "expected_baseline_exit": 1},
+  {"fixture": "tiny_python_cli", "check": ["python3", "-m", "unittest", "-v"], "expected_baseline_exit": 1},
+  {"fixture": "parser_project", "check": ["python3", "-m", "unittest", "-v"], "expected_baseline_exit": 1},
+  {"fixture": "scientific_numeric", "check": ["python3", "-m", "unittest", "-v"], "expected_baseline_exit": 1},
+  {"fixture": "notebook_tutorial", "check": ["python3", "check.py"], "expected_baseline_exit": 1},
+  {"fixture": "schema_project", "check": ["python3", "-m", "unittest", "-v"], "expected_baseline_exit": 1},
+  {"fixture": "file_locking", "check": ["python3", "-m", "unittest", "-v"], "expected_baseline_exit": 1},
+  {"fixture": "release_package", "check": ["python3", "-m", "unittest", "-v"], "expected_baseline_exit": 1}
+]

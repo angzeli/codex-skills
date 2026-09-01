@@ -50,6 +50,9 @@ jobs:
       - name: Run deterministic angze-code-style fixtures
         run: ./scripts/run_fixture_checks.sh angze-code-style
 
+      - name: Run deterministic angze-task-grader fixtures
+        run: ./scripts/run_fixture_checks.sh angze-task-grader
+
       - name: Verify v0.4.0 release integrity
         run: >-
           python3 scripts/check_release_integrity.py

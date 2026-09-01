@@ -1,0 +1,7 @@
+interface:
+  display_name: "Angze Task Grader"
+  short_description: "Grade tasks and right-size engineering effort"
+  default_prompt: "Use $angze-task-grader to grade this repository task and apply the minimum sufficient execution contract."
+
+policy:
+  allow_implicit_invocation: true

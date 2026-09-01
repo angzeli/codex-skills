@@ -1,0 +1,62 @@
+[
+  {
+    "case_id": "docs-typo",
+    "fixture": "docs_only",
+    "task_prompt": "Correct only 'instalation' to 'installation' in README.md. Leave the unrelated imperfect paragraph unchanged.",
+    "expected_tier": "T0",
+    "expected_overrides": [],
+    "allowed_paths": ["README.md"],
+    "acceptance_command": ["python3", "check.py"],
+    "expected_baseline_exit": 1
+  },
+  {
+    "case_id": "cli-zero",
+    "fixture": "tiny_python_cli",
+    "task_prompt": "Fix the CLI so --count 0 prints no greeting lines. Add no dependency or abstraction and change only what the focused bug requires.",
+    "expected_tier": "T1",
+    "expected_overrides": [],
+    "allowed_paths": ["tiny_cli.py", "test_tiny_cli.py"],
+    "acceptance_command": ["python3", "-m", "unittest", "-v"],
+    "expected_baseline_exit": 1
+  },
+  {
+    "case_id": "scientific-units",
+    "fixture": "scientific_numeric",
+    "task_prompt": "Fix the electronvolt-to-joule conversion using the documented constant. Keep the patch local and validate units, signs, and the synthetic numerical fixtures. Do not run an external calculation.",
+    "expected_tier": "T1",
+    "expected_overrides": ["scientific/numerical"],
+    "allowed_paths": ["conversions.py", "test_conversions.py"],
+    "acceptance_command": ["python3", "-m", "unittest", "-v"],
+    "expected_baseline_exit": 1
+  },
+  {
+    "case_id": "parser-summary",
+    "fixture": "parser_project",
+    "task_prompt": "Implement the bounded summary report described in README.md using the existing parser and CLI. Do not clean up the unrelated awkward helper.",
+    "expected_tier": "T2",
+    "expected_overrides": [],
+    "allowed_paths": ["records.py", "cli.py", "test_records.py", "README.md"],
+    "acceptance_command": ["python3", "-m", "unittest", "-v"],
+    "expected_baseline_exit": 1
+  },
+  {
+    "case_id": "schema-migration",
+    "fixture": "schema_project",
+    "task_prompt": "Implement the documented backward-compatible v1-to-v2 CSV migration. Preserve all rows and reject malformed input without overwriting it.",
+    "expected_tier": "T3",
+    "expected_overrides": ["data/destructive", "compatibility/cross-platform"],
+    "allowed_paths": ["migrate.py", "test_migrate.py", "schema_v2.json"],
+    "acceptance_command": ["python3", "-m", "unittest", "-v"],
+    "expected_baseline_exit": 1
+  },
+  {
+    "case_id": "release-rc",
+    "fixture": "release_package",
+    "task_prompt": "Prepare the synthetic package metadata for version 0.1.1rc1 and complete the local release checklist. Do not publish, tag, or use the network.",
+    "expected_tier": "T4",
+    "expected_overrides": ["compatibility/cross-platform"],
+    "allowed_paths": ["pyproject.toml", "src/tiny_release/__init__.py", "RELEASE_CHECKLIST.md"],
+    "acceptance_command": ["python3", "-m", "unittest", "-v"],
+    "expected_baseline_exit": 1
+  }
+]
