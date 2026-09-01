@@ -4,7 +4,33 @@ All notable changes to this collection are documented here. No remote release ha
 
 ## Unreleased
 
-No changes yet.
+### Added
+
+- Experimental `angze-task-grader` v0.1.0rc1 runtime with T0-T4 execution contracts, validation floors and ceilings, scientific-computing overrides, scope-expansion gates, controlled JSON evaluation mode, and an explicit composition boundary for artifact/domain skills.
+- Synthetic grading, routing, implementation, and one dual-skill composition case; eight public-safe fixture repositories; and a standard-library evaluation harness.
+- Deterministic task-grader fixture validation in repository CI.
+
+### Changed
+
+- Defined independent authority for task-grader engineering effort and `angze-code-style` artifact preservation; stricter safety, preservation, and editability constraints win without translating or comparing numeric tiers.
+- Limited overrides to the four declared categories and require them only when they materially alter the primary tier's normal execution contract.
+- Tightened contract checks for allowed overrides, non-empty fields, actionable stop conditions, T3/T4 hard triggers, and proportional T0/T1 validation ceilings.
+
+### Validated
+
+- Historical original 25-case execution: 21/25 under the earlier override expectations.
+- Retrospective rescore of those exact preserved contracts: 25/25 under corrected override semantics; this was not a new execution.
+- Fresh final-runtime full execution: 25/25, with no hard-trigger undergrade and no evaluation-mode worktree mutation.
+- Final dual-skill composition case: 1/1, with the generated notebook byte-identical, no tracked edit, an explicit preservation constraint, and no numeric-tier comparison.
+- Full implicit-routing execution: 8/8 positive and 8/8 negative outcomes by observed task-grader `SKILL.md` reads, with no observed false positive or false negative.
+- Existing six-case synthetic behavioral A/B plus focused iterations remains valid, with no observed correctness regression or speculative dependency/abstraction.
+
+### Known limitations
+
+- Synthetic evidence supports correctness and scope restraint but does not establish stable wall-time, command-count, or token savings.
+- Routing evidence measures skill-file reads in the current Codex JSON event stream, not general production routing performance.
+- The full routing execution spans a preserved five-prompt segment and an eleven-prompt resumed segment because the app was interrupted between prompts; every counted prompt has a completed raw event trace.
+- The default Python lacks PyYAML for the optional skill-creator validator; repository-owned structural and deterministic validation passed.
 
 ## [0.4.0] - 2026-08-28
 

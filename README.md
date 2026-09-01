@@ -41,6 +41,7 @@ codex_skills/
 | Skill | Purpose | Status |
 | --- | --- | --- |
 | `angze-code-style` | Document and prune scientific code and Jupyter notebooks using explicit contract inventory, evidence classes, and risk grading | Experimental v0.4.0 release candidate; synthetic and authorized real-notebook acceptance plus controlled Python, Shell, LaTeX, HTML, trigger, restraint, and idempotence gates pass |
+| `angze-task-grader` | Grade codebase and scientific-computing tasks and apply the minimum sufficient execution contract | Experimental v0.1.0rc1-ready; fresh 25/25 grading, 16/16 observed routing, dual-skill preservation, and deterministic CI gates pass, while stable speed and token savings remain unproven |
 
 ## Validate and install
 
